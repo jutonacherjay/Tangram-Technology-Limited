@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tangram Electronics – Hero</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { overflow-x: hidden; width: 100%; }
+
+    :root {
+      --mint: #e8f8f5;
+      --teal: #2ecfb0;
+      --deep-teal: #0a9e84;
+      --dark: #0d1f1b;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--mint);
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+    }
+
+    /* WordPress container override */
+    .hero {
+      margin: 0 calc(-50vw + 50%) !important;
+      width: 100vw !important;
+      max-width: 100vw !important;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      height: 70vh;
+      min-height: 460px;
+      overflow: hidden;
+      background: linear-gradient(120deg, #c8f2ec 0%, #e8f8f5 45%, #b2ece3 100%);
+      display: flex;
+      align-items: center;
+    }
+
+    /* subtle radial glow */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 650px 520px at 68% 50%, rgba(46,207,176,0.16) 0%, transparent 70%),
+        radial-gradient(ellipse 280px 280px at 15% 80%, rgba(46,207,176,0.09) 0%, transparent 70%);
+    }
+
+    /* ─── LEFT CONTENT ─── */
+    .slide-content {
+      position: relative;
+      z-index: 5;
+      width: 50%;
+      padding-left: 5%;
+      padding-right: 2%;
+      flex-shrink: 0;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--deep-teal);
+      background: rgba(46,207,176,0.12);
+      border: 1px solid rgba(46,207,176,0.35);
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 14px;
+      opacity: 0;
+      transform: translateY(18px);
+      animation: fadeUp 0.7s ease 0.2s forwards;
+    }
+
+    .slide-headline {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      line-height: 0.93;
+      letter-spacing: 1px;
+      color: var(--dark);
+      margin-bottom: 16px;
+      opacity: 0;
+      transform: translateY(24px);
+      animation: fadeUp 0.7s ease 0.38s forwards;
+    }
+    .slide-headline .accent { color: var(--deep-teal); }
+
+    .slide-subtext {
+      font-size: 0.92rem;
+      font-weight: 400;
+      line-height: 1.7;
+      color: rgba(13,31,27,0.62);
+      margin-bottom: 26px;
+      max-width: 360px;
+      opacity: 0;
+      transform: translateY(18px);
+      animation: fadeUp 0.7s ease 0.54s forwards;
+    }
+
+    .cta-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      opacity: 0;
+      transform: translateY(18px);
+      animation: fadeUp 0.7s ease 0.68s forwards;
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 30px;
+      background: var(--deep-teal);
+      color: white;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 9px;
+      border: none;
+      cursor: pointer;
+      transition: background .25s, transform .2s, box-shadow .25s;
+      box-shadow: 0 8px 24px rgba(10,158,132,0.32);
+    }
+    .btn-primary:hover {
+      background: #077d68;
+      transform: translateY(-2px);
+      box-shadow: 0 14px 32px rgba(10,158,132,0.42);
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 26px;
+      background: transparent;
+      color: var(--dark);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 9px;
+      border: 2px solid rgba(13,31,27,0.18);
+      cursor: pointer;
+      transition: border-color .25s, color .25s;
+    }
+    .btn-outline:hover { border-color: var(--deep-teal); color: var(--deep-teal); }
+
+    /* ─── RIGHT INNER SHOWCASE ─── */
+    .inner-showcase {
+      position: absolute;
+      right: 5%;
+      top: 14px;
+      bottom: 14px;
+      width: 50%;
+      max-width: 800px;
+      z-index: 4;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      box-shadow: -6px 0 40px rgba(0,0,0,0.1), 0 8px 32px rgba(0,0,0,0.08);
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.5s forwards;
+    }
+
+    .showcase-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 14px;
+      background: white;
+      border-bottom: 1px solid rgba(46,207,176,0.14);
+      flex-shrink: 0;
+    }
+
+    .inner-slider {
+      position: relative;
+      width: 100%;
+      flex: 1;
+      overflow: hidden;
+      background: #e8f8f5;
+    }
+
+    .inner-slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transform: scale(1.04);
+      transition: opacity 0.85s ease, transform 0.85s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .inner-slide.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .inner-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      pointer-events: none;
+    }
+    .inner-placeholder .icon { font-size: 3.2rem; }
+    .inner-placeholder .label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--deep-teal);
+    }
+
+    .inner-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.9);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.14);
+      transition: background .2s, transform .2s;
+    }
+    .inner-arrow:hover { background: white; transform: translateY(-50%) scale(1.1); }
+    .inner-arrow.prev-btn { left: 12px; }
+    .inner-arrow.next-btn { right: 12px; }
+
+    .inner-badge {
+      position: absolute;
+      top: 12px;
+      right: 14px;
+      z-index: 10;
+      background: rgba(10,158,132,0.82);
+      color: white;
+      font-size: 0.67rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      padding: 3px 10px;
+      border-radius: 100px;
+    }
+
+    .inner-footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 7px 14px;
+      background: white;
+      border-top: 1px solid rgba(46,207,176,0.1);
+      flex-shrink: 0;
+    }
+    .inner-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #cde8e4;
+      cursor: pointer;
+      transition: background .3s, width .3s, border-radius .3s;
+      flex-shrink: 0;
+    }
+    .inner-dot.active {
+      width: 20px;
+      border-radius: 4px;
+      background: var(--deep-teal);
+    }
+    .inner-footer-label {
+      margin-left: auto;
+      font-size: 0.58rem;
+      color: #bbb;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .progress-bar {
+      position: absolute;
+      bottom: 0; left: 0;
+      height: 3px;
+      width: 0;
+      background: var(--teal);
+      box-shadow: 0 0 8px var(--teal);
+      z-index: 1;
+    }
+
+    /* ═══════════════════════════════════════════════
+       RESPONSIVE BREAKPOINTS
+       ═══════════════════════════════════════════════ */
+
+    /* Small Laptops & Tablets Landscape (1024px - 1366px) */
+    @media (max-width: 1366px) and (min-width: 1024px) {
+      .hero { height: 65vh; min-height: 420px; }
+      
+      .slide-content {
+        width: 48%;
+        padding-left: 4%;
+      }
+
+      .inner-showcase {
+        width: 60%;
+        right: 3%;
+      }
+
+      .slide-headline { font-size: clamp(2.5rem, 4.5vw, 3.8rem); }
+      .slide-subtext { font-size: 0.88rem; max-width: 340px; }
+      .btn-primary, .btn-outline { padding: 12px 24px; font-size: 0.82rem; }
+    }
+
+    /* Tablets Portrait & Small Tablets (768px - 1023px) */
+    @media (max-width: 1023px) and (min-width: 768px) {
+      .hero { height: 60vh; min-height: 400px; }
+
+      .slide-content {
+        width: 45%;
+        padding-left: 4%;
+      }
+
+      .inner-showcase {
+        width: 58%;
+        right: 2%;
+        top: 12px;
+        bottom: 12px;
+      }
+
+      .eyebrow { font-size: 0.62rem; padding: 5px 14px; }
+      .slide-headline { font-size: clamp(2.2rem, 4vw, 3.2rem); }
+      .slide-subtext { font-size: 0.84rem; max-width: 300px; margin-bottom: 20px; }
+      .btn-primary, .btn-outline { padding: 11px 22px; font-size: 0.8rem; }
+      .inner-arrow { width: 32px; height: 32px; }
+    }
+
+    /* Mobile & Small Tablets (max-width: 767px) */
+    @media (max-width: 767px) {
+      .hero {
+        flex-direction: column;
+        height: auto;
+        min-height: unset;
+        padding-bottom: 0;
+      }
+
+      .slide-content {
+        width: 100%;
+        padding: 30px 5% 24px;
+        order: 2;
+      }
+
+      .inner-showcase {
+        position: relative;
+        right: auto;
+        top: auto;
+        bottom: auto;
+        width: 100%;
+        max-width: 100%;
+        height: 65vw;
+        min-height: 280px;
+        max-height: 420px;
+        border-radius: 0;
+        margin: 0;
+        order: 1;
+      }
+
+      .eyebrow { font-size: 0.6rem; padding: 5px 12px; margin-bottom: 10px; }
+      .slide-headline { font-size: clamp(2.2rem, 9vw, 3rem); margin-bottom: 8px; }
+      .slide-subtext { font-size: 0.82rem; margin-bottom: 16px; max-width: 100%; }
+      
+      .cta-group { flex-wrap: wrap; }
+      .btn-primary { padding: 10px 20px; font-size: 0.78rem; }
+      .btn-outline { padding: 9px 16px; font-size: 0.78rem; }
+
+      .showcase-header { padding: 5px 10px; }
+      .inner-footer { padding: 5px 10px; }
+      .inner-arrow { width: 36px; height: 36px; }
+      .inner-dot { width: 8px; height: 8px; }
+      .inner-dot.active { width: 24px; }
+    }
+
+    /* Extra Small Phones (max-width: 420px) */
+    @media (max-width: 420px) {
+      .hero { min-height: auto; }
+      
+      .slide-content { padding: 24px 5% 20px; }
+      
+      .inner-showcase {
+        height: 70vw;
+        min-height: 240px;
+        max-height: 360px;
+      }
+
+      .eyebrow { font-size: 0.58rem; letter-spacing: 3px; }
+      .slide-headline { font-size: clamp(1.8rem, 10vw, 2.4rem); }
+      .slide-subtext { font-size: 0.78rem; line-height: 1.6; }
+      
+      .btn-primary, .btn-outline {
+        padding: 9px 18px;
+        font-size: 0.74rem;
+        width: 100%;
+        justify-content: center;
+      }
+
+      .inner-arrow { width: 32px; height: 32px; }
+      .inner-badge { font-size: 0.62rem; padding: 2px 8px; }
+    }
+
+    /* Large Desktops (min-width: 1920px) */
+    @media (min-width: 1920px) {
+      .hero { height: 75vh; max-height: 900px; }
+      
+      .slide-content { max-width: 700px; }
+      .inner-showcase { max-width: 1100px; }
+      
+      .slide-headline { font-size: clamp(3.5rem, 5vw, 5.5rem); }
+      .slide-subtext { font-size: 1.05rem; max-width: 480px; }
+    }
+  </style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="inner-showcase">
+    <div class="showcase-header">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:0.9rem;letter-spacing:2px;color:#0d1f1b;">
+        TANGRAM <span style="color:#0a9e84;">Technology Ltd.</span>
+      </div>
+    </div>
+
+    <div class="inner-slider">
+      <div class="inner-slide active" data-bg="https://tangramelectronics.com/wp-content/uploads/2026/02/WhatsApp-Image-2026-02-09-at-09.26.19-1.jpeg"></div>
+      <div class="inner-slide" data-bg="https://tangramelectronics.com/wp-content/uploads/2026/03/Gemini_Generated_Image_stdce7stdce7stdc-3.png"></div>
+      <div class="inner-slide" data-bg="https://tangramelectronics.com/wp-content/uploads/2026/02/03.-3x2-Spirit--scaled.jpg"></div>
+      <div class="inner-slide" data-bg="https://tangramelectronics.com/wp-content/uploads/2026/02/04-3x2-Secure--scaled.jpg"></div>
+      <div class="inner-slide" data-bg="https://tangramelectronics.com/wp-content/uploads/2026/02/10ft-x-4ft-MD-sir-room-scaled.jpg"></div>
+      <div class="inner-slide" data-bg="https://tangramelectronics.com/wp-content/uploads/2026/03/565202250_797376173158971_5331781058357869663_n-2.jpg"></div>
+      <div class="inner-slide" data-bg="https://tangramelectronics.com/wp-content/uploads/2026/02/05-3x2ft-LED-Light-scaled.jpg"></div>
+      <div class="inner-slide" data-bg="https://tangramelectronics.com/wp-content/uploads/2026/02/629664381_884224754474112_2005643736107419374_n.jpg"></div>
+
+      <button class="inner-arrow prev-btn" onclick="innerNav(-1)">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0a9e84" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button class="inner-arrow next-btn" onclick="innerNav(1)">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0a9e84" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+
+      <div class="inner-badge" id="innerBadge">1 / 8</div>
+    </div>
+
+    <div class="inner-footer">
+      <div class="inner-dot active" onclick="innerGoTo(0)"></div>
+      <div class="inner-dot" onclick="innerGoTo(1)"></div>
+      <div class="inner-dot" onclick="innerGoTo(2)"></div>
+      <div class="inner-dot" onclick="innerGoTo(3)"></div>
+      <div class="inner-dot" onclick="innerGoTo(4)"></div>
+      <div class="inner-dot" onclick="innerGoTo(5)"></div>
+      <div class="inner-dot" onclick="innerGoTo(6)"></div>
+      <div class="inner-dot" onclick="innerGoTo(7)"></div>
+      <span class="inner-footer-label">PRECISION · RELIABLE</span>
+    </div>
+  </div>
+
+  <div class="slide-content">
+    
+    <h1 class="slide-headline">TANGRAM <span class="accent">ELECTRONICS</span></h1>
+    <div class="eyebrow">Spreading Positive Energy</div>
+    <p class="slide-subtext">Precision Electronics, Reliable Performance. Tangram Technology Ltd. delivers cutting-edge industrial solutions that power tomorrow.</p>
+    <div class="cta-group">
+      <a href="https://tangramelectronics.com/products/electrical-accessories/" class="btn-primary">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Explore Products
+      </a>
+      <a href="#" class="btn-outline">Learn More</a>
+    </div>
+  </div>
+
+  <div class="progress-bar" id="progressBar"></div>
+</section>
+
+<script>
+  const innerSlides = document.querySelectorAll('.inner-slide');
+  const innerDots = document.querySelectorAll('.inner-dot');
+  const badge = document.getElementById('innerBadge');
+  const progressBar = document.getElementById('progressBar');
+  let innerCur = 0;
+  let innerTimer;
+  const INNER_MS = 3500;
+
+  function innerGoTo(n) {
+    innerSlides[innerCur].classList.remove('active');
+    innerDots[innerCur].classList.remove('active');
+    innerCur = (n + innerSlides.length) % innerSlides.length;
+    innerSlides[innerCur].classList.add('active');
+    innerDots[innerCur].classList.add('active');
+    badge.textContent = `${innerCur + 1} / ${innerSlides.length}`;
+    restartProgress();
+  }
+
+  function innerNav(dir) {
+    innerGoTo(innerCur + dir);
+    clearInterval(innerTimer);
+    innerTimer = setInterval(() => innerGoTo(innerCur + 1), INNER_MS);
+  }
+
+  function restartProgress() {
+    progressBar.style.transition = 'none';
+    progressBar.style.width = '0';
+    void progressBar.offsetWidth;
+    progressBar.style.transition = `width ${INNER_MS}ms linear`;
+    progressBar.style.width = '100%';
+  }
+
+  innerSlides.forEach(slide => {
+    const url = slide.dataset.bg;
+    if (url) {
+      slide.style.backgroundImage = `url('${url}')`;
+    }
+  });
+
+  restartProgress();
+  innerTimer = setInterval(() => innerGoTo(innerCur + 1), INNER_MS);
+</script>
+
+</body>
+</html>
