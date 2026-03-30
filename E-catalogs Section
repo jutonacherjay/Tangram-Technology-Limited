@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-Catalogues Section</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'DM Sans', sans-serif;
+    background: #f0faf7;
+  }
+
+  .catalogue-section {
+    position: relative;
+    width: 100%;
+    min-height: 240px;
+    background: linear-gradient(135deg, #0d5c52 0%, #0e7a68 45%, #1a9e85 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 60px 40px;
+  }
+
+  /* Subtle floating blobs */
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.35;
+  }
+  .blob-1 { width: 300px; height: 300px; background: #0a4a42; top: -80px; left: -60px; }
+  .blob-2 { width: 220px; height: 220px; background: #0e7a68; bottom: -60px; right: 80px; }
+  .blob-3 { width: 160px; height: 160px; background: #1a9e85; top: 20px; right: 200px; }
+
+  /* Decorative teal rings */
+  .ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+  }
+  .ring-1 { width: 180px; height: 180px; top: -50px; left: 40px; }
+  .ring-2 { width: 100px; height: 100px; bottom: 10px; right: 120px; }
+
+  /* City SVG silhouette */
+  .city-svg {
+    position: absolute;
+    bottom: 0;
+    opacity: 0.15;
+    width: 380px;
+    height: 180px;
+  }
+  .city-svg.left  { left: -10px; }
+  .city-svg.right { right: -10px; transform: scaleX(-1); }
+
+  /* Main content */
+  .content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 620px;
+  }
+
+  .label {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.15);
+    color: #a8f0e0;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    padding: 5px 16px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: #ffffff;
+    line-height: 1.15;
+    margin-bottom: 14px;
+    letter-spacing: -0.5px;
+  }
+
+  h2 span {
+    color: #7de8d0;
+  }
+
+  .subtitle {
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #a8f0e0;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    margin-bottom: 34px;
+  }
+
+  .btn-view {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    background: linear-gradient(135deg, #f5c842, #e6b020);
+    color: #0d3d35;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 13px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    box-shadow: 0 6px 24px rgba(245, 200, 66, 0.4), 0 2px 8px rgba(245, 200, 66, 0.2);
+    transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+    cursor: pointer;
+  }
+
+  .btn-view:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 12px 32px rgba(245, 200, 66, 0.45), 0 4px 12px rgba(245, 200, 66, 0.25);
+    background: linear-gradient(135deg, #ffd84a, #f0ba28);
+  }
+
+  .btn-view svg {
+    transition: transform 0.22s ease;
+  }
+  .btn-view:hover svg {
+    transform: translateX(4px);
+  }
+</style>
+</head>
+<body>
+
+<section class="catalogue-section">
+
+  <!-- Background blobs -->
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <!-- Decorative rings -->
+  <div class="ring ring-1"></div>
+  <div class="ring ring-2"></div>
+
+  <!-- City silhouette left -->
+  <svg class="city-svg left" viewBox="0 0 380 180" xmlns="http://www.w3.org/2000/svg" fill="#ffffff">
+    <rect x="0"   y="100" width="30" height="80"/>
+    <rect x="10"  y="70"  width="16" height="30"/>
+    <rect x="40"  y="80"  width="40" height="100"/>
+    <rect x="50"  y="50"  width="20" height="30"/>
+    <rect x="90"  y="60"  width="50" height="120"/>
+    <rect x="105" y="30"  width="20" height="30"/>
+    <rect x="150" y="90"  width="35" height="90"/>
+    <rect x="195" y="70"  width="45" height="110"/>
+    <rect x="205" y="40"  width="25" height="30"/>
+    <rect x="250" y="100" width="30" height="80"/>
+    <rect x="290" y="75"  width="40" height="105"/>
+    <rect x="300" y="45"  width="20" height="30"/>
+    <rect x="340" y="95"  width="40" height="85"/>
+  </svg>
+
+  <!-- City silhouette right (mirrored) -->
+  <svg class="city-svg right" viewBox="0 0 380 180" xmlns="http://www.w3.org/2000/svg" fill="#ffffff">
+    <rect x="0"   y="100" width="30" height="80"/>
+    <rect x="10"  y="70"  width="16" height="30"/>
+    <rect x="40"  y="80"  width="40" height="100"/>
+    <rect x="50"  y="50"  width="20" height="30"/>
+    <rect x="90"  y="60"  width="50" height="120"/>
+    <rect x="105" y="30"  width="20" height="30"/>
+    <rect x="150" y="90"  width="35" height="90"/>
+    <rect x="195" y="70"  width="45" height="110"/>
+    <rect x="205" y="40"  width="25" height="30"/>
+    <rect x="250" y="100" width="30" height="80"/>
+    <rect x="290" y="75"  width="40" height="105"/>
+    <rect x="300" y="45"  width="20" height="30"/>
+    <rect x="340" y="95"  width="40" height="85"/>
+  </svg>
+
+  <!-- Main content -->
+  <div class="content">
+    <div class="label">Resources</div>
+    <h2>Download<br><span>E-Catalogues</span></h2>
+    <p class="subtitle">To get detail product and essential company information</p>
+    <a class="btn-view" href="https://tangramelectronics.com/downloads/">
+      View All
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="5" y1="12" x2="19" y2="12"/>
+        <polyline points="12 5 19 12 12 19"/>
+      </svg>
+    </a>
+  </div>
+
+</section>
+
+</body>
+</html>
