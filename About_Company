@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Tangram Technology Limited</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #10B981;
+            --primary-dark: #059669;
+            --primary-light: #34D399;
+            --secondary: #3B82F6;
+            --accent: #60A5FA;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --gradient-green: linear-gradient(135deg, #10B981 0%, #34D399 100%);
+            --gradient-blue: linear-gradient(135deg, #3B82F6 0%, #60A5FA 100%);
+            --gradient-tech: linear-gradient(135deg, #10B981 0%, #059669 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* About Us Section - Modern Design */
+        .about-section {
+            position: relative;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8f5f1 100%);
+            overflow: hidden;
+        }
+
+        /* Animated Background Elements */
+        .about-section::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 70%);
+            top: -200px;
+            right: -200px;
+            border-radius: 50%;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .about-section::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
+            bottom: -150px;
+            left: -150px;
+            border-radius: 50%;
+            animation: float 15s infinite ease-in-out reverse;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            33% {
+                transform: translate(30px, -30px) rotate(120deg);
+            }
+            66% {
+                transform: translate(-20px, 20px) rotate(240deg);
+            }
+        }
+
+        .about-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        /* Left Side - Title Section */
+        .about-title-section {
+            position: relative;
+        }
+
+        .section-label {
+            display: inline-block;
+            background: var(--gradient-tech);
+            color: white;
+            padding: 8px 24px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        .about-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 900;
+            color: var(--dark);
+            line-height: 1.1;
+            margin-bottom: 15px;
+            position: relative;
+            animation: slideInLeft 0.8s ease-out 0.2s backwards;
+        }
+
+        .about-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 100px;
+            height: 6px;
+            background: var(--gradient-green);
+            border-radius: 3px;
+        }
+
+        /* Decorative Elements */
+        .title-decoration {
+            position: absolute;
+            top: -30px;
+            left: -40px;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(52, 211, 153, 0.05));
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            z-index: -1;
+            animation: morphing 8s infinite ease-in-out;
+        }
+
+        @keyframes morphing {
+            0%, 100% {
+                border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+                transform: rotate(0deg);
+            }
+            50% {
+                border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%;
+                transform: rotate(180deg);
+            }
+        }
+
+        /* Right Side - Content Section */
+        .about-text-section {
+            background: white;
+            padding: 30px 35px;
+            border-radius: 24px;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.1),
+                0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+            position: relative;
+            overflow: hidden;
+            animation: slideInRight 0.8s ease-out 0.4s backwards;
+        }
+
+        .about-text-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-tech);
+        }
+
+        .company-name {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .about-description {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #555;
+            text-align: justify;
+            position: relative;
+        }
+
+        .about-description::first-letter {
+            font-size: 3.5rem;
+            font-weight: 700;
+            float: left;
+            line-height: 0.8;
+            margin: 10px 10px 0 0;
+            background: var(--gradient-tech);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Stats Section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 18px 12px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 16px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-tech);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(16, 185, 129, 0.2);
+        }
+
+        .stat-card:hover::before {
+            opacity: 0.05;
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            background: var(--gradient-tech);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 1;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Highlights Section */
+        .highlights {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .highlight-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+
+        .highlight-item:hover {
+            background: #e9f7f3;
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+        }
+
+        .highlight-icon {
+            width: 45px;
+            height: 45px;
+            background: var(--gradient-tech);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .highlight-text {
+            font-size: 0.95rem;
+            color: #555;
+            font-weight: 500;
+        }
+
+        /* Animations */
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .about-title {
+                font-size: 3.5rem;
+            }
+
+            .about-text-section {
+                padding: 35px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .highlights {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .about-section {
+                padding: 60px 15px;
+            }
+
+            .about-title {
+                font-size: 2.5rem;
+            }
+
+            .about-text-section {
+                padding: 25px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .title-decoration {
+                display: none;
+            }
+        }
+
+        /* Loading Animation */
+        .about-section > * {
+            animation: fadeInUp 0.8s ease-out backwards;
+        }
+
+        .stat-card {
+            animation: fadeInUp 0.6s ease-out backwards;
+        }
+
+        .stat-card:nth-child(1) { animation-delay: 0.6s; }
+        .stat-card:nth-child(2) { animation-delay: 0.7s; }
+        .stat-card:nth-child(3) { animation-delay: 0.8s; }
+
+        .highlight-item {
+            animation: fadeInUp 0.6s ease-out backwards;
+        }
+
+        .highlight-item:nth-child(1) { animation-delay: 0.9s; }
+        .highlight-item:nth-child(2) { animation-delay: 1.0s; }
+        .highlight-item:nth-child(3) { animation-delay: 1.1s; }
+        .highlight-item:nth-child(4) { animation-delay: 1.2s; }
+    </style>
+</head>
+<body>
+
+<section class="about-section">
+    <div class="about-container">
+        <div class="about-content">
+            
+            <!-- Left Side - Title -->
+            <div class="about-title-section">
+                <div class="title-decoration"></div>
+                <span class="section-label">Who We Are</span>
+                <h1 class="about-title">ABOUT US</h1>
+            </div>
+
+            <!-- Right Side - Content -->
+            <div class="about-text-section">
+                <p class="about-description">
+                    <span class="company-name">Tangram Technology Limited</span> is a leading provider of comprehensive solutions across various industries, including electronics, mold manufacturing, plastic injection, metal punching, air compressors, and other specialized machinery. With a state-of-the-art R&D center in Shenzhen, China, and manufacturing facilities in Zhongshan, China, and Dhaka, Bangladesh, Tangram is committed to delivering high-quality, reliable, and innovative products.
+                </p>
+
+                <!-- Stats -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-number">3</span>
+                        <span class="stat-label">Global Facilities</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">17+</span>
+                        <span class="stat-label">Years Experience</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Quality Assured</span>
+                    </div>
+                </div>
+
+                <!-- Highlights -->
+                <div class="highlights">
+                    <div class="highlight-item">
+                        <div class="highlight-icon">🔬</div>
+                        <span class="highlight-text">State-of-the-art R&D Center</span>
+                    </div>
+                    <div class="highlight-item">
+                        <div class="highlight-icon">🏭</div>
+                        <span class="highlight-text">Advanced Manufacturing</span>
+                    </div>
+                    <div class="highlight-item">
+                        <div class="highlight-icon">🌏</div>
+                        <span class="highlight-text">Global Operations</span>
+                    </div>
+                    <div class="highlight-item">
+                        <div class="highlight-icon">✨</div>
+                        <span class="highlight-text">Innovation Focused</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
