@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company News Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+        }
+
+        /* Breaking News Ticker */
+        .breaking-news {
+            background: linear-gradient(135deg, #108981 0%, #059669 100%);
+            padding: 18px 0;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(16, 137, 129, 0.4);
+            border-bottom: 4px solid #3882F6;
+        }
+
+        .breaking-news-label {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #3882F6 0%, #2563eb 100%);
+            padding: 18px 30px;
+            color: white;
+            font-weight: 800;
+            font-size: 15px;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 3px 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .breaking-news-content {
+            margin-left: 200px;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .ticker-text {
+            display: inline-block;
+            padding-left: 100%;
+            animation: scroll-left 35s linear infinite;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .ticker-text span {
+            margin-right: 60px;
+            padding-right: 60px;
+            border-right: 3px solid rgba(255, 255, 255, 0.4);
+        }
+
+        @keyframes scroll-left {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(-100%, 0);
+            }
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .page-header {
+            background: white;
+            padding: 30px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .page-header h1 {
+            font-size: 36px;
+            color: #108981;
+            margin-bottom: 5px;
+        }
+
+        .page-header p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        /* Main Layout */
+        .main-layout {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 20px;
+            align-items: start;
+        }
+
+        /* Left Sidebar - News List */
+        .news-list-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+            max-height: calc(100vh - 250px);
+            overflow-y: auto;
+            position: sticky;
+            top: 20px;
+        }
+
+        .news-list-header {
+            padding: 20px;
+            background: linear-gradient(135deg, #108981 0%, #059669 100%);
+            color: white;
+            border-radius: 10px 10px 0 0;
+            position: sticky;
+            top: 0;
+            z-index: 5;
+        }
+
+        .news-list-header h2 {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .news-list-header p {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        .news-item {
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .news-item:hover {
+            background: rgba(16, 137, 129, 0.05);
+            padding-left: 25px;
+        }
+
+        .news-item.active {
+            background: linear-gradient(90deg, rgba(16, 137, 129, 0.1) 0%, rgba(52, 3, 153, 0.05) 100%);
+            border-left: 4px solid #108981;
+        }
+
+        .news-item-thumbnail {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #340399 0%, #108981 100%);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .news-item-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .news-item-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .news-item-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .news-item-date {
+            font-size: 12px;
+            color: #999;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Right Side - News Details */
+        .news-details-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            min-height: 600px;
+        }
+
+        .news-details-title {
+            font-size: 38px;
+            color: #108981;
+            font-weight: 800;
+            line-height: 1.3;
+            margin-bottom: 20px;
+        }
+
+        .news-details-meta {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .news-details-meta span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .news-details-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #340399 0%, #108981 100%);
+            border-radius: 12px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 100px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .news-details-image:hover {
+            transform: scale(1.02);
+        }
+
+        .news-details-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+
+        .news-details-content {
+            font-size: 17px;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        .news-details-content h3 {
+            color: #108981;
+            font-size: 24px;
+            margin: 30px 0 15px 0;
+        }
+
+        .news-details-content p {
+            margin-bottom: 20px;
+        }
+
+        .news-details-content ul {
+            margin: 20px 0;
+            padding-left: 25px;
+        }
+
+        .news-details-content li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 100px 20px;
+            color: #999;
+        }
+
+        .empty-state-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+
+        .empty-state h3 {
+            font-size: 24px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        /* Lightbox Modal */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .lightbox-modal.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-image {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 8px;
+            animation: zoomIn 0.3s ease;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+            z-index: 1001;
+        }
+
+        .lightbox-close:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        /* Scrollbar Styling */
+        .news-list-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .news-list-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .news-list-container::-webkit-scrollbar-thumb {
+            background: #108981;
+            border-radius: 4px;
+        }
+
+        .news-list-container::-webkit-scrollbar-thumb:hover {
+            background: #059669;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-layout {
+                grid-template-columns: 350px 1fr;
+                gap: 15px;
+            }
+
+            .news-list-container {
+                max-height: calc(100vh - 200px);
+                position: sticky;
+                top: 10px;
+            }
+
+            .page-header h1 {
+                font-size: 28px;
+            }
+
+            .page-header p {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 0;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            /* Mobile: More space for details */
+            .main-layout {
+                grid-template-columns: 140px 1fr;
+                gap: 8px;
+            }
+
+            /* Breaking News Mobile */
+            .breaking-news {
+                padding: 0;
+            }
+
+            .breaking-news-label {
+                position: static;
+                width: 100%;
+                padding: 10px 15px;
+                text-align: center;
+                font-size: 11px;
+                letter-spacing: 0.5px;
+                border-radius: 0;
+            }
+
+            .breaking-news-content {
+                margin-left: 0;
+                padding: 10px 0;
+            }
+
+            .ticker-text {
+                font-size: 13px;
+                font-weight: 600;
+            }
+
+            .ticker-text span {
+                margin-right: 30px;
+                padding-right: 30px;
+            }
+
+            /* Page Header Mobile */
+            .page-header {
+                padding: 15px 10px;
+                margin-bottom: 10px;
+            }
+
+            .page-header h1 {
+                font-size: 18px;
+                line-height: 1.2;
+            }
+
+            .page-header p {
+                font-size: 11px;
+            }
+
+            /* News List Mobile - Compact */
+            .news-list-container {
+                max-height: calc(100vh - 180px);
+                border-radius: 6px;
+            }
+
+            .news-list-header {
+                padding: 8px;
+            }
+
+            .news-list-header h2 {
+                font-size: 11px;
+                margin-bottom: 2px;
+            }
+
+            .news-list-header p {
+                font-size: 8px;
+            }
+
+            .news-item {
+                padding: 6px 8px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+            }
+
+            .news-item:hover {
+                padding-left: 8px;
+            }
+
+            .news-item-thumbnail {
+                width: 100%;
+                height: 60px;
+                font-size: 24px;
+                margin-bottom: 0;
+                border-radius: 4px;
+            }
+
+            .news-item-title {
+                font-size: 10px;
+                font-weight: 700;
+                line-height: 1.3;
+                -webkit-line-clamp: 2;
+                margin-bottom: 4px;
+            }
+
+            .news-item-date {
+                font-size: 8px;
+                margin-top: 2px;
+            }
+
+            /* News Details Mobile */
+            .news-details-container {
+                padding: 20px 15px;
+                border-radius: 6px;
+                min-height: auto;
+            }
+
+            .news-details-title {
+                font-size: 18px;
+                line-height: 1.3;
+                margin-bottom: 12px;
+            }
+
+            .news-details-meta {
+                flex-direction: column;
+                gap: 6px;
+                margin-bottom: 15px;
+                padding-bottom: 12px;
+                font-size: 11px;
+            }
+
+            .news-details-image {
+                height: 180px;
+                font-size: 50px;
+                margin-bottom: 15px;
+                border-radius: 6px;
+            }
+
+            .news-details-content {
+                font-size: 13px;
+                line-height: 1.7;
+            }
+
+            .news-details-content h3 {
+                font-size: 15px;
+                margin: 18px 0 10px 0;
+            }
+
+            .news-details-content p {
+                margin-bottom: 12px;
+            }
+
+            .news-details-content ul {
+                margin: 15px 0;
+                padding-left: 18px;
+            }
+
+            .news-details-content li {
+                margin-bottom: 8px;
+                font-size: 12px;
+            }
+
+            /* Empty State Mobile */
+            .empty-state {
+                padding: 50px 15px;
+            }
+
+            .empty-state-icon {
+                font-size: 45px;
+                margin-bottom: 12px;
+            }
+
+            .empty-state h3 {
+                font-size: 15px;
+            }
+
+            .empty-state p {
+                font-size: 12px;
+            }
+
+            /* Scrollbar Mobile */
+            .news-list-container::-webkit-scrollbar {
+                width: 3px;
+            }
+
+            /* Lightbox Mobile */
+            .lightbox-modal {
+                padding: 10px;
+            }
+
+            .lightbox-close {
+                top: 10px;
+                right: 10px;
+                font-size: 30px;
+                padding: 5px 10px;
+            }
+        }
+
+        /* Small Mobile Devices */
+        @media (max-width: 480px) {
+            .main-layout {
+                grid-template-columns: 120px 1fr;
+                gap: 6px;
+            }
+
+            .page-header h1 {
+                font-size: 16px;
+            }
+
+            .news-list-header h2 {
+                font-size: 10px;
+            }
+
+            .news-item-thumbnail {
+                height: 55px;
+                font-size: 20px;
+            }
+
+            .news-item-title {
+                font-size: 9px;
+            }
+
+            .news-details-title {
+                font-size: 16px;
+            }
+
+            .ticker-text {
+                font-size: 11px;
+            }
+
+            .breaking-news-label {
+                font-size: 10px;
+                padding: 8px 12px;
+            }
+
+            .news-details-content {
+                font-size: 12px;
+            }
+
+            .news-details-content h3 {
+                font-size: 14px;
+            }
+
+            .news-details-content li {
+                font-size: 11px;
+            }
+
+            .news-details-image {
+                height: 160px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Breaking News Ticker -->
+    <div class="breaking-news">
+        <div class="breaking-news-label">
+            📢 Announcement
+        </div>
+        <div class="breaking-news-content">
+            <div class="ticker-text">
+             
+                <span> Tangram Technology Limited-এর পক্ষ থেকে পবিত্র ঈদ-উল-ফিতরের আন্তরিক শুভেচ্ছা  | ঈদ মোবারক🌙 </span>
+                
+                   <span> Tangram Technology Limited ঈদুল ফিতর, স্বাধীনতা দিবস ও লাইলাতুল কদর উপলক্ষে ১৯–২৬ মার্চ ২০২৬ পর্যন্ত বন্ধ থাকবে। ✨</span>
+                 
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1>🏢 News & Events</h1>
+            <p>Stay updated with latest company announcements and news</p>
+        </div>
+
+        <!-- Main Layout -->
+        <div class="main-layout">
+            <!-- Left Sidebar - News List -->
+            <div class="news-list-container">
+                <div class="news-list-header">
+                    <h2>📰 All HeadLines</h2>
+                    <p>Click on any news to view details</p>
+                </div>
+
+                <div id="newsList">
+                    <!-- News items will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Right Side - News Details -->
+            <div class="news-details-container" id="newsDetails">
+                <div class="empty-state">
+                    <div class="empty-state-icon">📰</div>
+                    <h3>Select a news to view details</h3>
+                    <p>Click on any news from the left sidebar</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox-modal" id="lightboxModal">
+        <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+        <div class="lightbox-content">
+            <img id="lightboxImage" class="lightbox-image" alt="Full size image">
+        </div>
+    </div>
+
+    <script>
+        // Company News Data
+        const newsData = [
+            
+            {
+    id: 1,
+    category: 'Festival',
+    image: 'https://tangramelectronics.com/wp-content/uploads/2026/03/Eid-Card-1-scaled.jpg',
+    title: 'ঈদ মোবারক 🌙 ',
+    date: 'ঈদ-উল-ফিতর, ২০২৬',
+    author: 'Tangram Technology Limited',
+    excerpt: 'পবিত্র ঈদ-উল-ফিতর উপলক্ষে সবাইকে জানাই আন্তরিক শুভেচ্ছা ও অভিনন্দন।',
+    content: `
+        <h3>পবিত্র ঈদ-উল-ফিতরের শুভেচ্ছা</h3>
+        <p>Tangram Technology Limited-এর পক্ষ থেকে আপনাকে এবং আপনার পরিবারকে জানাই পবিত্র ঈদ-উল-ফিতরের আন্তরিক শুভেচ্ছা।</p>
+        
+        <p>এই আনন্দঘন উৎসব আপনার জীবনে বয়ে আনুক শান্তি, সুখ ও সমৃদ্ধি। ভালোবাসা, সহমর্মিতা এবং মানবতার চেতনায় ভরে উঠুক প্রতিটি মুহূর্ত।</p>
+        
+        <ul>
+            <li>পরিবারের সাথে আনন্দময় সময় কাটান</li>
+            <li>ভালোবাসা ও সৌহার্দ্য ছড়িয়ে দিন</li>
+            <li>নতুন আশায় শুরু হোক আগামী দিন</li>
+        </ul>
+        
+        <p><strong>আপনাদের অব্যাহত আস্থা ও সহযোগিতার জন্য আমরা কৃতজ্ঞ। ঈদের এই আনন্দ সবার মাঝে ছড়িয়ে পড়ুক।</strong> 🌙✨</p>
+    `
+},
+            {
+                id: 2,
+                category: 'Product Update',
+                image: 'https://tangramelectronics.com/wp-content/uploads/2026/02/Harmoney-Series-Poster-2-scaled.jpg',
+                title: 'শীঘ্রই আসছে… 🔥 প্রিমিয়াম হারমনি সিরিজ',
+                date: '১৪ ফেব্রুয়ারি, ২০২৬',
+                author: 'Tangram Technology Limited',
+                excerpt: 'প্রিমিয়াম হারমনি সিরিজ – ইকোনমি দামে প্রিমিয়াম কোয়ালিটি!',
+                content: `
+                    <h3>নতুন প্রিমিয়াম অভিজ্ঞতা শীঘ্রই</h3>
+                    <p>প্রিমিয়াম হারমনি সিরিজ – ইকোনমি দামে প্রিমিয়াম কোয়ালিটি! স্টাইল, সেফটি ও ডিউরেবিলিটির পারফেক্ট কম্বিনেশন।</p>
+                    
+                    <p>আধুনিক ডিজাইন ও উন্নত প্রযুক্তির সমন্বয়ে তৈরি এই সিরিজ আপনার ঘর ও অফিসের লুককে দেবে নতুন মাত্রা।</p>
+                    
+                    <ul>
+                        <li>দীর্ঘস্থায়ী ও শক্তপোক্ত বিল্ড কোয়ালিটি</li>
+                        <li>এনার্জি সেভিং ও পরিবেশবান্ধব ডিজাইন</li>
+                        <li>আধুনিক ইন্টেরিয়রের সাথে মানানসই প্রিমিয়াম ফিনিশ</li>
+                    </ul>
+                    
+                    <p><strong>আপডেট পেতে আমাদের পেইজে চোখ রাখুন। খুব শীঘ্রই আসছে আরও চমক!</strong> ✨</p>
+                `
+            },
+            {
+                id: 3,
+                category: 'Company News',
+                image: 'https://tangramelectronics.com/wp-content/uploads/2026/02/IMG20260205134619-scaled.jpg',
+                title: 'Quarterly Sales Meeting 2026 Successfully Held',
+                date: '१४ ফেব্রুয়ারি, ২०२६',
+                author: 'Tangram Technology Limited',
+                excerpt: 'We successfully held our Quarterly Sales Meeting 2026 with our sales team and management.',
+                content: `
+                    <h3>Quarterly Sales Meeting 2026 – Highlights</h3>
+                    <p>We are thrilled to announce that we successfully held our Quarterly Sales Meeting 2026 with our sales team and management.</p>
+                    
+                    <p>Later in the session, we discussed our upcoming Panel Light and Harmony Series, sharing insights into product direction and market opportunities.</p>
+                    
+                    <p>Our future-forward session focused on new strategies, innovative products, and building a stronger roadmap for sustainable growth.</p>
+                    
+                    <ul>
+                        <li>New sales strategies for 2026</li>
+                        <li>Upcoming product launches and roadmap</li>
+                        <li>Team alignment for future growth</li>
+                    </ul>
+                    
+                    <p><strong>Tangram Technology Limited – Spreading Positive Energy.</strong> 🚀</p>
+                `
+            },
+            {
+    id: 4,
+    category: 'Company News',
+    image: 'https://tangramelectronics.com/wp-content/uploads/2026/02/Image_20260219113100-1-scaled.jpg',
+    title: 'রমজান মোবারক – সাহরি ও ইফতারের সময়সূচি',
+    date: 'রমজান ২०२६',
+    author: 'Tangram Technology Limited',
+    excerpt: 'ইবাদত, সংযম ও রহমতের এই পবিত্র মাসে Tangram Technology Limited এর পক্ষ থেকে সাহরি ও ইফতারের সঠিক সময়সূচি।',
+    content: `
+        <h3>🌙 রমজান মোবারক</h3>
+        
+        <p>
+        ইবাদত, সংযম ও রহমতের এই পবিত্র মাসে Tangram Technology Limited এর পক্ষ থেকে
+        সকল সম্মানিত ক্লায়েন্ট, পার্টনার ও শুভাকাঙ্ক্ষীদের জানাই আন্তরিক শুভেচ্ছা।
+        </p>
+
+        <p>
+        পবিত্র রমজান উপলক্ষে আমরা শেয়ার করছি সাহরি ও ইফতারের সঠিক সময়সূচি,
+        যাতে সবাই সময়মতো ইবাদত ও রোজা পালন করতে পারেন।
+        </p>
+
+       
+
+        <p>
+        আল্লাহ আমাদের সবার ইবাদত কবুল করুন এবং আমাদের জীবন সুখ, শান্তি ও সমৃদ্ধিতে পরিপূর্ণ করুন।
+        </p>
+
+        <p><strong>Tangram Technology Limited – Spreading Positive Energy.</strong> ✨</p>
+    `
+}
+
+        ];
+
+        // Function to render news list
+        function renderNewsList() {
+            const newsList = document.getElementById('newsList');
+            newsList.innerHTML = newsData.map(news => `
+                <div class="news-item" onclick="showNewsDetails(${news.id}, this)">
+                    <div class="news-item-thumbnail">
+                        <img src="${news.image}" alt="${news.title}">
+                    </div>
+                    <div class="news-item-content">
+                        <div class="news-item-title">${news.title}</div>
+                        <div class="news-item-date">
+                            📅 ${news.date}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Function to show news details
+        function showNewsDetails(newsId, clickedElement) {
+            const news = newsData.find(n => n.id === newsId);
+            if (!news) return;
+
+            // Remove active class from all items
+            document.querySelectorAll('.news-item').forEach(item => {
+                item.classList.remove('active');
+            });
+
+            // Add active class to clicked item
+            if (clickedElement) clickedElement.classList.add('active');
+
+            // Show details
+            const detailsContainer = document.getElementById('newsDetails');
+            detailsContainer.innerHTML = `
+                <h1 class="news-details-title">${news.title}</h1>
+                <div class="news-details-meta">
+                    <span>📅 ${news.date}</span>
+                    <span>✍️ ${news.author}</span>
+                </div>
+                <div class="news-details-image" onclick="openLightbox('${news.image}')">
+                    <img src="${news.image}" alt="${news.title}">
+                </div>
+                <div class="news-details-content">
+                    ${news.content}
+                </div>
+            `;
+
+            // Scroll to top of details (for mobile)
+            detailsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Lightbox functions
+        function openLightbox(imageSrc) {
+            const lightbox = document.getElementById('lightboxModal');
+            const lightboxImage = document.getElementById('lightboxImage');
+            lightboxImage.src = imageSrc;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightboxModal');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close lightbox when clicking outside the image
+        document.getElementById('lightboxModal').addEventListener('click', function(event) {
+            if (event.target === this) {
+                closeLightbox();
+            }
+        });
+
+        // Close lightbox with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+
+        // Initialize
+        renderNewsList();
+
+        // Auto-select first news on load
+        setTimeout(() => {
+            const firstNewsItem = document.querySelector('.news-item');
+            if (firstNewsItem) {
+                firstNewsItem.classList.add('active');
+                showNewsDetails(newsData[0].id);
+            }
+        }, 100);
+    </script>
+</body>
+</html>
