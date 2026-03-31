@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bangladesh Divisions - Distributors</title>
+
+<style>
+body {
+    margin: 0;
+    padding: 40px 16px;
+    font-family: Arial, sans-serif;
+    background: #f5f7fa;
+}
+
+.cards-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    max-width: 1300px;
+    margin: auto;
+}
+
+.flip-card {
+    background: transparent;
+    width: 100%;
+    height: 420px;
+    perspective: 1200px;
+    transition: transform 0.3s ease;
+}
+
+.flip-card:hover {
+    transform: translateY(-10px);
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s ease;
+    transform-style: preserve-3d;
+}
+
+.flip-card.flipped .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 18px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+    padding: 24px;
+}
+
+.flip-card-front {
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.flip-card-back {
+    background: linear-gradient(135deg, #006747, #004d35);
+    color: #ffffff;
+    transform: rotateY(180deg);
+    overflow-y: auto;
+}
+
+.district-icon {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #006747, #004d35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 42px;
+    color: #fff;
+    margin-bottom: 20px;
+    transition: transform 0.6s ease;
+}
+
+.flip-card:hover .district-icon {
+    transform: rotate(360deg);
+}
+
+.division-name {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.division-sub {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.badge {
+    background: #f4a20c;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.back-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #f4a20c;
+    text-align: center;
+}
+
+.distributor-item {
+    background: rgba(255,255,255,0.1);
+    padding: 12px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.flip-btn {
+    margin-top: 15px;
+    background: #006747;
+    color: #fff;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.flip-btn.back {
+    background: #f4a20c;
+    color: #000;
+}
+
+@media (max-width: 768px) {
+    .flip-card {
+        height: 380px;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="cards-wrapper">
+
+    <div class="flip-card">
+  <div class="flip-card-inner">
+    <div class="flip-card-front">
+      <div class="district-icon">🏛️</div>
+      <div class="division-name">Dhaka</div>
+      <div class="division-sub">Dhaka Division</div>
+      <span class="badge">5 Distributors</span>
+      <button class="flip-btn" onclick="flipCard(this)">View Distributors</button>
+    </div>
+    <div class="flip-card-back">
+      <div class="back-title">Authorized Distributors</div>
+
+      <div class="distributor-item"><strong>Al Hasan Electric House</strong><br>🆔 Code: 1056<br>📞 01740-581015<br>📍 Madina Electric Super Market, Nawabpur, Dhaka</div>
+      <div class="distributor-item"><strong>Mahmud Enterprise</strong><br>🆔 Code: 1050<br>📞 01719-560791<br>📍 Sundarban Square Super Market, Dhaka</div>
+      <div class="distributor-item"><strong>Mayer Dowa Electric</strong><br>🆔 Code: 1061<br>📞 01727-767672<br>📍 Kaptanbazar No.1 (2nd Floor), Nawabpur, Dhaka</div>
+      <div class="distributor-item"><strong>Chaina Electric 02</strong><br>🆔 Code: 1109<br>📞 01724-211690<br>📍 Lalmia Market, Nawabpur, Dhaka</div>
+      <div class="distributor-item"><strong>New Faridpur Electric</strong><br>🆔 Code: 1051<br>📞 01736-212788<br>📍 Gangor Bazar, Niamatpur, Naogaon</div>
+
+      <button class="flip-btn back" onclick="flipCard(this)">⬅ Back</button>
+    </div>
+  </div>
+</div>
+
+<!-- Chattogram -->
+   <div class="flip-card">
+  <div class="flip-card-inner">
+    <div class="flip-card-front">
+      <div class="district-icon">⚓</div>
+      <div class="division-name">Chattogram</div>
+      <div class="division-sub">Chattogram Division</div>
+      <span class="badge">2 Distributors</span>
+      <button class="flip-btn" onclick="flipCard(this)">View Distributors</button>
+    </div>
+    <div class="flip-card-back">
+      <div class="back-title">Authorized Distributors</div>
+
+      <div class="distributor-item"><strong>M/S Insaf Trading</strong><br>🆔 1107<br>📞 01819-623724<br>📍 Epic Plaza, Jubilee Road, Chattogram</div>
+      <div class="distributor-item"><strong>Chowmuhoni Electric Store</strong><br>🆔 1210<br>📞 01612-233190<br>📍 Raozan, Chattogram</div>
+
+      <button class="flip-btn back" onclick="flipCard(this)">⬅ Back</button>
+    </div>
+  </div>
+</div>
+
+<!-- Khulna -->
+    <div class="flip-card">
+  <div class="flip-card-inner">
+    <div class="flip-card-front">
+      <div class="district-icon">🌿</div>
+      <div class="division-name">Khulna</div>
+      <div class="division-sub">Khulna Division</div>
+      <span class="badge">12 Distributors</span>
+      <button class="flip-btn" onclick="flipCard(this)">View Distributors</button>
+    </div>
+    <div class="flip-card-back">
+      <div class="back-title">Authorized Distributors</div>
+
+      <div class="distributor-item"><strong>Akib Enterprise</strong><br>🆔 1045<br>📞 01725-082978<br>📍 Pakapull, Muktijudha Market, Satkhira</div>
+      <div class="distributor-item"><strong>EnergyTac</strong><br>🆔 1283<br>📞 01912835284<br>📍 541, Niznanduali, West Nanduali, Magura Sadar, Magura-7600.</div>
+      <div class="distributor-item"><strong>Boni Electric</strong><br>🆔 1042<br>📞 01728-932666<br>📍 Sorwardi Market, Dakbangla, Khulna</div>
+      <div class="distributor-item"><strong>Master Electric</strong><br>🆔 1212<br>📞 01936-262274<br>📍 Babur Ali Gate, Kushtia Sadar, Kushtia</div>
+      <div class="distributor-item"><strong>Newton Foam & Electric Corner</strong><br>🆔 1039<br>📞 01710-859462<br>📍 Shafi Market, Bagerhat Sadar, Bagerhat</div>
+      <div class="distributor-item"><strong>Rikta Electric</strong><br>🆔 1200<br>📞 01718-502410<br>📍 Dudh Bazar, Dumuria, Khulna</div>
+      <div class="distributor-item"><strong>Saad Enterprise</strong><br>🆔 1043<br>📞 01911-434903<br>📍 Bou Bazar, Sonadanga, Khulna</div>
+      <div class="distributor-item"><strong>Safwan Traders</strong><br>🆔 1070<br>📞 01712-184400<br>📍 Sherebangla Road, Alkatramil Mor, Khulna</div>
+      <div class="distributor-item"><strong>Suborno Electric</strong><br>🆔 1040<br>📞 01714-032331<br>📍 College Road, Gopalganj</div>
+      <div class="distributor-item"><strong>Tusher Electronics</strong><br>🆔 1069<br>📞 01884-415771<br>📍 Main Bus Stand, Kaliganj, Jhenidah</div>
+      <div class="distributor-item"><strong>Uzzal & Brothers</strong><br>🆔 1194<br>📞 01712-036566<br>📍 Haque Tower, Chuadanga</div>
+      <div class="distributor-item"><strong>Zam Zam Electric</strong><br>🆔 1130<br>📞 01716-463470<br>📍Shohorardi Market, Sadore, Khulna</div>
+
+      <button class="flip-btn back" onclick="flipCard(this)">⬅ Back</button>
+    </div>
+  </div>
+</div>
+
+
+
+    <!-- Barishal -->
+<div class="flip-card">
+  <div class="flip-card-inner">
+    <div class="flip-card-front">
+      <div class="district-icon">🚤</div>
+      <div class="division-name">Barishal</div>
+      <div class="division-sub">Barishal Division</div>
+      <span class="badge">No Distributor</span>
+      <button class="flip-btn" onclick="flipCard(this)">View Distributors</button>
+    </div>
+    <div class="flip-card-back">
+      <div class="back-title">Authorized Distributors</div>
+      <div class="distributor-item">Currently no distributor available.</div>
+      <button class="flip-btn back" onclick="flipCard(this)">⬅ Back</button>
+    </div>
+  </div>
+</div>
+
+
+    <!-- Mymensingh -->
+<div class="flip-card">
+  <div class="flip-card-inner">
+    <div class="flip-card-front">
+      <div class="district-icon">🌾</div>
+      <div class="division-name">Mymensingh</div>
+      <div class="division-sub">Mymensingh Division</div>
+      <span class="badge">8 Distributors</span>
+      <button class="flip-btn" onclick="flipCard(this)">View Distributors</button>
+    </div>
+    <div class="flip-card-back">
+      <div class="back-title">Authorized Distributors</div>
+
+      <div class="distributor-item"><strong>MS. Hazi Aftab Traders</strong><br>🆔 1031<br>📞 01775-635533<br>📍 Kotiadi, Kishoreganj</div>
+      <div class="distributor-item"><strong>New Sanchita Enterprise & Lighting House</strong><br>🆔 1035<br>📞 01752-213831<br>📍 Modhupur, Tangail</div>
+      <div class="distributor-item"><strong>Newaz Electric</strong><br>🆔 1078<br>📞 01925-190910<br>📍 Haluaghat, Mymensingh</div>
+      <div class="distributor-item"><strong>Tamanna Akhi Enterprise</strong><br>🆔 1034<br>📞 01717-625093<br>📍 Modhupur Road, Tangail</div>
+      <div class="distributor-item"><strong>National Electric</strong><br>🆔 1148<br>📞 01614-217179<br>📍 Jamalpur Sadar</div>
+      <div class="distributor-item"><strong>Omor Electric House</strong><br>🆔 1030<br>📞 01710-341154<br>📍 Maskanda, Mymensingh</div>
+      <div class="distributor-item"><strong>Khan Electric</strong><br>🆔 1026<br>📞 01725-248395<br>📍 Tarakanda, Mymensingh</div>
+      <div class="distributor-item"><strong>Vai Vai Electric & Electronics</strong><br>🆔 1073<br>📞 01919-090731<br>📍 Netrakona</div>
+
+      <button class="flip-btn back" onclick="flipCard(this)">⬅ Back</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- Rajshahi -->
+<div class="flip-card">
+  <div class="flip-card-inner">
+    <div class="flip-card-front">
+      <div class="district-icon">🏺</div>
+      <div class="division-name">Rajshahi</div>
+      <div class="division-sub">Rajshahi Division</div>
+      <span class="badge">4 Distributors</span>
+      <button class="flip-btn" onclick="flipCard(this)">View Distributors</button>
+    </div>
+    <div class="flip-card-back">
+      <div class="back-title">Authorized Distributors</div>
+
+      <div class="distributor-item"><strong>Momin Light House</strong><br>🆔 1087<br>📞 01725-245119<br>📍 Joypurhat</div>
+      <div class="distributor-item"><strong>Hamidul Electric</strong><br>🆔 1008<br>📞 01728-315613<br>📍 Natore</div>
+      <div class="distributor-item"><strong>Bizle Lighting</strong><br>🆔 1184<br>📞 01742-770542<br>📍 Rajshahi</div>
+      <div class="distributor-item"><strong>Aiyan Electric</strong><br>🆔 1193<br>📞 01711-082568<br>📍 Bonpara</div>
+
+      <button class="flip-btn back" onclick="flipCard(this)">⬅ Back</button>
+    </div>
+  </div>
+</div>
+
+
+
+    <!-- Rangpur -->
+<div class="flip-card">
+  <div class="flip-card-inner">
+    <div class="flip-card-front">
+      <div class="district-icon">❄️</div>
+      <div class="division-name">Rangpur</div>
+      <div class="division-sub">Rangpur Division</div>
+      <span class="badge">3 Distributors</span>
+      <button class="flip-btn" onclick="flipCard(this)">View Distributors</button>
+    </div>
+    <div class="flip-card-back">
+      <div class="back-title">Authorized Distributors</div>
+
+      <div class="distributor-item"><strong>M/S Zinna Elec</strong><br>🆔 1152<br>📞 01770-656496<br>📍 Gaibandha Sadar</div>
+      <div class="distributor-item"><strong>M/S Sohag Electric</strong><br>🆔 1236<br>📞 01716-776606<br>📍 Polashbari</div>
+      <div class="distributor-item"><strong>Nuriya Electric</strong><br>🆔 1189<br>📞 01733-298222<br>📍 Bhurungamari</div>
+
+      <button class="flip-btn back" onclick="flipCard(this)">⬅ Back</button>
+    </div>
+  </div>
+</div>
+
+
+
+    <!-- Sylhet -->
+<div class="flip-card">
+  <div class="flip-card-inner">
+    <div class="flip-card-front">
+      <div class="district-icon">🍃</div>
+      <div class="division-name">Sylhet</div>
+      <div class="division-sub">Sylhet Division</div>
+      <span class="badge">7 Distributors</span>
+      <button class="flip-btn" onclick="flipCard(this)">View Distributors</button>
+    </div>
+    <div class="flip-card-back">
+      <div class="back-title">Authorized Distributors</div>
+
+      <div class="distributor-item">
+        <strong>M/S Vai Vai Electric</strong><br>
+        🆔 Code: 1096<br>
+        📞 01719-349635<br>
+        📍 Sreemonga, Hobiganj Road, Moulvibazar
+      </div>
+
+      <div class="distributor-item">
+        <strong>ABC Enterprise</strong><br>
+        🆔 Code: 1016<br>
+        📞 01738-670741<br>
+        📍 Kumarpara, Sylhet
+      </div>
+
+      <div class="distributor-item">
+        <strong>Avizath Electric</strong><br>
+        🆔 Code: 1103<br>
+        📞 01711-268507 / 01739-044707<br>
+        📍 East Dhopadigirpar, Sylhet
+      </div>
+
+      <div class="distributor-item">
+        <strong>Shagor Paint & Electric</strong><br>
+        🆔 Code: 1118<br>
+        📞 01776-946446<br>
+        📍 Shaparan School Market, Sylhet
+      </div>
+
+      <div class="distributor-item">
+        <strong>Sharif Enterprise</strong><br>
+        🆔 Code: 1083<br>
+        📞 01711-103668<br>
+        📍 Panna Super Market, Jalalabad Cantonment
+      </div>
+
+      <div class="distributor-item">
+        <strong>Shapno Electric</strong><br>
+        🆔 Code: 1019<br>
+        📞 01715-454723<br>
+        📍 Khanighat, Sylhet
+      </div>
+
+      <div class="distributor-item">
+        <strong>M/S Abdur Rahman Traders</strong><br>
+        🆔 Code: 1091<br>
+        📞 01710-716066<br>
+        📍 Shalutikor Bazar, Gowainghat Road
+      </div>
+
+      <button class="flip-btn back" onclick="flipCard(this)">⬅ Back</button>
+    </div>
+  </div>
+</div>
+
+<!-- Savar -->
+<div class="flip-card">
+  <div class="flip-card-inner">
+    <div class="flip-card-front">
+      <div class="district-icon">🏙️</div>
+      <div class="division-name">Savar</div>
+      <div class="division-sub">Dhaka Region</div>
+      <span class="badge">1 Distributor</span>
+      <button class="flip-btn" onclick="flipCard(this)">View Distributors</button>
+    </div>
+    <div class="flip-card-back">
+      <div class="back-title">Authorized Distributors</div>
+      <div class="distributor-item">
+        <strong>Loknath Electric</strong><br>
+        🆔 Code: 1121<br>
+        📞 01972-506237<br>
+        📍 Nama Bazar, Savar, Dhaka
+      </div>
+      <button class="flip-btn back" onclick="flipCard(this)">⬅ Back</button>
+    </div>
+  </div>
+</div>
+
+<!-- Gazipur -->
+<div class="flip-card">
+  <div class="flip-card-inner">
+    <div class="flip-card-front">
+      <div class="district-icon">🏙️</div>
+      <div class="division-name">Gazipur</div>
+      <div class="division-sub">Dhaka Region</div>
+      <span class="badge">5 Distributor</span>
+      <button class="flip-btn" onclick="flipCard(this)">View Distributors</button>
+    </div>
+    <div class="flip-card-back">
+      <div class="back-title">Authorized Distributors</div>
+      <div class="distributor-item">
+        <strong>Liberty C & E Co.</strong><br>
+        🆔 Code: 1160<br>
+        📞 01717-498424<br>
+        📍 Baipail, Ashulia, Dhaka
+      </div>
+      <div class="distributor-item">
+        <strong>Fahim electric</strong><br>
+        🆔 Code: 1112<br>
+        📞 +8801932017709<br>
+        📍 Sadupara mur, Ashulia, Dhaka
+      </div>
+      
+      <div class="distributor-item">
+        <strong>Aekhi electric</strong><br>
+        🆔 Code: 1187<br>
+        📞 01713-535307<br>
+        📍 Kaliakor bajar, Kaliakor, Gazipur
+      </div>
+      
+      <div class="distributor-item">
+        <strong>Aekhi electric</strong><br>
+        🆔 Code: 1187<br>
+        📞 01713-535307<br>
+        📍 Kaliakor bajar, Kaliakor, Gazipur
+      </div>
+      
+      <div class="distributor-item">
+        <strong>Numan electric</strong><br>
+        🆔 Code: 1175<br>
+        📞 01679-110335<br>
+        📍 Mirjapur bajar, Tangail
+      </div>
+      
+      <div class="distributor-item">
+        <strong>Teen vai Electric & Electronics</strong><br>
+        🆔 Code: 1214<br>
+        📞+8801766-036704<br>
+        📍 Sokhipur road, Sagordighi Bajar, Gatail, Tangail
+      </div>
+      
+      <button class="flip-btn back" onclick="flipCard(this)">⬅ Back</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+<script>
+function flipCard(btn) {
+    btn.closest('.flip-card').classList.toggle('flipped');
+}
+</script>
+
+</body>
+</html>
