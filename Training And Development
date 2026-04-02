@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Event Gallery | ইভেন্ট গ্যালারি</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f0fdf4 0%, #e6f7f3 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #108981 0%, #059669 100%);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(16, 137, 129, 0.3);
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+        }
+
+        .gallery-section {
+            margin-bottom: 60px;
+            animation: fadeIn 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .gallery-section:nth-child(2) { animation-delay: 0.1s; }
+        .gallery-section:nth-child(3) { animation-delay: 0.2s; }
+        .gallery-section:nth-child(4) { animation-delay: 0.3s; }
+        .gallery-section:nth-child(5) { animation-delay: 0.4s; }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            background: white;
+            padding: 25px 30px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border-left: 6px solid #108981;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section-header:hover {
+            transform: translateX(5px);
+            box-shadow: 0 6px 20px rgba(16, 137, 129, 0.15);
+        }
+
+        .section-header h2 {
+            color: #108981;
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        .section-header p {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 10px;
+        }
+
+        .photo-card {
+            position: relative;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            animation: scaleIn 0.5s ease-out;
+            animation-fill-mode: both;
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .photo-card:nth-child(1) { animation-delay: 0.1s; }
+        .photo-card:nth-child(2) { animation-delay: 0.15s; }
+        .photo-card:nth-child(3) { animation-delay: 0.2s; }
+        .photo-card:nth-child(4) { animation-delay: 0.25s; }
+        .photo-card:nth-child(5) { animation-delay: 0.3s; }
+        .photo-card:nth-child(6) { animation-delay: 0.35s; }
+        .photo-card:nth-child(7) { animation-delay: 0.4s; }
+        .photo-card:nth-child(8) { animation-delay: 0.45s; }
+
+        .photo-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(16, 137, 129, 0.25);
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .photo-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .photo-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(16, 137, 129, 0.95) 0%, rgba(16, 137, 129, 0.7) 70%, transparent 100%);
+            color: white;
+            padding: 20px;
+            transform: translateY(60%);
+            transition: transform 0.3s ease;
+        }
+
+        .photo-card:hover .photo-overlay {
+            transform: translateY(0);
+        }
+
+        .photo-overlay h3 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .photo-overlay p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            position: relative;
+            margin: 5% auto;
+            max-width: 90%;
+            max-height: 85vh;
+            animation: zoomIn 0.3s ease;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-content img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: #108981;
+        }
+
+        .stats-banner {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+            padding: 10px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #108981 0%, #059669 100%);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 4px 15px rgba(16, 137, 129, 0.3);
+            transition: transform 0.3s ease;
+            animation: bounceIn 0.6s ease;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .header p {
+                font-size: 0.95rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.4rem;
+            }
+
+            .photo-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 15px;
+            }
+
+            .photo-card img {
+                height: 180px;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .modal-content {
+                margin: 10% auto;
+                max-width: 95%;
+            }
+
+            .close {
+                top: 10px;
+                right: 15px;
+                font-size: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .header {
+                padding: 25px 15px;
+                margin-bottom: 25px;
+            }
+
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .section-header {
+                padding: 20px;
+            }
+
+            .photo-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .photo-card img {
+                height: 200px;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!--<div class="header">-->
+    <!--    <h1>🏭 Company Event Gallery</h1>-->
+    <!--    <p>আমাদের কোম্পানির বিভিন্ন ইভেন্ট এবং কার্যক্রমের ছবি</p>-->
+    <!--</div>-->
+
+    <!--<div class="stats-banner">-->
+    <!--    <div class="stat-card">-->
+    <!--        <div class="stat-number">150+</div>-->
+    <!--        <div class="stat-label">Total Events</div>-->
+    <!--    </div>-->
+    <!--    <div class="stat-card">-->
+    <!--        <div class="stat-number">500+</div>-->
+    <!--        <div class="stat-label">Photos</div>-->
+    <!--    </div>-->
+    <!--    <div class="stat-card">-->
+    <!--        <div class="stat-number">25+</div>-->
+    <!--        <div class="stat-label">Projects</div>-->
+    <!--    </div>-->
+    <!--</div>-->
+
+    <!-- Industrial Air Compressor System Section -->
+    <div class="gallery-section">
+        <div class="section-header">
+            <h2>🔧 Industrial Air Compressor System at Tangram Factory</h2>
+            <p>Tangram Factory-তে আমাদের অত্যাধুনিক Industrial Air Compressor System Installation</p>
+        </div>
+        <div class="photo-grid">
+            <div class="photo-card" onclick="openModal(this)">
+                <img src="https://tangramelectronics.com/wp-content/uploads/2025/01/ccac0b03-c18a-4c25-b9d7-e88a914dc479-1-1.jpg" alt="Compressor Installation">
+                <div class="photo-overlay">
+                    <h3>Main Compressor Unit</h3>
+                    <p>High-capacity industrial compressor</p>
+                </div>
+            </div>
+            <div class="photo-card" onclick="openModal(this)">
+                <img src="https://tangramelectronics.com/wp-content/uploads/2025/01/065bcb3a-4499-4de5-885a-a24f5ca4766b-1-1-1.jpg" alt="Control Panel">
+                <div class="photo-overlay">
+                    <h3>Control Panel Setup</h3>
+                    <p>Advanced monitoring system</p>
+                </div>
+            </div>
+            <div class="photo-card" onclick="openModal(this)">
+                <img src="https://tangramelectronics.com/wp-content/uploads/2025/01/edc1590c-de9e-4964-8a61-e89c7b7675f0-1-1-1.jpg" alt="Pipeline Installation">
+                <div class="photo-overlay">
+                    <h3>Pipeline Network</h3>
+                    <p>Complete air distribution system</p>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+
+    <!-- Meetings and Collaboration Section -->
+    <div class="gallery-section">
+        <div class="section-header">
+            <h2>Quarterly Sales Meeting 2026</h2>
+            <p>টিম মিটিং, ক্লায়েন্ট আলোচনা এবং সহযোগিতামূলক কার্যক্রম</p>
+        </div>
+        <div class="photo-grid">
+            <div class="photo-card" onclick="openModal(this)">
+                <img src="https://tangramelectronics.com/wp-content/uploads/2026/02/IMG20260205134619-scaled.jpg" alt="Team Meeting">
+                <div class="photo-overlay">
+                    <h3>Strategic Planning</h3>
+                    <p>Quarterly team meeting</p>
+                </div>
+            </div>
+            <div class="photo-card" onclick="openModal(this)">
+                <img src="https://tangramelectronics.com/wp-content/uploads/2026/02/630306007_884225654474022_2943585231204257308_n.jpg" alt="Client Discussion">
+                <div class="photo-overlay">
+                    <h3>Client Consultation</h3>
+                    <p>Project discussion session</p>
+                </div>
+            </div>
+            <div class="photo-card" onclick="openModal(this)">
+                <img src="https://tangramelectronics.com/wp-content/uploads/2026/02/629664381_884224754474112_2005643736107419374_n.jpg" alt="Presentation">
+                <div class="photo-overlay">
+                    <h3>Project Presentation</h3>
+                    <p>Showcasing new solutions</p>
+                </div>
+            </div>
+            <div class="photo-card" onclick="openModal(this)">
+                <img src="https://tangramelectronics.com/wp-content/uploads/2026/02/631178797_884224724474115_760050978488306654_n.jpg" alt="Brainstorming">
+                <div class="photo-overlay">
+                    <h3>Brainstorming Session</h3>
+                    <p>Innovation workshop</p>
+                </div>
+            </div>
+            <div class="photo-card" onclick="openModal(this)">
+                <img src="https://tangramelectronics.com/wp-content/uploads/2026/02/629213303_884224491140805_2796572874746802023_n.jpg" alt="Team Collaboration">
+                <div class="photo-overlay">
+                    <h3>Team Collaboration</h3>
+                    <p>Working together</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- Modal for full-size image viewing -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="close">&times;</span>
+        <div class="modal-content">
+            <img id="modalImage" src="" alt="Full size image">
+        </div>
+    </div>
+
+    <script>
+        function openModal(card) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const img = card.querySelector('img');
+            
+            modal.style.display = 'block';
+            modalImg.src = img.src;
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Lazy loading animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.gallery-section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
