@@ -1,0 +1,1646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Categories - Electrical Series</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --mint: #e8f8f5;
+            --light-teal: #c8f2ec;
+            --soft-teal: #b2ece3;
+            --teal: #2ecfb0;
+            --deep-teal: #0a9e84;
+            --dark-teal: #077d68;
+            --dark-text: #1a3a36;
+            --border-color: #a0d8d0;
+            --hover-color: #7fc5ba;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: white;
+            color: var(--dark-text);
+            overflow-x: hidden;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        html {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* HEADER */
+        .header {
+            background: linear-gradient(135deg, var(--deep-teal) 0%, var(--teal) 100%);
+            padding: 15px 20px;
+            text-align: center;
+            border-bottom: 3px solid var(--dark-teal);
+            animation: slideDown 0.6s ease-out;
+            flex-shrink: 0;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            color: white;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .header p {
+            font-size: 0.8rem;
+            color: #e0f5f1;
+            font-weight: 500;
+        }
+
+        /* MAIN CONTAINER */
+        .main-container {
+            display: flex;
+            flex: 1;
+            gap: 0;
+            overflow: hidden;
+            min-height: 0;
+        }
+
+        /* LEFT SIDEBAR - CATEGORIES */
+        .sidebar {
+            width: 30%;
+            background-color: white;
+            border-right: 2px solid var(--teal);
+            overflow-y: auto;
+            padding: 15px;
+            animation: slideInLeft 0.6s ease-out 0.2s both;
+            flex-shrink: 0;
+            min-height: 0;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .sidebar h3 {
+            font-size: 1rem;
+            margin-bottom: 12px;
+            color: var(--deep-teal);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .category-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .category-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .category-item {
+            padding: 12px 12px;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            position: relative;
+            font-weight: 500;
+            color: var(--dark-text);
+            font-size: 0.9rem;
+        }
+
+        .category-item.main-category {
+            padding: 12px 8px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--deep-teal);
+            cursor: default;
+            margin-top: 10px;
+            margin-bottom: 0;
+        }
+
+        .category-item.sub-category {
+            padding-left: 24px;
+            font-size: 0.85rem;
+            background-color: white;
+            max-height: 0;
+            overflow: hidden;
+            padding-top: 0;
+            padding-bottom: 0;
+            margin: 0;
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: block;
+        }
+
+        .category-item.main-category:hover ~ .category-item.sub-category {
+            max-height: 50px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            opacity: 1;
+            background-color: var(--mint);
+        }
+
+        .category-item.sub-category:hover,
+        .category-item.sub-category:hover ~ .category-item.sub-category {
+            max-height: 50px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            opacity: 1;
+            background-color: var(--light-teal);
+        }
+
+        }
+
+        .category-item.sub-category::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 24px;
+            width: calc(100% - 24px);
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--teal), transparent);
+            animation: none;
+            transition: opacity 0.4s ease;
+            opacity: 0;
+        }
+
+        .category-item.sub-category:hover::after {
+            opacity: 1;
+        }
+
+        .category-item.sub-category.active {
+            max-height: 50px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            opacity: 1;
+            background-color: var(--teal);
+            color: white;
+            font-weight: 700;
+            box-shadow: inset 0 2px 8px rgba(10, 158, 132, 0.2);
+        }
+
+        /* RIGHT CONTENT AREA */
+        .content {
+            width: 70%;
+            padding: 15px;
+            overflow-y: auto;
+            animation: slideInRight 0.6s ease-out 0.2s both;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-height: 0;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .content h2 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--dark-text);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 15px;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .product-card {
+            background-color: white;
+            border: 2px solid var(--teal);
+            border-radius: 12px;
+            padding: 22px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInScale 0.5s ease-out both;
+            box-shadow: 0 4px 15px rgba(46, 207, 176, 0.15);
+            display: flex;
+            flex-direction: column;
+            min-height: 380px;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .product-card:nth-child(1) { animation-delay: 0.05s; }
+        .product-card:nth-child(2) { animation-delay: 0.1s; }
+        .product-card:nth-child(3) { animation-delay: 0.15s; }
+        .product-card:nth-child(4) { animation-delay: 0.2s; }
+        .product-card:nth-child(5) { animation-delay: 0.25s; }
+        .product-card:nth-child(6) { animation-delay: 0.3s; }
+
+        .product-image {
+            width: 100%;
+            height: 160px;
+            margin: 0 auto 18px;
+            background: linear-gradient(135deg, var(--teal), var(--deep-teal));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            perspective: 1000px;
+            transition: transform 0.4s ease;
+            overflow: hidden;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .product-card:hover .product-image {
+            transform: rotateX(25deg) rotateY(25deg) scale(1.1);
+        }
+
+        .product-info {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex: 1;
+        }
+
+        .product-name {
+            font-size: 1.05rem;
+            font-weight: 800;
+            margin-bottom: 3px;
+            color: var(--dark-text);
+            transition: color 0.3s ease;
+            line-height: 1.3;
+        }
+
+        .product-subtitle {
+            font-size: 0.8rem;
+            color: var(--teal);
+            font-weight: 600;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--light-teal);
+        }
+
+        .product-desc {
+            font-size: 0.82rem;
+            color: var(--hover-color);
+            margin-bottom: 12px;
+            min-height: 45px;
+            line-height: 1.4;
+            flex-grow: 1;
+        }
+
+        .product-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 45px rgba(46, 207, 176, 0.3);
+            border-color: var(--deep-teal);
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 0%, rgba(200, 242, 236, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .product-card:hover::before {
+            opacity: 1;
+        }
+
+        /* PAGINATION */
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+            animation: fadeIn 0.5s ease-out;
+            flex-shrink: 0;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .pagination button,
+        .pagination span {
+            padding: 6px 10px;
+            border: 2px solid var(--deep-teal);
+            background-color: white;
+            color: var(--deep-teal);
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .pagination button:hover:not(:disabled) {
+            background-color: var(--deep-teal);
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        .pagination button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .pagination .active {
+            background-color: var(--deep-teal);
+            color: white;
+            font-weight: 700;
+        }
+
+        .pagination-left,
+        .pagination-center,
+        .pagination-right {
+            display: flex;
+            gap: 6px;
+        }
+
+        .pagination-left {
+            flex: 0;
+        }
+
+        .pagination-center {
+            flex: 1;
+            justify-content: center;
+        }
+
+        .pagination-right {
+            flex: 0;
+        }
+
+        /* MODAL - PRODUCT DETAILS */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 550px;
+            box-shadow: 0 30px 60px rgba(7, 125, 104, 0.2);
+            animation: slideUp 0.4s ease-out;
+            max-height: 80vh;
+            overflow-y: auto;
+            border-top: 4px solid var(--deep-teal);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: var(--dark-text);
+            font-weight: 700;
+        }
+
+        .close-btn {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--teal);
+            cursor: pointer;
+            border: none;
+            background: none;
+            padding: 0;
+            width: 26px;
+            height: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            color: var(--dark-teal);
+            transform: rotate(90deg);
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, var(--teal), var(--deep-teal));
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            object-fit: cover;
+            overflow: hidden;
+        }
+
+        .modal-details {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .detail-item {
+            padding: 12px;
+            background-color: var(--mint);
+            border-left: 4px solid var(--deep-teal);
+            border-radius: 6px;
+        }
+
+        .detail-label {
+            font-size: 0.8rem;
+            color: var(--deep-teal);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            margin-bottom: 4px;
+        }
+
+        .detail-value {
+            font-size: 0.95rem;
+            color: var(--dark-text);
+            font-weight: 600;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-close-modal {
+            flex: 1;
+            padding: 10px 16px;
+            border: 2px solid var(--deep-teal);
+            background-color: white;
+            color: var(--deep-teal);
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-close-modal:hover {
+            background-color: var(--deep-teal);
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 1024px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 2px solid var(--teal);
+                max-height: 250px;
+            }
+
+            .content {
+                width: 100%;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.6rem;
+            }
+
+            .header p {
+                font-size: 0.8rem;
+            }
+
+            .sidebar {
+                max-height: 200px;
+            }
+
+            .sidebar h3 {
+                font-size: 0.95rem;
+            }
+
+            .category-item {
+                padding: 10px 10px;
+                font-size: 0.85rem;
+            }
+
+            .content h2 {
+                font-size: 1.4rem;
+                margin-bottom: 18px;
+            }
+
+            .content {
+                padding: 18px;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 15px;
+            }
+
+            .product-card {
+                min-height: 350px;
+                padding: 16px;
+            }
+
+            .product-image {
+                height: 130px;
+                font-size: 1.8rem;
+                margin-bottom: 14px;
+            }
+
+            .product-name {
+                font-size: 0.95rem;
+            }
+
+            .product-subtitle {
+                font-size: 0.75rem;
+            }
+
+            .product-desc {
+                font-size: 0.78rem;
+                min-height: 35px;
+            }
+
+            .modal-content {
+                padding: 28px;
+                width: 95%;
+            }
+
+            .modal-title {
+                font-size: 1.4rem;
+            }
+
+            .modal-image {
+                height: 240px;
+                font-size: 2.8rem;
+            }
+
+            .find-products-section h2 {
+                font-size: 1.6rem;
+                margin-bottom: 18px;
+            }
+
+            .slider-product-tag {
+                padding: 8px 16px;
+                font-size: 0.82rem;
+            }
+
+            .slider-btn {
+                padding: 8px 16px;
+                font-size: 0.82rem;
+            }
+
+            .slider-dots {
+                gap: 8px;
+                margin-top: 16px;
+            }
+
+            .dot {
+                width: 8px;
+                height: 8px;
+            }
+
+            .dot.active {
+                width: 22px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 18px 12px;
+            }
+
+            .header h1 {
+                font-size: 1.3rem;
+                margin-bottom: 6px;
+            }
+
+            .header p {
+                font-size: 0.75rem;
+            }
+
+            .sidebar {
+                max-height: 140px;
+                padding: 12px;
+            }
+
+            .sidebar h3 {
+                font-size: 0.85rem;
+                margin-bottom: 10px;
+            }
+
+            .category-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .category-group {
+                gap: 5px;
+            }
+
+            .category-item {
+                padding: 8px 10px;
+                font-size: 0.8rem;
+            }
+
+            .category-item.main-category {
+                padding: 8px 6px;
+                font-size: 0.85rem;
+                margin-top: 8px;
+            }
+
+            .content {
+                padding: 12px;
+            }
+
+            .content h2 {
+                font-size: 1.1rem;
+                margin-bottom: 12px;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .product-card {
+                min-height: 320px;
+                padding: 14px;
+            }
+
+            .product-image {
+                height: 110px;
+                font-size: 1.6rem;
+                margin-bottom: 10px;
+            }
+
+            .product-name {
+                font-size: 0.8rem;
+                font-weight: 700;
+                line-height: 1.2;
+            }
+
+            .product-subtitle {
+                font-size: 0.7rem;
+                padding-bottom: 6px;
+                margin-bottom: 6px;
+            }
+
+            .product-desc {
+                font-size: 0.7rem;
+                min-height: 28px;
+                margin-bottom: 8px;
+            }
+
+            .pagination {
+                gap: 4px;
+                margin-top: 15px;
+                flex-direction: column;
+            }
+
+            .pagination-left,
+            .pagination-center,
+            .pagination-right {
+                width: 100%;
+                flex: none;
+            }
+
+            .pagination-left {
+                text-align: left;
+            }
+
+            .pagination-right {
+                text-align: right;
+            }
+
+            .pagination button,
+            .pagination span {
+                padding: 6px 8px;
+                font-size: 0.7rem;
+            }
+
+            .find-products-section {
+                padding: 20px 12px;
+                margin-bottom: 20px;
+            }
+
+            .find-products-section h2 {
+                font-size: 1.2rem;
+                margin-bottom: 12px;
+            }
+
+            .slider-track {
+                gap: 8px;
+                padding: 8px 0;
+            }
+
+            .slider-product-tag {
+                padding: 7px 12px;
+                font-size: 0.75rem;
+            }
+
+            .slider-controls {
+                gap: 10px;
+                margin-top: 12px;
+            }
+
+            .slider-btn {
+                padding: 6px 10px;
+                font-size: 0.75rem;
+                flex: 1;
+            }
+
+            .slider-dots {
+                gap: 5px;
+                margin-top: 10px;
+            }
+
+            .dot {
+                width: 5px;
+                height: 5px;
+            }
+
+            .dot.active {
+                width: 14px;
+            }
+
+            .modal-content {
+                padding: 18px;
+                width: 95%;
+            }
+
+            .modal-title {
+                font-size: 1.2rem;
+            }
+
+            .modal-image {
+                height: 180px;
+                font-size: 2.2rem;
+            }
+
+            .detail-item {
+                padding: 10px;
+            }
+
+            .detail-label {
+                font-size: 0.7rem;
+            }
+
+            .detail-value {
+                font-size: 0.85rem;
+            }
+        }
+
+        /* SCROLLBAR STYLING */
+        .sidebar::-webkit-scrollbar,
+        .content::-webkit-scrollbar,
+        .modal-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .sidebar::-webkit-scrollbar-track,
+        .content::-webkit-scrollbar-track,
+        .modal-content::-webkit-scrollbar-track {
+            background: white;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb,
+        .content::-webkit-scrollbar-thumb,
+        .modal-content::-webkit-scrollbar-thumb {
+            background: var(--teal);
+            border-radius: 4px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb:hover,
+        .content::-webkit-scrollbar-thumb:hover,
+        .modal-content::-webkit-scrollbar-thumb:hover {
+            background: var(--deep-teal);
+        }
+
+        .empty-message {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--hover-color);
+            font-size: 1.1rem;
+        }
+
+        /* FIND OUR PRODUCTS SECTION */
+        .find-products-section {
+            background: linear-gradient(135deg, var(--mint) 0%, white 100%);
+            padding: 20px 20px;
+            text-align: center;
+            border-bottom: 2px solid var(--teal);
+            flex-shrink: 0;
+        }
+
+        .find-products-section h2 {
+            font-size: 1.5rem;
+            color: var(--dark-teal);
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        /* SLIDER STYLES FOR ALL DEVICES */
+        .slider-container {
+            position: relative;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .slider-wrapper {
+            display: flex;
+            overflow: hidden;
+            gap: 10px;
+            position: relative;
+            background: white;
+            border-radius: 8px;
+            padding: 0 5px;
+        }
+
+        .slider-track {
+            display: flex;
+            gap: 10px;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            padding: 5px 0;
+        }
+
+        .slider-product-tag {
+            padding: 8px 16px;
+            background-color: white;
+            border: 2px solid var(--teal);
+            color: var(--deep-teal);
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            flex-shrink: 0;
+            min-width: fit-content;
+        }
+
+        .slider-product-tag:hover {
+            background-color: var(--deep-teal);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(10, 158, 132, 0.2);
+        }
+
+        /* SLIDER BUTTONS */
+        .slider-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+            gap: 10px;
+        }
+
+        .slider-btn {
+            padding: 8px 14px;
+            border: 2px solid var(--deep-teal);
+            background-color: white;
+            color: var(--deep-teal);
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .slider-btn:hover:not(:disabled) {
+            background-color: var(--deep-teal);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(10, 158, 132, 0.2);
+        }
+
+        .slider-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        /* SLIDER DOTS/INDICATORS */
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--light-teal);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid var(--light-teal);
+        }
+
+        .dot:hover {
+            background-color: var(--teal);
+        }
+
+        .dot.active {
+            background-color: var(--deep-teal);
+            border-color: var(--deep-teal);
+            width: 20px;
+            border-radius: 4px;
+        }
+
+        /* HIDE DEFAULT GRID */
+        .all-products-list {
+            display: none;
+        }
+
+        /* PAGINATION - SIDE BY SIDE */
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+            gap: 20px;
+        }
+
+        .pagination-left {
+            flex: 1;
+        }
+
+        .pagination-center {
+            flex: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .pagination-right {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <div class="header">
+        <h1>Product Categories</h1>
+        <p>Explore our comprehensive electrical solutions</p>
+    </div>
+
+    <!-- FIND OUR PRODUCTS SECTION -->
+    <div class="find-products-section">
+        <h2>Find Our Products</h2>
+        
+        <!-- Slider Container -->
+        <div class="slider-container">
+            <div class="slider-wrapper">
+                <div class="slider-track" id="sliderTrack"></div>
+            </div>
+            <div class="slider-controls">
+                <button class="slider-btn" id="sliderPrevBtn">← Previous</button>
+                <div class="slider-dots" id="sliderDots"></div>
+                <button class="slider-btn" id="sliderNextBtn">Next →</button>
+            </div>
+        </div>
+
+        <!-- Hidden grid for old layout -->
+        <div class="all-products-list" id="allProductsList"></div>
+    </div>
+
+    <!-- MAIN CONTAINER -->
+    <div class="main-container">
+        <!-- LEFT SIDEBAR -->
+        <div class="sidebar">
+            <h3>Categories</h3>
+            <div class="category-list" id="categoryList"></div>
+        </div>
+
+        <!-- RIGHT CONTENT AREA -->
+        <div class="content">
+            <h2 id="categoryTitle">All Products</h2>
+            <div class="products-grid" id="productsGrid"></div>
+            <div class="pagination" id="pagination">
+                <div class="pagination-left" id="paginationLeft"></div>
+                <div class="pagination-center" id="paginationCenter"></div>
+                <div class="pagination-right" id="paginationRight"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL - PRODUCT DETAILS -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalProductName"></h2>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <img class="modal-image" id="modalProductImage" src="" alt="Product Image">
+            <div class="modal-details" id="modalDetails"></div>
+            <div class="modal-actions">
+                <button class="btn-close-modal" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // PRODUCTS DATA - JSON FORMAT WITH SUBCATEGORIES
+        const productsData = {
+            categories: [
+                {
+                    id: 1,
+                    name: 'Spirit Series',
+                    icon: '',
+                    subcategories: [
+                        {
+                            id: 101,
+                            name:'Holder',
+                            products: [
+                                { id: 1001, name: 'Round Batten Holder', description: 'High-quality batten holder', image: 'https://tangramelectronics.com/wp-content/uploads/2025/06/Tangram-Round-Batten-Holder.jpg', specifications: { 'Material': 'V0 PC Plastic', 'Type': 'Round', 'Warranty': '1 Years' } },
+                                { id: 1002, name: 'Big Octagonal Holder', description: 'Premium octagonal holder', image: 'https://tangramelectronics.com/wp-content/uploads/2025/01/Image_20260106110218.jpg', specifications: { 'Material': 'V0 PC Plastic', 'Type': 'Octagonal', 'Warranty': '1 Years' } },
+                                { id: 1003, name: 'Batten Holder B/C', description: 'Standard batten holder', image: 'https://tangramelectronics.com/wp-content/uploads/2025/06/Tangram-Batten-Holder-b-c.jpg', specifications: { 'Material': 'V0 PC Plastic', 'Type': 'B/C', 'Warranty': '1 Years' } },
+                                { id: 1004, name: 'Square Holder', description: 'Modern square design', image: 'https://tangramelectronics.com/wp-content/uploads/2025/06/Tangram-Spirit-Square-Holder.jpg', specifications: { 'Material': 'V0 PC Plastic', 'Shape': 'Square', 'Warranty': '1 Years' } },
+                                { id: 1005, name: 'pendant Holder C', description: 'Modern square design', image: 'https://tangramelectronics.com/wp-content/uploads/2025/12/Pendant-Holder-C.jpg', specifications: { 'Material': 'Plastic', 'Shape': 'Square', 'Warranty': '1 Years' } },
+                                 { id: 1005, name:'pendant Holder A/B', description: 'Modern square design', image: 'https://tangramelectronics.com/wp-content/uploads/2025/12/Pendant-Holder-AB.jpg', specifications: { 'Material': 'V0 PC Plastic', 'Shape': 'Square', 'Warranty': '1 Years' } },
+                                { id: 1006, name: 'Heat Resistant Holder', description: 'Temperature resistant holder', image: 'https://tangramelectronics.com/wp-content/uploads/2026/02/Image_20260224144453.jpg', specifications: { 'Material': 'Heat Resistant Plastic', 'Rating': 'High', 'Warranty': '1 Years' } }
+                            ]
+                        },
+                        {
+                            id: 102,
+                            name: 'Ceiling Rose',
+                            products: [
+                                { id: 1006, name: 'Small Ceiling Rose', description: 'Compact ceiling rose', image: 'https://tangramelectronics.com/wp-content/uploads/2025/01/Tangram-Small-Ceiling-Rose.jpg', specifications: { 'Size': 'Small', 'Material': 'V0 PC Plastic', 'Warranty': '1 Years' } },
+                                { id: 1007, name: 'Big Ceiling Rose', description: 'Large ceiling rose', image: 'https://tangramelectronics.com/wp-content/uploads/2025/01/Tangram-Big-ceiling-rose.jpg', specifications: { 'Size': 'Big', 'Material': 'Plastic', 'Warranty': '1 Years' } },
+                                { id: 1008, name: 'Square Ceiling Rose', description: 'Square design rose', image: 'https://tangramelectronics.com/wp-content/uploads/2025/12/Image_20251230114103.jpg', specifications: { 'Shape': 'Square', 'Material': 'Plastic', 'Warranty': '1 Years' } }
+                            ]
+                        },
+                        {
+                            id: 103,
+                            name: 'Switch & Sockets',
+                            products: [
+                                { id: 1009, name: 'Fuse', description: 'Safety protection device', image: 'https://tangramelectronics.com/wp-content/uploads/2025/12/Image_20251228104005.jpg', specifications: { 'Type': 'Rewirable/Plug', 'Material': 'V0 PC Plastic', 'Conductor': 'Copper conductor' } },
+                                { id: 1010, name: 'Indicator', description: 'LED status indicator', image: 'https://tangramelectronics.com/wp-content/uploads/2025/04/Tangram-Spirit-Piano-Indicator-Switch.jpg', specifications: { 'Type': 'LED', 'Color': 'Red', 'Voltage': '230V AC' } },
+                                { id: 1011, name: '2pin Socket', description: 'Standard 2-pin outlet', image: 'https://tangramelectronics.com/wp-content/uploads/2025/06/Tangram-Piano-2-Pin-socket.jpg', specifications: { 'Pins': '2', 'Material': 'Fire-retardant polycarbonate body', 'Voltage': '250V AC' } },
+                                { id: 1012, name: 'Regulator', description: 'Power regulation unit', image: 'https://tangramelectronics.com/wp-content/uploads/2025/04/Spirit-Smart-Fan-Regulator.jpg', specifications: { 'Type': 'Fan/Speed', 'Material': 'Polycarbonate Virgin Resin', 'Speed Levels': 'Smooth fan speed control' } },
+                                { id: 1013, name: '2 way switch', description: 'Tangram Spirit Piano 2-Way Switch – Premium Electrical Switch', image: 'https://tangramelectronics.com/wp-content/uploads/2025/12/2way-Switch.jpg', specifications: { 'Type': 'Fire-proof V0 PC / Plastic', 'Conductor': 'Copper ', 'Warranty': '1 year' } },
+                                { id: 1014, name: 'Bell Push', description: 'Doorbell push button', image: 'https://tangramelectronics.com/wp-content/uploads/2025/04/Tangram-Spirit-Bell-Push-switch.jpg', specifications: {'Type': 'Fire-proof V0 PC / Plastic', 'Conductor': 'Copper ', 'Warranty': '1 year' } }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 2,
+                    name: 'Secure Series',
+                    icon: '',
+                    subcategories: [
+                        {
+                            id: 201,
+                            name: 'Mounting Box',
+                            products: [
+                                { id: 2001, name: 'Mounting Box Concealed', description: 'Hidden installation box', image: 'https://tangramelectronics.com/wp-content/uploads/2025/12/Concealed-TYpe-Mounting-Red.jpg', specifications: { 'Type': 'Concealed', 'Material': 'PVC', 'Installation': 'Wall embedded' } },
+                                { id: 2002, name: 'Mounting Box Surface', description: 'Surface-mounted box', image: 'https://tangramelectronics.com/wp-content/uploads/2025/12/1-Gang-Surface-Mounting-Box.jpg', specifications: { 'Type': 'Surface', 'Material': 'High-strength fire-retardant PVC', 'Installation': 'Surface mounted' } }
+                            ]
+                        },
+                        {
+                            id: 202,
+                            name: 'Combination Socket',
+                            products: [
+                                { id: 2003, name: 'Combination Socket 5pin', description: '5-pin combination', image: 'https://tangramelectronics.com/wp-content/uploads/2025/06/5-Pin-Combination-Socket.jpg', specifications: { 'Pins': '5', 'Rating': '13A', 'Voltage': '250V AC' } },
+                                { id: 2004, name: 'Combination Socket 8pin', description: '8-pin combination', image: 'https://tangramelectronics.com/wp-content/uploads/2025/06/Tangram-8-Pin-Combination-Socket.jpg', specifications: { 'Pins': '8', 'Rating': '13A', 'Voltage': '250V AC' } }
+                            ]
+                        },
+                        {
+                            id: 203,
+                            name: 'Plug',
+                            products: [
+                                { id: 2005, name: 'Plug 2pin Round', description: 'Round 2-pin plug', image: 'https://tangramelectronics.com/wp-content/uploads/2025/12/Image_20251230114249.jpg', specifications: { 'Type': 'Round Pin', 'Pins': '2', 'Warranty': '1 Year' } },
+                                { id: 2006, name: 'Plug 3pin Flat', description: 'Flat 3-pin plug', image: 'https://tangramelectronics.com/wp-content/uploads/2025/06/Image_20251230123616.jpg', specifications: { 'Type': 'Flat Pin', 'Pins': '3', 'Warranty': '1 Year' } }
+                            ]
+                        },
+                        {
+                            id: 204,
+                            name: 'Universal Extension Socket',
+                            products: [
+                                { id: 2007, name: 'Extension 4bit 2pin', description: '4-bit 2-pin extension', image: 'https://tangramelectronics.com/wp-content/uploads/2026/01/Image_20260106111812.jpg', specifications: { 'Outlets': '4', 'Pin Type': '2-pin', 'Switch': 'LED Push ' } },
+                                { id: 2008, name: 'Extension 4bit 3pin', description: '4-bit 3-pin extension', image: 'https://tangramelectronics.com/wp-content/uploads/2026/01/Image_20260106111858.jpg', specifications: { 'Outlets': '4', 'Pin Type': '3-pin', 'Switch': 'LED Push ' } },
+                                { id: 2009, name: 'Extension 5bit 2pin', description: '5-bit 2-pin extension', image: 'https://tangramelectronics.com/wp-content/uploads/2026/01/Image_20260106111822.jpg', specifications: { 'Outlets': '5', 'Pin Type': '2-pin', 'Switch': 'LED Push ' } },
+                                { id: 2010, name: 'Extension 5bit 3pin', description: '5-bit 3-pin extension', image: 'https://tangramelectronics.com/wp-content/uploads/2026/01/Image_20260112113920.jpg', specifications: { 'Outlets': '5', 'Pin Type': '3-pin', 'Switch': 'LED Push ' } }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 3,
+                    name: 'Harmony Series',
+                    icon: '️',
+                    subcategories: [
+                        {
+                            id: 301,
+                            name: 'Combination Socket',
+                            products: [
+                                { id: 3001, name: 'Socket 8pin Combination', description: '8-pin combination socket', image: 'https://tangramelectronics.com/wp-content/uploads/2026/01/8.jpg', specifications: { 'Pins': '8', 'Warranty': '1 Year', 'Material': 'Polycarbonate Virgin Resin' } }
+                            ]
+                        },
+                        {
+                            id: 302,
+                            name: 'Switch',
+                            products: [
+                                { id: 3002, name: '4 Gang Switch', description: 'Four gang switch', image: 'https://tangramelectronics.com/wp-content/uploads/2026/01/4.jpg', specifications: { 'Gangs': '4', 'Rating': '6A', 'Voltage': '250V AC' } },
+                                { id: 3003, name: '3 Gang Switch', description: 'Three gang switch', image: 'https://tangramelectronics.com/wp-content/uploads/2026/01/3.jpg', specifications: { 'Gangs': '3', 'Rating': '6A', 'Voltage': '250V AC' } },
+                                { id: 3004, name: 'DP Switch', description: 'Double pole switch', image: 'https://tangramelectronics.com/wp-content/uploads/2026/01/6.jpg', specifications: { 'Poles': 'Double', 'Rating': '10A', 'Voltage': '250V AC' } },
+                                { id: 3005, name: '2 Way Switch', description: 'Two way switch', image: 'https://tangramelectronics.com/wp-content/uploads/2026/01/2.jpg', specifications: { 'Type': '2 Way', 'Rating': '6A', 'Voltage': '250V AC' } },
+                                { id: 3006, name: 'One Gang Switch', description: 'Single gang switch', image:'https://tangramelectronics.com/wp-content/uploads/2026/01/1.jpg', specifications: { 'Gangs': '1', 'Rating': '6A', 'Voltage': '250V AC' } },
+                                { id: 3007, name: 'Fan Regulator', description: 'Speed control unit', image: 'https://tangramelectronics.com/wp-content/uploads/2026/01/5.jpg', specifications: { 'Type': 'Fan Speed Control', 'Rating': '5A', 'Voltage': '230V AC' } }
+                            ]
+                        },
+                        {
+                            id: 303,
+                            name: 'Socket',
+                            products: [
+                                { id: 3008, name: 'Television Socket', description: 'TV connection socket', image: 'https://tangramelectronics.com/wp-content/uploads/2026/01/12.jpg', specifications: { 'Type': 'Television', 'Rating': '10A', 'Impedance': '75 Ohm' } },
+                                { id: 3009, name: 'Internet Socket', description: 'Internet/Ethernet socket', image: 'https://tangramelectronics.com/wp-content/uploads/2026/01/11.jpg', specifications: { 'Type': 'RJ45', 'Category': 'CAT6', 'Rating': '10A' } },
+                                { id: 3010, name: 'Telephone Socket', description: 'Phone connection socket', image: 'https://tangramelectronics.com/wp-content/uploads/2026/01/10.jpg', specifications: { 'Type': 'Telephone', 'Pins': '2', 'Rating': '5A' } },
+                                { id: 3011, name: '3 Pin Flat Socket', description: '3-pin flat socket', image: 'https://tangramelectronics.com/wp-content/uploads/2026/01/9.jpg', specifications: { 'Type': 'flat Pin', 'Pins': '3', 'Rating': '10A' } },
+                                { id: 3012, name: '3 Pin Round Socket', description: '3-pin round socket', image: 'https://tangramelectronics.com/wp-content/uploads/2026/01/7.jpg', specifications: { 'Type': 'Round Pin', 'Pins': '3', 'Rating': '10A' } }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        };
+
+        // STATE
+        let currentPage = 1;
+        let itemsPerPage = 6;
+        let currentCategory = null;
+        let currentSubcategory = null;
+        let displayedProducts = [];
+
+        // INITIALIZATION
+        function init() {
+            renderAllProductsList();
+            renderSidebar();
+            document.getElementById('categoryTitle').textContent = 'All Products';
+            loadAllProducts();
+        }
+
+        // RENDER ALL PRODUCTS LIST (FIND OUR PRODUCTS SECTION)
+        function renderAllProductsList() {
+            const sliderTrack = document.getElementById('sliderTrack');
+            const sliderDots = document.getElementById('sliderDots');
+            const sliderPrevBtn = document.getElementById('sliderPrevBtn');
+            const sliderNextBtn = document.getElementById('sliderNextBtn');
+            
+            sliderTrack.innerHTML = '';
+            sliderDots.innerHTML = '';
+            
+            const allProducts = [];
+            productsData.categories.forEach(cat => {
+                cat.subcategories.forEach(subcat => {
+                    subcat.products.forEach(product => {
+                        allProducts.push(product);
+                    });
+                });
+            });
+
+            // Create slider items
+            allProducts.forEach(product => {
+                const tag = document.createElement('div');
+                tag.className = 'slider-product-tag';
+                tag.textContent = product.name;
+                tag.addEventListener('click', () => {
+                    openModal(product);
+                });
+                sliderTrack.appendChild(tag);
+            });
+
+            // Slider Configuration
+            const itemWidth = 200; // Approximate width of each tag + gap
+            const visibleItems = 4;
+            let currentSlide = 0;
+            const totalSlides = Math.ceil(allProducts.length / visibleItems);
+
+            // Create dots
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('div');
+                dot.className = `dot ${i === 0 ? 'active' : ''}`;
+                dot.addEventListener('click', () => {
+                    currentSlide = i;
+                    updateSlider();
+                });
+                sliderDots.appendChild(dot);
+            }
+
+            function updateSlider() {
+                const offset = currentSlide * (itemWidth * visibleItems);
+                sliderTrack.style.transform = `translateX(-${offset}px)`;
+
+                // Update dots
+                document.querySelectorAll('.dot').forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentSlide);
+                });
+
+                // Update button states
+                sliderPrevBtn.disabled = currentSlide === 0;
+                sliderNextBtn.disabled = currentSlide === totalSlides - 1;
+            }
+
+            sliderPrevBtn.addEventListener('click', () => {
+                if (currentSlide > 0) {
+                    currentSlide--;
+                    updateSlider();
+                }
+            });
+
+            sliderNextBtn.addEventListener('click', () => {
+                if (currentSlide < totalSlides - 1) {
+                    currentSlide++;
+                    updateSlider();
+                }
+            });
+
+            // Initialize
+            updateSlider();
+        }
+
+        // RENDER SIDEBAR WITH SUBCATEGORIES
+        function renderSidebar() {
+            const sidebar = document.getElementById('categoryList');
+            sidebar.innerHTML = '';
+            
+            productsData.categories.forEach(cat => {
+                // Create a wrapper for each category and its subcategories
+                const wrapper = document.createElement('div');
+                wrapper.className = 'category-group';
+                
+                // Main category item
+                const catItem = document.createElement('div');
+                catItem.className = 'category-item main-category';
+                catItem.innerHTML = `<strong>${cat.icon} ${cat.name}</strong>`;
+                wrapper.appendChild(catItem);
+                
+                // Subcategories
+                cat.subcategories.forEach(subcat => {
+                    const subItem = document.createElement('div');
+                    subItem.className = 'category-item sub-category';
+                    subItem.textContent = `-- ${subcat.name}`;
+                    subItem.dataset.categoryId = cat.id;
+                    subItem.dataset.subcategoryId = subcat.id;
+                    subItem.addEventListener('click', () => {
+                        document.querySelectorAll('.category-item').forEach(i => i.classList.remove('active'));
+                        subItem.classList.add('active');
+                        currentCategory = cat.id;
+                        currentSubcategory = subcat.id;
+                        currentPage = 1;
+                        displayedProducts = subcat.products;
+                        renderProducts();
+                        document.getElementById('categoryTitle').textContent = `${cat.name} - ${subcat.name}`;
+                    });
+                    wrapper.appendChild(subItem);
+                });
+                
+                sidebar.appendChild(wrapper);
+            });
+        }
+
+        // LOAD ALL PRODUCTS
+        function loadAllProducts() {
+            displayedProducts = [];
+            productsData.categories.forEach(cat => {
+                cat.subcategories.forEach(subcat => {
+                    displayedProducts.push(...subcat.products);
+                });
+            });
+            currentPage = 1;
+            renderProducts();
+        }
+
+        // RENDER PRODUCTS
+        function renderProducts() {
+            const grid = document.getElementById('productsGrid');
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const paginatedProducts = displayedProducts.slice(startIndex, endIndex);
+
+            grid.innerHTML = '';
+            
+            if (paginatedProducts.length === 0) {
+                grid.innerHTML = '<div class="empty-message">No products found</div>';
+            } else {
+                paginatedProducts.forEach(product => {
+                    const card = document.createElement('div');
+                    card.className = 'product-card';
+                    
+                    // Get subcategory name for subtitle
+                    let subcategoryName = '';
+                    productsData.categories.forEach(cat => {
+                        cat.subcategories.forEach(subcat => {
+                            if (subcat.products.includes(product)) {
+                                subcategoryName = subcat.name;
+                            }
+                        });
+                    });
+                    
+                    card.innerHTML = `
+                        <img class="product-image" src="${product.image}" alt="${product.name}" onerror="this.style.background='linear-gradient(135deg, #2ecfb0, #0a9e84)'">
+                        <div class="product-info">
+                            <div class="product-name">${product.name}</div>
+                            <div class="product-subtitle">${subcategoryName}</div>
+                            <div class="product-desc">${product.description}</div>
+                        </div>
+                    `;
+                    card.addEventListener('click', () => openModal(product));
+                    grid.appendChild(card);
+                });
+            }
+
+            renderPagination();
+        }
+
+        // RENDER PAGINATION
+        function renderPagination() {
+            const paginationLeft = document.getElementById('paginationLeft');
+            const paginationCenter = document.getElementById('paginationCenter');
+            const paginationRight = document.getElementById('paginationRight');
+            
+            paginationLeft.innerHTML = '';
+            paginationCenter.innerHTML = '';
+            paginationRight.innerHTML = '';
+            
+            const totalPages = Math.ceil(displayedProducts.length / itemsPerPage);
+
+            if (totalPages <= 0) return;
+
+            // Previous Button (LEFT)
+            const prevBtn = document.createElement('button');
+            prevBtn.textContent = '← Previous';
+            prevBtn.disabled = currentPage === 1;
+            prevBtn.style.padding = '10px 14px';
+            prevBtn.style.border = '2px solid var(--deep-teal)';
+            prevBtn.style.backgroundColor = 'white';
+            prevBtn.style.color = 'var(--deep-teal)';
+            prevBtn.style.borderRadius = '8px';
+            prevBtn.style.cursor = 'pointer';
+            prevBtn.style.fontWeight = '600';
+            prevBtn.style.fontSize = '0.9rem';
+            prevBtn.style.transition = 'all 0.3s ease';
+            prevBtn.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderProducts();
+                    document.querySelector('.content').scrollTop = 0;
+                }
+            });
+            prevBtn.addEventListener('mouseover', function() {
+                if (!this.disabled) {
+                    this.style.backgroundColor = 'var(--deep-teal)';
+                    this.style.color = 'white';
+                    this.style.transform = 'translateY(-2px)';
+                }
+            });
+            prevBtn.addEventListener('mouseout', function() {
+                if (!this.disabled) {
+                    this.style.backgroundColor = 'white';
+                    this.style.color = 'var(--deep-teal)';
+                    this.style.transform = 'translateY(0)';
+                }
+            });
+            if (currentPage > 1) {
+                paginationLeft.appendChild(prevBtn);
+            }
+
+            // Page Numbers (CENTER)
+            for (let i = 1; i <= totalPages; i++) {
+                if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
+                    const pageBtn = document.createElement('button');
+                    pageBtn.textContent = i;
+                    pageBtn.style.padding = '10px 14px';
+                    pageBtn.style.border = '2px solid var(--deep-teal)';
+                    pageBtn.style.backgroundColor = currentPage === i ? 'var(--deep-teal)' : 'white';
+                    pageBtn.style.color = currentPage === i ? 'white' : 'var(--deep-teal)';
+                    pageBtn.style.borderRadius = '8px';
+                    pageBtn.style.cursor = 'pointer';
+                    pageBtn.style.fontWeight = '600';
+                    pageBtn.style.fontSize = '0.9rem';
+                    pageBtn.style.transition = 'all 0.3s ease';
+                    
+                    if (currentPage === i) {
+                        pageBtn.style.fontWeight = '700';
+                    }
+                    
+                    pageBtn.addEventListener('click', () => {
+                        currentPage = i;
+                        renderProducts();
+                        document.querySelector('.content').scrollTop = 0;
+                    });
+                    pageBtn.addEventListener('mouseover', function() {
+                        if (currentPage !== i) {
+                            this.style.backgroundColor = 'var(--deep-teal)';
+                            this.style.color = 'white';
+                            this.style.transform = 'translateY(-2px)';
+                        }
+                    });
+                    pageBtn.addEventListener('mouseout', function() {
+                        if (currentPage !== i) {
+                            this.style.backgroundColor = 'white';
+                            this.style.color = 'var(--deep-teal)';
+                            this.style.transform = 'translateY(0)';
+                        }
+                    });
+                    paginationCenter.appendChild(pageBtn);
+                }
+            }
+
+            // Next Button (RIGHT)
+            const nextBtn = document.createElement('button');
+            nextBtn.textContent = 'Next →';
+            nextBtn.disabled = currentPage === totalPages;
+            nextBtn.style.padding = '10px 14px';
+            nextBtn.style.border = '2px solid var(--deep-teal)';
+            nextBtn.style.backgroundColor = 'white';
+            nextBtn.style.color = 'var(--deep-teal)';
+            nextBtn.style.borderRadius = '8px';
+            nextBtn.style.cursor = 'pointer';
+            nextBtn.style.fontWeight = '600';
+            nextBtn.style.fontSize = '0.9rem';
+            nextBtn.style.transition = 'all 0.3s ease';
+            nextBtn.addEventListener('click', () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderProducts();
+                    document.querySelector('.content').scrollTop = 0;
+                }
+            });
+            nextBtn.addEventListener('mouseover', function() {
+                if (!this.disabled) {
+                    this.style.backgroundColor = 'var(--deep-teal)';
+                    this.style.color = 'white';
+                    this.style.transform = 'translateY(-2px)';
+                }
+            });
+            nextBtn.addEventListener('mouseout', function() {
+                if (!this.disabled) {
+                    this.style.backgroundColor = 'white';
+                    this.style.color = 'var(--deep-teal)';
+                    this.style.transform = 'translateY(0)';
+                }
+            });
+            if (currentPage < totalPages) {
+                paginationRight.appendChild(nextBtn);
+            }
+        }
+
+        // OPEN PRODUCT DETAILS MODAL
+        function openModal(product) {
+            const modal = document.getElementById('productModal');
+            document.getElementById('modalProductName').textContent = product.name;
+            document.getElementById('modalProductImage').src = product.image;
+            
+            const detailsContainer = document.getElementById('modalDetails');
+            detailsContainer.innerHTML = '';
+            
+            // Add specifications
+            Object.entries(product.specifications).forEach(([key, value]) => {
+                const item = document.createElement('div');
+                item.className = 'detail-item';
+                item.innerHTML = `
+                    <div class="detail-label">${key}</div>
+                    <div class="detail-value">${value}</div>
+                `;
+                detailsContainer.appendChild(item);
+            });
+            
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // CLOSE MODAL
+        function closeModal() {
+            const modal = document.getElementById('productModal');
+            modal.classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        // CLOSE MODAL ON BACKGROUND CLICK
+        document.getElementById('productModal').addEventListener('click', (e) => {
+            if (e.target.id === 'productModal') {
+                closeModal();
+            }
+        });
+
+        // KEYBOARD CLOSE
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // START
+        init();
+    </script>
+</body>
+</html>
