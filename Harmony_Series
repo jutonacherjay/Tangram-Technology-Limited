@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harmony Series</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --light-mint: #e8f8f5;
+            --soft-mint: #c8f2ec;
+            --mint: #b2ece3;
+            --primary: #2ecfb0;
+            --primary-dark: #0a9e84;
+            --primary-darker: #077d68;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Work Sans', sans-serif; background: white; color: #1a1a1a; }
+        .page-header { text-align: center; padding: 4rem 5% 3rem; background: linear-gradient(135deg, var(--light-mint) 0%, white 100%); }
+        .page-title { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900; color: var(--primary-darker); margin: 0 0 0.5rem 0; }
+        .page-subtitle { color: var(--primary-dark); font-size: 1.1rem; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 4rem 5%; }
+        .category-section { margin-bottom: 5rem; }
+        .category-title { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--primary-dark); margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 3px solid var(--mint); display: inline-block; }
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; }
+        .product-card { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; opacity: 0; transform: translateY(50px); border: 2px solid transparent; }
+        .product-card.animate { animation: slideUp 0.6s ease forwards; }
+        @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+        .product-card:hover { transform: translateY(-8px); box-shadow: 0 12px 40px rgba(46, 207, 176, 0.2); border-color: var(--primary); }
+        .product-image { width: 100%; height: 220px; object-fit: cover; background: var(--light-mint); }
+        .product-info { padding: 1.5rem; }
+        .product-name { font-weight: 600; font-size: 1.1rem; color: var(--primary-darker); margin-bottom: 0.5rem; }
+        .product-description { color: #666; font-size: 0.9rem; line-height: 1.4; }
+        .view-details { display: inline-block; margin-top: 1rem; color: var(--primary); font-weight: 500; font-size: 0.9rem; transition: all 0.3s ease; }
+        .product-card:hover .view-details { transform: translateX(5px); }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 1000; overflow-y: auto; padding: 2rem; }
+        .modal.active { display: flex; align-items: center; justify-content: center; }
+        .modal-content { background: white; border-radius: 24px; max-width: 900px; width: 100%; max-height: 90vh; overflow-y: auto; position: relative; animation: slideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        @keyframes slideIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .modal-close { position: absolute; top: 1.5rem; right: 1.5rem; width: 40px; height: 40px; background: var(--primary); border: none; border-radius: 50%; color: white; font-size: 1.5rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; z-index: 10; }
+        .modal-close:hover { background: var(--primary-dark); transform: rotate(90deg); }
+        .modal-image { width: 100%; height: 400px; object-fit: cover; background: var(--light-mint); }
+        .modal-info { padding: 2.5rem; }
+        .modal-title { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--primary-darker); margin-bottom: 1rem; }
+        .modal-description { color: #666; line-height: 1.6; margin-bottom: 2rem; }
+        .specifications { background: var(--light-mint); border-radius: 12px; padding: 1.5rem; }
+        .spec-title { font-weight: 600; color: var(--primary-darker); margin-bottom: 1rem; font-size: 1.2rem; }
+        .spec-item { display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid var(--mint); }
+        .spec-item:last-child { border-bottom: none; }
+        .spec-label { font-weight: 500; color: var(--primary-dark); }
+        .spec-value { color: #555; }
+        @media (max-width: 768px) {
+            .page-title { font-size: 2rem; }
+            .page-subtitle { font-size: 1rem; }
+            .container { padding: 2rem 5%; }
+            .products-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+            .modal-content { margin: 1rem; }
+            .modal-image { height: 250px; }
+            .modal-info { padding: 1.5rem; }
+            .modal-title { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-header">
+        <h1 class="page-title">Harmony Series </h1>
+        <p class="page-subtitle">Elegant design meets superior functionality</p>
+    </div>
+    <div class="container" id="productsContainer"></div>
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <img class="modal-image" id="modalImage" alt="">
+            <div class="modal-info">
+                <h2 class="modal-title" id="modalTitle"></h2>
+                <p class="modal-description" id="modalDescription"></p>
+                <div class="specifications">
+                    <h3 class="spec-title">Specifications</h3>
+                    <div id="modalSpecs"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const productsData={categories:[{id:3,name:'Harmony Series',subcategories:[{id:301,name:'Combination Socket',products:[{id:3001,name:'Socket 8pin Combination',description:'8-pin combination socket',image:'https://tangramelectronics.com/wp-content/uploads/2026/01/8.jpg',specifications:{'Pins':'8','Warranty':'1 Year','Material':'Polycarbonate Virgin Resin'}}]},{id:302,name:'Switch',products:[{id:3002,name:'4 Gang Switch',description:'Four gang switch',image:'https://tangramelectronics.com/wp-content/uploads/2026/01/4.jpg',specifications:{'Gangs':'4','Rating':'6A','Voltage':'250V AC'}},{id:3003,name:'3 Gang Switch',description:'Three gang switch',image:'https://tangramelectronics.com/wp-content/uploads/2026/01/3.jpg',specifications:{'Gangs':'3','Rating':'6A','Voltage':'250V AC'}},{id:3004,name:'DP Switch',description:'Double pole switch',image:'https://tangramelectronics.com/wp-content/uploads/2026/01/6.jpg',specifications:{'Poles':'Double','Rating':'10A','Voltage':'250V AC'}},{id:3005,name:'2 Way Switch',description:'Two way switch',image:'https://tangramelectronics.com/wp-content/uploads/2026/01/2.jpg',specifications:{'Type':'2 Way','Rating':'6A','Voltage':'250V AC'}},{id:3006,name:'One Gang Switch',description:'Single gang switch',image:'https://tangramelectronics.com/wp-content/uploads/2026/01/1.jpg',specifications:{'Gangs':'1','Rating':'6A','Voltage':'250V AC'}},{id:3007,name:'Fan Regulator',description:'Speed control unit',image:'https://tangramelectronics.com/wp-content/uploads/2026/01/5.jpg',specifications:{'Type':'Fan Speed Control','Rating':'5A','Voltage':'230V AC'}}]},{id:303,name:'Socket',products:[{id:3008,name:'Television Socket',description:'TV connection socket',image:'https://tangramelectronics.com/wp-content/uploads/2026/01/12.jpg',specifications:{'Type':'Television','Rating':'10A','Impedance':'75 Ohm'}},{id:3009,name:'Internet Socket',description:'Internet/Ethernet socket',image:'https://tangramelectronics.com/wp-content/uploads/2026/01/11.jpg',specifications:{'Type':'RJ45','Category':'CAT6','Rating':'10A'}},{id:3010,name:'Telephone Socket',description:'Phone connection socket',image:'https://tangramelectronics.com/wp-content/uploads/2026/01/10.jpg',specifications:{'Type':'Telephone','Pins':'2','Rating':'5A'}},{id:3011,name:'3 Pin Flat Socket',description:'3-pin flat socket',image:'https://tangramelectronics.com/wp-content/uploads/2026/01/9.jpg',specifications:{'Type':'flat Pin','Pins':'3','Rating':'10A'}},{id:3012,name:'3 Pin Round Socket',description:'3-pin round socket',image:'https://tangramelectronics.com/wp-content/uploads/2026/01/7.jpg',specifications:{'Type':'Round Pin','Pins':'3','Rating':'10A'}}]}]}]};function renderProducts(){const container=document.getElementById('productsContainer');const harmonySeries=productsData.categories[0];harmonySeries.subcategories.forEach(subcategory=>{const section=document.createElement('div');section.className='category-section';section.innerHTML=`<h2 class="category-title">${subcategory.name}</h2><div class="products-grid"></div>`;const grid=section.querySelector('.products-grid');subcategory.products.forEach((product,index)=>{const card=document.createElement('div');card.className='product-card';card.style.animationDelay=`${index*0.1}s`;card.innerHTML=`<img src="${product.image}" alt="${product.name}" class="product-image"><div class="product-info"><h3 class="product-name">${product.name}</h3><p class="product-description">${product.description}</p><span class="view-details">View Details →</span></div>`;card.onclick=()=>openModal(product);grid.appendChild(card);});container.appendChild(section);});observeCards();}function observeCards(){const observer=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('animate');}});},{threshold:0.1});document.querySelectorAll('.product-card').forEach(card=>{observer.observe(card);});}function openModal(product){const modal=document.getElementById('productModal');document.getElementById('modalImage').src=product.image;document.getElementById('modalTitle').textContent=product.name;document.getElementById('modalDescription').textContent=product.description;const specsContainer=document.getElementById('modalSpecs');specsContainer.innerHTML='';Object.entries(product.specifications).forEach(([key,value])=>{specsContainer.innerHTML+=`<div class="spec-item"><span class="spec-label">${key}</span><span class="spec-value">${value}</span></div>`;});modal.classList.add('active');document.body.style.overflow='hidden';}function closeModal(){const modal=document.getElementById('productModal');modal.classList.remove('active');document.body.style.overflow='auto';}document.getElementById('productModal').addEventListener('click',(e)=>{if(e.target.id==='productModal'){closeModal();}});renderProducts();
+    </script>
+</body>
+</html>
