@@ -1,0 +1,985 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@600;700&display=swap');
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --mint:#e8f8f5;
+  --lt:#c8f2ec;
+  --st:#b2ece3;
+  --teal:#2ecfb0;
+  --deep:#0a9e84;
+  --dark:#077d68;
+  --ink:#0d2e28;
+  --ink2:#2a5a52;
+  --ink3:#4a8a80;
+  --r:10px;
+  --r2:16px;
+}
+
+/* ── OUTER WRAPPER ── */
+#tdr-outer{
+  width:100%;
+  background:var(--mint);
+  font-family:'Hind Siliguri',sans-serif;
+  color:var(--ink);
+}
+
+/* ── HERO ── */
+.tdr-hero{
+  background:linear-gradient(135deg,#0a9e84 0%,#077d68 100%);
+  border-radius:var(--r2);
+  padding:24px 20px 22px;
+  margin:16px 16px 0;
+  position:relative;
+  overflow:hidden;
+}
+.tdr-hero::after{
+  content:'';position:absolute;right:-30px;top:-30px;
+  width:160px;height:160px;border-radius:50%;
+  background:rgba(255,255,255,.07);pointer-events:none;
+}
+.tdr-hero-inner{position:relative}
+.tdr-hero-left{width:100%}
+.tdr-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  background:rgba(255,255,255,.15);
+  border:1px solid rgba(255,255,255,.25);
+  border-radius:50px;padding:4px 12px;
+  font-size:11px;color:#fff;font-weight:500;
+  margin-bottom:12px;letter-spacing:.4px;
+}
+.tdr-badge-dot{width:6px;height:6px;border-radius:50%;background:#b2ece3;flex-shrink:0}
+.tdr-hero h1{
+  font-family:'Noto Serif Bengali',serif;
+  font-size:clamp(18px,5vw,26px);
+  font-weight:700;color:#fff;line-height:1.4;margin-bottom:8px;
+}
+.tdr-hero p{
+  font-size:clamp(12px,3.5vw,13.5px);
+  color:rgba(255,255,255,.75);line-height:1.7;
+}
+.tdr-hero-bar{width:36px;height:3px;background:#b2ece3;border-radius:2px;margin-top:14px}
+@media(min-width:768px){
+  .tdr-hero{margin:24px 24px 0;padding:36px 44px 32px}
+}
+@media(min-width:960px){
+  .tdr-hero{margin:32px auto 0;max-width:900px;padding:40px 48px 36px}
+}
+
+/* ── FORM CONTAINER — centered, max-width ── */
+#tdr-wrap{
+  width:100%;
+  max-width:900px;
+  margin:0 auto;
+  padding:28px 16px 64px;
+}
+@media(min-width:600px){#tdr-wrap{padding:36px 24px 80px}}
+@media(min-width:960px){#tdr-wrap{padding:48px 32px 100px}}
+
+/* ── SECTION ── */
+.tdr-section{
+  background:#fff;
+  border-radius:var(--r2);
+  border:1px solid var(--lt);
+  margin-bottom:16px;
+  overflow:hidden;
+}
+@media(min-width:768px){.tdr-section{margin-bottom:20px;border-radius:20px}}
+
+.tdr-sec-head{
+  display:flex;align-items:center;gap:12px;
+  padding:13px 18px;
+  background:var(--mint);
+  border-bottom:1px solid var(--lt);
+}
+@media(min-width:768px){.tdr-sec-head{padding:15px 24px}}
+
+.tdr-sec-num{
+  width:26px;height:26px;border-radius:50%;
+  background:var(--deep);color:#fff;
+  font-size:11px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+@media(min-width:768px){.tdr-sec-num{width:28px;height:28px;font-size:12px}}
+
+.tdr-sec-title{font-size:13px;font-weight:600;color:var(--ink2)}
+@media(min-width:768px){.tdr-sec-title{font-size:14px}}
+
+.tdr-sec-body{padding:16px}
+@media(min-width:768px){.tdr-sec-body{padding:22px 24px}}
+@media(min-width:960px){.tdr-sec-body{padding:26px 28px}}
+
+/* ── GRID ── */
+.tdr-grid{display:grid;grid-template-columns:1fr;gap:14px}
+.tdr-span2{grid-column:1/-1}
+@media(min-width:480px){
+  .tdr-grid.cols2{grid-template-columns:1fr 1fr}
+}
+@media(min-width:768px){
+  .tdr-grid{gap:18px}
+  .tdr-grid.cols3{grid-template-columns:1fr 1fr 1fr}
+}
+
+/* ── FIELD ── */
+.tdr-field{display:flex;flex-direction:column;gap:6px}
+.tdr-field label{
+  font-size:12.5px;font-weight:600;
+  color:var(--ink2);line-height:1.4;
+}
+@media(min-width:768px){.tdr-field label{font-size:13px}}
+.tdr-field label .req{color:var(--deep);margin-left:2px}
+
+.tdr-field input,
+.tdr-field textarea{
+  width:100%;
+  padding:8px 13px;
+  border:1.5px solid #d0ede8;
+  border-radius:var(--r);
+  font-family:'Hind Siliguri',sans-serif;
+  font-size:14px;color:var(--ink);
+  background:#fff;outline:none;
+  -webkit-appearance:none;
+  transition:border .18s,box-shadow .18s;
+  min-height:38px;
+}
+@media(min-width:768px){
+  .tdr-field input,.tdr-field textarea{
+    padding:9px 16px;font-size:14.5px;min-height:42px;
+  }
+}
+.tdr-field input:focus,
+.tdr-field textarea:focus{
+  border-color:var(--teal);
+  box-shadow:0 0 0 3px rgba(46,207,176,.14);
+}
+.tdr-field textarea{resize:vertical;min-height:100px;line-height:1.65}
+
+/* ── OPTIONS ── */
+.tdr-opts{display:flex;flex-direction:column;gap:8px}
+.tdr-opts.horiz{flex-direction:row;flex-wrap:wrap}
+
+.tdr-opt{
+  display:flex;align-items:center;gap:10px;
+  padding:11px 14px;
+  border:1.5px solid #d0ede8;
+  border-radius:var(--r);
+  cursor:pointer;font-size:13.5px;
+  color:var(--ink2);
+  transition:all .18s;user-select:none;
+  min-height:44px;
+  -webkit-tap-highlight-color:transparent;
+}
+@media(min-width:768px){
+  .tdr-opt{padding:12px 18px;font-size:14px;min-height:48px}
+}
+.tdr-opt:hover{border-color:var(--teal);background:#f0fdfb}
+.tdr-opt input{
+  appearance:none;-webkit-appearance:none;
+  width:7px;height:7px;min-width:7px;
+  border:1.5px solid #b2ece3;
+  border-radius:8px;
+  flex-shrink:0;cursor:pointer;
+  position:relative;
+  background:#fff;
+  transition:background .15s,border-color .15s;
+}
+.tdr-opt input:checked{
+  background:var(--deep);
+  border-color:var(--deep);
+  animation:tdr-pop .18s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes tdr-pop{
+  0%{transform:scale(.5)}
+  100%{transform:scale(1)}
+}
+.tdr-opt input:checked::after{
+  content:'';display:block;
+  width:2px;height:4px;
+  border-right:1.2px solid #fff;
+  border-bottom:1.2px solid #fff;
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-65%) rotate(45deg);
+}
+.tdr-opt.sel{border-color:var(--deep);background:#e6faf6;color:var(--dark);font-weight:600}
+
+/* ── FILE ── */
+.tdr-file{
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:6px;
+  border:2px dashed #b2ece3;border-radius:var(--r);
+  padding:20px 16px;cursor:pointer;
+  transition:all .18s;text-align:center;
+  color:var(--ink3);font-size:13px;
+  min-height:100px;
+  -webkit-tap-highlight-color:transparent;
+}
+@media(min-width:768px){.tdr-file{padding:28px 20px;min-height:120px;font-size:13.5px}}
+.tdr-file:hover,.tdr-file:active{border-color:var(--deep);background:#f0fdfb}
+.tdr-file input{display:none}
+.tdr-file-icon{
+  width:38px;height:38px;background:var(--lt);
+  border-radius:9px;display:flex;align-items:center;justify-content:center;
+}
+.tdr-file-icon svg{width:18px;height:18px;stroke:var(--deep);fill:none;stroke-width:2}
+.tdr-fname{font-size:11.5px;color:var(--deep);font-weight:600;margin-top:2px;word-break:break-all}
+
+/* ── SUBMIT ── */
+.tdr-submit-wrap{text-align:center;margin-top:10px}
+.tdr-btn-submit{
+  display:block;width:100%;
+  background:var(--deep);color:#fff;border:none;
+  padding:16px 24px;
+  font-family:'Hind Siliguri',sans-serif;
+  font-size:16px;font-weight:700;
+  border-radius:50px;cursor:pointer;
+  transition:all .2s;
+  box-shadow:0 4px 20px rgba(10,158,132,.35);
+  letter-spacing:.3px;min-height:52px;
+  -webkit-tap-highlight-color:transparent;
+}
+@media(min-width:480px){
+  .tdr-btn-submit{width:auto;display:inline-block;padding:16px 64px;font-size:17px}
+}
+@media(min-width:768px){
+  .tdr-btn-submit{padding:18px 80px;font-size:18px;min-height:58px}
+}
+.tdr-btn-submit:hover{background:var(--dark);transform:translateY(-2px);box-shadow:0 8px 28px rgba(7,125,104,.4)}
+.tdr-btn-submit:active{transform:scale(.98)}
+.tdr-btn-submit:disabled{background:#a0d8d0;box-shadow:none;cursor:not-allowed;transform:none}
+
+/* ── SPINNER ── */
+.tdr-spin{
+  display:none;width:20px;height:20px;
+  border:2.5px solid rgba(255,255,255,.4);
+  border-top-color:#fff;border-radius:50%;
+  animation:tdr-rot .7s linear infinite;margin:0 auto;
+}
+@keyframes tdr-rot{to{transform:rotate(360deg)}}
+
+/* ── ERROR ── */
+.tdr-err{
+  display:none;background:#fff0f1;
+  border:1.5px solid #f5a0a8;border-radius:var(--r);
+  padding:12px 18px;font-size:13.5px;
+  color:#b52832;margin-top:16px;text-align:center;line-height:1.5;
+}
+
+/* ── SUCCESS ── */
+.tdr-success{
+  display:none;background:#fff;
+  border-radius:var(--r2);border:1px solid var(--lt);
+  padding:48px 24px;text-align:center;
+}
+@media(min-width:768px){.tdr-success{padding:72px 48px}}
+.tdr-success-icon{
+  width:72px;height:72px;
+  background:linear-gradient(135deg,var(--teal),var(--deep));
+  border-radius:50%;display:flex;align-items:center;
+  justify-content:center;margin:0 auto 20px;
+}
+.tdr-success-icon svg{width:32px;height:32px;stroke:#fff;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.tdr-success h2{font-family:'Noto Serif Bengali',serif;font-size:clamp(20px,4vw,26px);color:var(--dark);margin-bottom:12px}
+.tdr-success p{font-size:clamp(13px,2vw,15px);color:var(--ink2);line-height:1.8;max-width:440px;margin:0 auto}
+.tdr-success-badge{
+  display:inline-block;background:var(--mint);
+  border:1px solid var(--st);border-radius:50px;
+  padding:8px 24px;font-size:clamp(12px,2vw,13.5px);
+  color:var(--deep);font-weight:600;margin-top:20px;line-height:1.5;
+}
+.tdr-note{font-size:11.5px;color:var(--ink3);margin-top:8px;line-height:1.5}
+
+/* ── LANGUAGE TOGGLE ── */
+.tdr-lang-wrap{
+  position:absolute;top:16px;right:16px;z-index:10;
+}
+@media(min-width:768px){.tdr-lang-wrap{top:20px;right:24px}}
+.tdr-lang-btn{
+  display:flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,.18);
+  border:1px solid rgba(255,255,255,.3);
+  border-radius:50px;padding:5px 12px;
+  font-family:'Hind Siliguri',sans-serif;
+  font-size:12px;font-weight:600;color:#fff;
+  cursor:pointer;transition:all .18s;
+  -webkit-tap-highlight-color:transparent;
+}
+.tdr-lang-btn:hover{background:rgba(255,255,255,.28)}
+.tdr-lang-flag{font-size:14px}
+
+/* ── ADVANTAGE BUTTON ── */
+.tdr-adv-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  margin-top:20px;
+  background:var(--deep);color:#fff;
+  border:none;border-radius:50px;
+  padding:12px 28px;
+  font-family:'Hind Siliguri',sans-serif;
+  font-size:14px;font-weight:600;
+  cursor:pointer;transition:all .18s;
+  box-shadow:0 4px 14px rgba(10,158,132,.3);
+  -webkit-tap-highlight-color:transparent;
+}
+.tdr-adv-btn:hover{background:var(--dark);transform:translateY(-1px)}
+.tdr-adv-btn svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2;flex-shrink:0}
+
+/* ── ADVANTAGE MODAL ── */
+.tdr-modal-overlay{
+  display:none;
+  position:fixed;inset:0;
+  background:rgba(10,46,40,.55);
+  z-index:9999;
+  align-items:center;justify-content:center;
+  padding:16px;
+}
+.tdr-modal-overlay.open{display:flex}
+.tdr-modal{
+  background:#fff;
+  border-radius:20px;
+  max-width:560px;width:100%;
+  max-height:90vh;overflow-y:auto;
+  padding:28px 24px;
+  animation:tdr-modal-in .25s cubic-bezier(.34,1.2,.64,1);
+}
+@media(min-width:600px){.tdr-modal{padding:36px 40px}}
+@keyframes tdr-modal-in{
+  0%{transform:scale(.9) translateY(20px);opacity:0}
+  100%{transform:scale(1) translateY(0);opacity:1}
+}
+.tdr-modal-head{
+  display:flex;align-items:flex-start;
+  justify-content:space-between;gap:12px;
+  margin-bottom:20px;
+}
+.tdr-modal-head h3{
+  font-family:'Noto Serif Bengali',serif;
+  font-size:clamp(16px,4vw,20px);
+  color:var(--dark);line-height:1.35;
+}
+.tdr-modal-close{
+  width:32px;height:32px;border-radius:50%;
+  background:var(--mint);border:none;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;flex-shrink:0;
+  transition:background .15s;
+}
+.tdr-modal-close:hover{background:var(--lt)}
+.tdr-modal-close svg{width:16px;height:16px;stroke:var(--ink2);fill:none;stroke-width:2;stroke-linecap:round}
+.tdr-adv-list{display:flex;flex-direction:column;gap:12px}
+.tdr-adv-item{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:14px 16px;
+  background:var(--mint);
+  border-radius:12px;
+  border-left:3px solid var(--teal);
+}
+.tdr-adv-icon{
+  width:36px;height:36px;flex-shrink:0;
+  background:var(--deep);border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;
+}
+.tdr-adv-text strong{
+  display:block;font-size:13.5px;
+  font-weight:600;color:var(--ink);margin-bottom:3px;
+}
+.tdr-adv-text span{font-size:12.5px;color:var(--ink3);line-height:1.5}
+</style>
+
+<div id="tdr-outer">
+
+  <!-- HERO -->
+  <div class="tdr-hero">
+    <div class="tdr-lang-wrap">
+      <button class="tdr-lang-btn" id="tdr-lang-btn" onclick="tdrToggleLang()">
+        <span class="tdr-lang-flag">🇬🇧</span>
+        <span id="tdr-lang-label">English</span>
+      </button>
+    </div>
+    <div class="tdr-hero-inner">
+      <div class="tdr-hero-left">
+        <div class="tdr-badge"><span class="tdr-badge-dot"></span>Tangram Technology Limited</div>
+        <h1 data-bn="ডিলার আবেদন ফর্ম" data-en="Dealer Application Form">ডিলার আবেদন ফর্ম</h1>
+        <p data-bn="ট্যানগ্রাম টেকনোলজি লিমিটেডের অনুমোদিত ডিলার হতে আগ্রহী হলে অনুগ্রহ করে নিচের ফর্মটি সঠিক তথ্য দিয়ে পূরণ করুন। আমাদের টিম আপনার আবেদন পর্যালোচনা করে শীঘ্রই যোগাযোগ করবে।" data-en="If you are interested in becoming an authorized dealer of Tangram Technology Limited, please fill out the form below with accurate information. Our team will review your application and contact you shortly.">ট্যানগ্রাম টেকনোলজি লিমিটেডের অনুমোদিত ডিলার হতে আগ্রহী হলে অনুগ্রহ করে নিচের ফর্মটি সঠিক তথ্য দিয়ে পূরণ করুন। আমাদের টিম আপনার আবেদন পর্যালোচনা করে শীঘ্রই যোগাযোগ করবে।</p>
+        <div class="tdr-hero-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORM -->
+  <div id="tdr-wrap">
+    <form id="tdr-form" novalidate>
+
+      <!-- ১. ব্যক্তিগত তথ্য -->
+      <div class="tdr-section">
+        <div class="tdr-sec-head">
+          <div class="tdr-sec-num">১</div>
+          <div class="tdr-sec-title">ব্যক্তিগত তথ্য</div>
+        </div>
+        <div class="tdr-sec-body">
+          <div class="tdr-grid cols2">
+            <div class="tdr-field">
+              <label>পূর্ণ নাম <span class="req">*</span></label>
+              <input type="text" name="full_name" placeholder="আপনার পূর্ণ নাম লিখুন" autocomplete="name">
+            </div>
+            <div class="tdr-field">
+              <label>মোবাইল নম্বর <span class="req">*</span></label>
+              <input type="tel" name="mobile" placeholder="০১XXXXXXXXX" autocomplete="tel">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ২. ব্যবসার তথ্য -->
+      <div class="tdr-section">
+        <div class="tdr-sec-head">
+          <div class="tdr-sec-num">২</div>
+          <div class="tdr-sec-title">ব্যবসার তথ্য</div>
+        </div>
+        <div class="tdr-sec-body">
+          <div class="tdr-grid">
+            <div class="tdr-field">
+              <label>ব্যবসার নাম / দোকানের নাম <span class="req">*</span></label>
+              <input type="text" name="shop_name" placeholder="দোকান বা প্রতিষ্ঠানের নাম">
+            </div>
+            <div class="tdr-field">
+              <label>ব্যবসার ধরণ <span class="req">*</span></label>
+              <div class="tdr-opts horiz">
+                <label class="tdr-opt"><input type="radio" name="business_type" value="খুচরা দোকান (Retail)"> খুচরা দোকান (Retail)</label>
+                <label class="tdr-opt"><input type="radio" name="business_type" value="পাইকারি দোকান (Wholesale)"> পাইকারি দোকান (Wholesale)</label>
+                <label class="tdr-opt"><input type="radio" name="business_type" value="ডিস্ট্রিবিউটর"> ডিস্ট্রিবিউটর</label>
+                <label class="tdr-opt"><input type="radio" name="business_type" value="অনলাইন বিক্রেতা"> অনলাইন বিক্রেতা</label>
+              </div>
+            </div>
+            <div class="tdr-field">
+              <label>কত বছর ধরে ব্যবসা করছেন <span class="req">*</span></label>
+              <div class="tdr-opts horiz">
+                <label class="tdr-opt"><input type="radio" name="years_in_business" value="১ বছরের কম"> ১ বছরের কম</label>
+                <label class="tdr-opt"><input type="radio" name="years_in_business" value="১–৩ বছর"> ১–৩ বছর</label>
+                <label class="tdr-opt"><input type="radio" name="years_in_business" value="৩–৫ বছর"> ৩–৫ বছর</label>
+                <label class="tdr-opt"><input type="radio" name="years_in_business" value="৫ বছরের বেশি"> ৫ বছরের বেশি</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ৩. ব্যবসার অবস্থান -->
+      <div class="tdr-section">
+        <div class="tdr-sec-head">
+          <div class="tdr-sec-num">৩</div>
+          <div class="tdr-sec-title">ব্যবসার অবস্থান</div>
+        </div>
+        <div class="tdr-sec-body">
+          <div class="tdr-grid cols2">
+            <div class="tdr-field">
+              <label>জেলা <span class="req">*</span></label>
+              <input type="text" name="district" placeholder="আপনার জেলা">
+            </div>
+            <div class="tdr-field">
+              <label>উপজেলা / এলাকা</label>
+              <input type="text" name="upazila" placeholder="উপজেলা বা এলাকার নাম">
+            </div>
+            <div class="tdr-field tdr-span2">
+              <label>দোকানের সম্পূর্ণ ঠিকানা <span class="req">*</span></label>
+              <textarea name="full_address" rows="3" placeholder="রোড, এলাকা, শহর সহ সম্পূর্ণ ঠিকানা"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ৪. ব্যবসার বিস্তারিত -->
+      <div class="tdr-section">
+        <div class="tdr-sec-head">
+          <div class="tdr-sec-num">৪</div>
+          <div class="tdr-sec-title">ব্যবসার বিস্তারিত</div>
+        </div>
+        <div class="tdr-sec-body">
+          <div class="tdr-grid">
+            <div class="tdr-field">
+              <label>আপনি কি বর্তমানে ইলেকট্রিক্যাল বা টেক এক্সেসরিজ পণ্য বিক্রি করেন? <span class="req">*</span></label>
+              <div class="tdr-opts horiz">
+                <label class="tdr-opt"><input type="radio" name="sells_electrical" value="হ্যাঁ"> হ্যাঁ</label>
+                <label class="tdr-opt"><input type="radio" name="sells_electrical" value="না"> না</label>
+              </div>
+            </div>
+            <div class="tdr-field">
+              <label>যদি হ্যাঁ হয়, কোন কোন ব্র্যান্ড বিক্রি করেন?</label>
+              <input type="text" name="current_brands" placeholder="যেমন: Walton, Vision, Philips...">
+            </div>
+            <div class="tdr-grid cols2">
+              <div class="tdr-field">
+                <label>দোকানের আকার (স্কয়ার ফিট)</label>
+                <input type="number" name="shop_size" placeholder="যেমন: 200" inputmode="numeric">
+              </div>
+              <div class="tdr-field">
+                <label>কর্মচারীর সংখ্যা</label>
+                <input type="number" name="employees" placeholder="যেমন: 3" inputmode="numeric">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ৫. মাসিক বিক্রয় -->
+      <div class="tdr-section">
+        <div class="tdr-sec-head">
+          <div class="tdr-sec-num">৫</div>
+          <div class="tdr-sec-title">সম্ভাব্য মাসিক বিক্রয়</div>
+        </div>
+        <div class="tdr-sec-body">
+          <div class="tdr-field">
+            <label>সম্ভাব্য মাসিক বিক্রয় পরিমাণ <span class="req">*</span></label>
+            <div class="tdr-opts horiz">
+              <label class="tdr-opt"><input type="radio" name="monthly_sales" value="৫০,০০০–১,০০,০০০ টাকা"> ৫০,০০০ – ১,০০,০০০ টাকা</label>
+              <label class="tdr-opt"><input type="radio" name="monthly_sales" value="১,০০,০০০–৩,০০,০০০ টাকা"> ১,০০,০০০ – ৩,০০,০০০ টাকা</label>
+              <label class="tdr-opt"><input type="radio" name="monthly_sales" value="৩,০০,০০০–৫,০০,০০০ টাকা"> ৩,০০,০০০ – ৫,০০,০০০ টাকা</label>
+              <label class="tdr-opt"><input type="radio" name="monthly_sales" value="৫,০০,০০০ টাকার বেশি"> ৫,০০,০০০ টাকার বেশি</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ৬. আগ্রহী পণ্য -->
+      <div class="tdr-section">
+        <div class="tdr-sec-head">
+          <div class="tdr-sec-num">৬</div>
+          <div class="tdr-sec-title">কোন পণ্যে আগ্রহী</div>
+        </div>
+        <div class="tdr-sec-body">
+          <div class="tdr-field">
+            <label>আপনি ট্যানগ্রামের কোন পণ্য বিক্রি করতে চান? <span class="req">*</span></label>
+            <div class="tdr-opts horiz">
+              <label class="tdr-opt"><input type="checkbox" name="interested_products[]" value="এক্সটেনশন সকেট"> এক্সটেনশন সকেট</label>
+              <label class="tdr-opt"><input type="checkbox" name="interested_products[]" value="মাল্টিপ্লাগ"> মাল্টিপ্লাগ</label>
+              <label class="tdr-opt"><input type="checkbox" name="interested_products[]" value="ইলেকট্রিক্যাল এক্সেসরিজ"> ইলেকট্রিক্যাল এক্সেসরিজ</label>
+              <label class="tdr-opt"><input type="checkbox" name="interested_products[]" value="সবগুলো"> সবগুলো</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ৭. বিনিয়োগ -->
+      <div class="tdr-section">
+        <div class="tdr-sec-head">
+          <div class="tdr-sec-num">৭</div>
+          <div class="tdr-sec-title">বিনিয়োগ সক্ষমতা</div>
+        </div>
+        <div class="tdr-sec-body">
+          <div class="tdr-field">
+            <label>প্রাথমিকভাবে কত টাকার পণ্য নিয়ে ব্যবসা শুরু করতে পারবেন? <span class="req">*</span></label>
+            <div class="tdr-opts horiz">
+              <label class="tdr-opt"><input type="radio" name="investment" value="৫০,০০০–১ লক্ষ টাকা (সর্বনিম্ন)"> ৫০,০০০ – ১ লক্ষ টাকা (সর্বনিম্ন)</label>
+              <label class="tdr-opt"><input type="radio" name="investment" value="১–৩ লক্ষ টাকা"> ১ – ৩ লক্ষ টাকা</label>
+              <label class="tdr-opt"><input type="radio" name="investment" value="৩–৫ লক্ষ টাকা"> ৩ – ৫ লক্ষ টাকা</label>
+              <label class="tdr-opt"><input type="radio" name="investment" value="৫ লক্ষ টাকার বেশি"> ৫ লক্ষ টাকার বেশি</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ৮. ডকুমেন্ট -->
+      <div class="tdr-section">
+        <div class="tdr-sec-head">
+          <div class="tdr-sec-num">৮</div>
+          <div class="tdr-sec-title">প্রয়োজনীয় ডকুমেন্ট</div>
+        </div>
+        <div class="tdr-sec-body">
+          <div class="tdr-grid cols2">
+            <div class="tdr-field">
+              <label>দোকানের ছবি <span class="req">*</span></label>
+              <label class="tdr-file">
+                <div class="tdr-file-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+                ছবি আপলোড করুন
+                <input type="file" name="shop_photo" accept="image/*">
+                <span class="tdr-fname" id="tdr-fn1"></span>
+              </label>
+            </div>
+            <div class="tdr-field">
+              <label>এনআইডি কপি <span class="req">*</span></label>
+              <label class="tdr-file">
+                <div class="tdr-file-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+                ফাইল আপলোড করুন
+                <input type="file" name="nid_copy" accept="image/*,.pdf">
+                <span class="tdr-fname" id="tdr-fn2"></span>
+              </label>
+            </div>
+            <div class="tdr-field tdr-span2">
+              <label>ট্রেড লাইসেন্স <span style="color:var(--ink3);font-weight:400">(ঐচ্ছিক)</span></label>
+              <label class="tdr-file">
+                <div class="tdr-file-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+                ট্রেড লাইসেন্স আপলোড করুন
+                <input type="file" name="trade_license" accept="image/*,.pdf">
+                <span class="tdr-fname" id="tdr-fn3"></span>
+              </label>
+            </div>
+          </div>
+          <p class="tdr-note">* ছবি বা পিডিএফ ফরম্যাটে সর্বোচ্চ ৫ এমবি আপলোড করুন।</p>
+        </div>
+      </div>
+
+      <!-- ৯. মন্তব্য -->
+      <div class="tdr-section">
+        <div class="tdr-sec-head">
+          <div class="tdr-sec-num">৯</div>
+          <div class="tdr-sec-title">অতিরিক্ত মন্তব্য</div>
+        </div>
+        <div class="tdr-sec-body">
+          <div class="tdr-field">
+            <label>আপনি কেন ট্যানগ্রাম টেকনোলজি লিমিটেডের ডিলার হতে চান?</label>
+            <textarea name="comments" rows="4" placeholder="আপনার মতামত বা কারণ লিখুন..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUBMIT -->
+      <div class="tdr-submit-wrap">
+        <button type="submit" class="tdr-btn-submit" id="tdr-sub-btn">
+          <span id="tdr-sub-txt">ডিলার হওয়ার জন্য আবেদন করুন</span>
+          <div class="tdr-spin" id="tdr-sub-spin"></div>
+        </button>
+      </div>
+
+      <div class="tdr-err" id="tdr-err-main"></div>
+
+    </form>
+
+    <!-- SUCCESS -->
+    <div class="tdr-success" id="tdr-success">
+      <div class="tdr-success-icon">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h2 data-bn="ধন্যবাদ!" data-en="Thank You!">ধন্যবাদ!</h2>
+      <p data-bn="ট্যানগ্রাম টেকনোলজি লিমিটেডের ডিলার হওয়ার জন্য আপনার আবেদন সফলভাবে গ্রহণ করা হয়েছে।" data-en="Your application to become a dealer of Tangram Technology Limited has been successfully received.">ট্যানগ্রাম টেকনোলজি লিমিটেডের ডিলার হওয়ার জন্য আপনার আবেদন সফলভাবে গ্রহণ করা হয়েছে।</p>
+      <div class="tdr-success-badge" data-bn="আমাদের টিম ৩–৫ কর্মদিবসের মধ্যে যোগাযোগ করবে" data-en="Our team will contact you within 3–5 working days">আমাদের টিম ৩–৫ কর্মদিবসের মধ্যে যোগাযোগ করবে</div>
+      <br>
+      <button class="tdr-adv-btn" onclick="document.getElementById('tdr-adv-modal').classList.add('open')">
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <span data-bn="ডিলার হওয়ার সুবিধাসমূহ দেখুন" data-en="View Advantages of Being a Distributor">ডিলার হওয়ার সুবিধাসমূহ দেখুন</span>
+      </button>
+    </div>
+
+  </div><!-- #tdr-wrap -->
+
+  <!-- ADVANTAGE MODAL -->
+  <div class="tdr-modal-overlay" id="tdr-adv-modal" onclick="if(event.target===this)this.classList.remove('open')">
+    <div class="tdr-modal">
+      <div class="tdr-modal-head">
+        <h3 data-bn="ডিলার হওয়ার সুবিধাসমূহ" data-en="Advantages of Being a Distributor">ডিলার হওয়ার সুবিধাসমূহ</h3>
+        <button class="tdr-modal-close" onclick="document.getElementById('tdr-adv-modal').classList.remove('open')">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="tdr-adv-list">
+        <div class="tdr-adv-item">
+          <div class="tdr-adv-icon">💰</div>
+          <div class="tdr-adv-text">
+            <strong data-bn="আকর্ষণীয় মুনাফা মার্জিন" data-en="Attractive Profit Margin">আকর্ষণীয় মুনাফা মার্জিন</strong>
+            <span data-bn="প্রতিটি পণ্যে প্রতিযোগিতামূলক মূল্যে সর্বোচ্চ মুনাফা নিশ্চিত করা হয়।" data-en="Maximum profit is ensured on every product at competitive prices.">প্রতিটি পণ্যে প্রতিযোগিতামূলক মূল্যে সর্বোচ্চ মুনাফা নিশ্চিত করা হয়।</span>
+          </div>
+        </div>
+        <div class="tdr-adv-item">
+          <div class="tdr-adv-icon">🚚</div>
+          <div class="tdr-adv-text">
+            <strong data-bn="দ্রুত ডেলিভারি সুবিধা" data-en="Fast Delivery Service">দ্রুত ডেলিভারি সুবিধা</strong>
+            <span data-bn="সারা বাংলাদেশে দ্রুত ও নিরাপদ ডেলিভারি নিশ্চিত করা হয়।" data-en="Fast and safe delivery is ensured across all of Bangladesh.">সারা বাংলাদেশে দ্রুত ও নিরাপদ ডেলিভারি নিশ্চিত করা হয়।</span>
+          </div>
+        </div>
+        <div class="tdr-adv-item">
+          <div class="tdr-adv-icon">🎯</div>
+          <div class="tdr-adv-text">
+            <strong data-bn="বিশেষ ডিলার অফার ও ছাড়" data-en="Special Dealer Offers & Discounts">বিশেষ ডিলার অফার ও ছাড়</strong>
+            <span data-bn="নিয়মিত ডিলারদের জন্য বিশেষ ছাড় এবং মৌসুমী অফার প্রদান করা হয়।" data-en="Special discounts and seasonal offers are provided for regular dealers.">নিয়মিত ডিলারদের জন্য বিশেষ ছাড় এবং মৌসুমী অফার প্রদান করা হয়।</span>
+          </div>
+        </div>
+        <div class="tdr-adv-item">
+          <div class="tdr-adv-icon">🛡️</div>
+          <div class="tdr-adv-text">
+            <strong data-bn="১০০% অথেনটিক পণ্যের নিশ্চয়তা" data-en="100% Authentic Product Guarantee">১০০% অথেনটিক পণ্যের নিশ্চয়তা</strong>
+            <span data-bn="সকল পণ্য সরাসরি ট্যানগ্রাম থেকে সরবরাহ করা হয়, নকলের কোনো সুযোগ নেই।" data-en="All products are supplied directly from Tangram, with no possibility of counterfeits.">সকল পণ্য সরাসরি ট্যানগ্রাম থেকে সরবরাহ করা হয়, নকলের কোনো সুযোগ নেই।</span>
+          </div>
+        </div>
+        <div class="tdr-adv-item">
+          <div class="tdr-adv-icon">📞</div>
+          <div class="tdr-adv-text">
+            <strong data-bn="ডেডিকেটেড সাপোর্ট টিম" data-en="Dedicated Support Team">ডেডিকেটেড সাপোর্ট টিম</strong>
+            <span data-bn="যেকোনো সমস্যায় আমাদের বিক্রয় ও সাপোর্ট টিম সবসময় পাশে আছে।" data-en="Our sales and support team is always available to help with any issues.">যেকোনো সমস্যায় আমাদের বিক্রয় ও সাপোর্ট টিম সবসময় পাশে আছে।</span>
+          </div>
+        </div>
+        <div class="tdr-adv-item">
+          <div class="tdr-adv-icon">📈</div>
+          <div class="tdr-adv-text">
+            <strong data-bn="ব্যবসা বৃদ্ধির সুযোগ" data-en="Business Growth Opportunity">ব্যবসা বৃদ্ধির সুযোগ</strong>
+            <span data-bn="ট্যানগ্রামের ব্র্যান্ড পরিচিতি ব্যবহার করে নিজের ব্যবসাকে দ্রুত বড় করার সুযোগ।" data-en="Leverage Tangram's brand recognition to grow your business rapidly.">ট্যানগ্রামের ব্র্যান্ড পরিচিতি ব্যবহার করে নিজের ব্যবসাকে দ্রুত বড় করার সুযোগ।</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+(function(){
+
+  var lang='bn';
+
+  var T={
+    'sec-1':{bn:'ব্যক্তিগত তথ্য',en:'Personal Information'},
+    'sec-2':{bn:'ব্যবসার তথ্য',en:'Business Information'},
+    'sec-3':{bn:'ব্যবসার অবস্থান',en:'Business Location'},
+    'sec-4':{bn:'ব্যবসার বিস্তারিত',en:'Business Details'},
+    'sec-5':{bn:'সম্ভাব্য মাসিক বিক্রয়',en:'Estimated Monthly Sales'},
+    'sec-6':{bn:'কোন পণ্যে আগ্রহী',en:'Interested Products'},
+    'sec-7':{bn:'বিনিয়োগ সক্ষমতা',en:'Investment Capacity'},
+    'sec-8':{bn:'প্রয়োজনীয় ডকুমেন্ট',en:'Required Documents'},
+    'sec-9':{bn:'অতিরিক্ত মন্তব্য',en:'Additional Comments'},
+    'lbl-full_name':{bn:'পূর্ণ নাম',en:'Full Name'},
+    'lbl-mobile':{bn:'মোবাইল নম্বর',en:'Mobile Number'},
+    'lbl-shop_name':{bn:'ব্যবসার নাম / দোকানের নাম',en:'Business / Shop Name'},
+    'lbl-business_type':{bn:'ব্যবসার ধরণ',en:'Business Type'},
+    'lbl-years':{bn:'কত বছর ধরে ব্যবসা করছেন',en:'Years in Business'},
+    'lbl-district':{bn:'জেলা',en:'District'},
+    'lbl-upazila':{bn:'উপজেলা / এলাকা',en:'Upazila / Area'},
+    'lbl-address':{bn:'দোকানের সম্পূর্ণ ঠিকানা',en:'Full Shop Address'},
+    'lbl-sells':{bn:'আপনি কি বর্তমানে ইলেকট্রিক্যাল বা টেক এক্সেসরিজ পণ্য বিক্রি করেন?',en:'Do you currently sell electrical or tech accessories?'},
+    'lbl-brands':{bn:'যদি হ্যাঁ হয়, কোন কোন ব্র্যান্ড বিক্রি করেন?',en:'If yes, which brands do you sell?'},
+    'lbl-shop_size':{bn:'দোকানের আকার (স্কয়ার ফিট)',en:'Shop Size (Square Feet)'},
+    'lbl-employees':{bn:'কর্মচারীর সংখ্যা',en:'Number of Employees'},
+    'lbl-monthly':{bn:'সম্ভাব্য মাসিক বিক্রয় পরিমাণ',en:'Estimated Monthly Sales Amount'},
+    'lbl-products':{bn:'আপনি ট্যানগ্রামের কোন পণ্য বিক্রি করতে চান?',en:'Which Tangram products do you want to sell?'},
+    'lbl-investment':{bn:'প্রাথমিকভাবে কত টাকার পণ্য নিয়ে ব্যবসা শুরু করতে পারবেন?',en:'What is your initial investment capacity?'},
+    'lbl-shop_photo':{bn:'দোকানের ছবি',en:'Shop Photo'},
+    'lbl-nid':{bn:'এনআইডি কপি',en:'NID Copy'},
+    'lbl-trade':{bn:'ট্রেড লাইসেন্স',en:'Trade License'},
+    'lbl-comments':{bn:'আপনি কেন ট্যানগ্রাম টেকনোলজি লিমিটেডের ডিলার হতে চান?',en:'Why do you want to become a Tangram Technology dealer?'},
+    'ph-full_name':{bn:'আপনার পূর্ণ নাম লিখুন',en:'Enter your full name'},
+    'ph-mobile':{bn:'০১XXXXXXXXX',en:'01XXXXXXXXX'},
+    'ph-shop_name':{bn:'দোকান বা প্রতিষ্ঠানের নাম',en:'Shop or business name'},
+    'ph-district':{bn:'আপনার জেলা',en:'Your district'},
+    'ph-upazila':{bn:'উপজেলা বা এলাকার নাম',en:'Upazila or area name'},
+    'ph-address':{bn:'রোড, এলাকা, শহর সহ সম্পূর্ণ ঠিকানা',en:'Full address including road, area, city'},
+    'ph-brands':{bn:'যেমন: Walton, Vision, Philips...',en:'e.g. Walton, Vision, Philips...'},
+    'ph-shop_size':{bn:'যেমন: 200',en:'e.g. 200'},
+    'ph-employees':{bn:'যেমন: 3',en:'e.g. 3'},
+    'ph-comments':{bn:'আপনার মতামত বা কারণ লিখুন...',en:'Write your opinion or reason...'},
+    'ph-shop_photo':{bn:'ছবি আপলোড করুন',en:'Upload photo'},
+    'ph-nid':{bn:'ফাইল আপলোড করুন',en:'Upload file'},
+    'ph-trade':{bn:'ট্রেড লাইসেন্স আপলোড করুন',en:'Upload trade license'},
+    'opt-retail':{bn:'খুচরা দোকান (Retail)',en:'Retail Shop'},
+    'opt-wholesale':{bn:'পাইকারি দোকান (Wholesale)',en:'Wholesale Shop'},
+    'opt-dist':{bn:'ডিস্ট্রিবিউটর',en:'Distributor'},
+    'opt-online':{bn:'অনলাইন বিক্রেতা',en:'Online Seller'},
+    'opt-y1':{bn:'১ বছরের কম',en:'Less than 1 year'},
+    'opt-y13':{bn:'১–৩ বছর',en:'1–3 years'},
+    'opt-y35':{bn:'৩–৫ বছর',en:'3–5 years'},
+    'opt-y5':{bn:'৫ বছরের বেশি',en:'More than 5 years'},
+    'opt-yes':{bn:'হ্যাঁ',en:'Yes'},
+    'opt-no':{bn:'না',en:'No'},
+    'opt-s1':{bn:'৫০,০০০ – ১,০০,০০০ টাকা',en:'50,000 – 1,00,000 BDT'},
+    'opt-s2':{bn:'১,০০,০০০ – ৩,০০,০০০ টাকা',en:'1,00,000 – 3,00,000 BDT'},
+    'opt-s3':{bn:'৩,০০,০০০ – ৫,০০,০০০ টাকা',en:'3,00,000 – 5,00,000 BDT'},
+    'opt-s4':{bn:'৫,০০,০০০ টাকার বেশি',en:'More than 5,00,000 BDT'},
+    'opt-p1':{bn:'এক্সটেনশন সকেট',en:'Extension Socket'},
+    'opt-p2':{bn:'মাল্টিপ্লাগ',en:'Multiplug'},
+    'opt-p3':{bn:'ইলেকট্রিক্যাল এক্সেসরিজ',en:'Electrical Accessories'},
+    'opt-p4':{bn:'সবগুলো',en:'All Products'},
+    'opt-i1':{bn:'৫০,০০০ – ১ লক্ষ টাকা (সর্বনিম্ন)',en:'50,000 – 1 Lakh BDT (Minimum)'},
+    'opt-i2':{bn:'১ – ৩ লক্ষ টাকা',en:'1 – 3 Lakh BDT'},
+    'opt-i3':{bn:'৩ – ৫ লক্ষ টাকা',en:'3 – 5 Lakh BDT'},
+    'opt-i4':{bn:'৫ লক্ষ টাকার বেশি',en:'More than 5 Lakh BDT'},
+    'optional':{bn:'(ঐচ্ছিক)',en:'(Optional)'},
+    'file-note':{bn:'* ছবি বা পিডিএফ ফরম্যাটে সর্বোচ্চ ৫ এমবি আপলোড করুন।',en:'* Upload image or PDF format, max 5 MB.'},
+    'submit-btn':{bn:'ডিলার হওয়ার জন্য আবেদন করুন',en:'Apply to Become a Dealer'},
+    'err-name':{bn:'অনুগ্রহ করে পূর্ণ নাম ও মোবাইল নম্বর পূরণ করুন।',en:'Please fill in your full name and mobile number.'},
+    'err-shop':{bn:'অনুগ্রহ করে দোকানের নাম পূরণ করুন।',en:'Please fill in your shop name.'},
+    'err-btype':{bn:'অনুগ্রহ করে ব্যবসার ধরণ নির্বাচন করুন।',en:'Please select your business type.'},
+    'err-years':{bn:'অনুগ্রহ করে ব্যবসার বয়স নির্বাচন করুন।',en:'Please select years in business.'},
+    'err-addr':{bn:'অনুগ্রহ করে জেলা ও সম্পূর্ণ ঠিকানা পূরণ করুন।',en:'Please fill in district and full address.'},
+    'err-elec':{bn:'অনুগ্রহ করে ইলেকট্রিক্যাল পণ্য সংক্রান্ত প্রশ্নের উত্তর দিন।',en:'Please answer the electrical products question.'},
+    'err-sales':{bn:'অনুগ্রহ করে সম্ভাব্য মাসিক বিক্রয় নির্বাচন করুন।',en:'Please select estimated monthly sales.'},
+    'err-prod':{bn:'অনুগ্রহ করে কমপক্ষে একটি পণ্য নির্বাচন করুন।',en:'Please select at least one product.'},
+    'err-inv':{bn:'অনুগ্রহ করে বিনিয়োগ পরিমাণ নির্বাচন করুন।',en:'Please select your investment amount.'},
+    'err-net':{bn:'নেটওয়ার্ক সমস্যা হয়েছে, আবার চেষ্টা করুন।',en:'Network error, please try again.'},
+    'err-gen':{bn:'একটি সমস্যা হয়েছে, আবার চেষ্টা করুন।',en:'Something went wrong, please try again.'},
+  };
+
+  function t(k){return T[k]?T[k][lang]:k;}
+
+  /* ── Apply language ── */
+  function applyLang(){
+    /* data-bn / data-en */
+    document.querySelectorAll('[data-bn]').forEach(function(el){
+      el.textContent=lang==='bn'?el.getAttribute('data-bn'):el.getAttribute('data-en');
+    });
+    /* section titles */
+    var st=document.querySelectorAll('.tdr-sec-title');
+    ['sec-1','sec-2','sec-3','sec-4','sec-5','sec-6','sec-7','sec-8','sec-9'].forEach(function(k,i){if(st[i])st[i].textContent=t(k);});
+    /* field labels */
+    var lblMap={'full_name':'lbl-full_name','mobile':'lbl-mobile','shop_name':'lbl-shop_name','business_type':'lbl-business_type','years_in_business':'lbl-years','district':'lbl-district','upazila':'lbl-upazila','full_address':'lbl-address','sells_electrical':'lbl-sells','current_brands':'lbl-brands','shop_size':'lbl-shop_size','employees':'lbl-employees','monthly_sales':'lbl-monthly','interested_products[]':'lbl-products','investment':'lbl-investment','comments':'lbl-comments'};
+    Object.keys(lblMap).forEach(function(name){
+      var inp=document.querySelector('[name="'+name+'"]');
+      if(!inp)return;
+      var lbl=inp.closest('.tdr-field').querySelector('label');
+      if(!lbl)return;
+      var req=lbl.querySelector('.req');
+      lbl.textContent=t(lblMap[name]);
+      if(req)lbl.appendChild(req);
+    });
+    /* file box labels */
+    [{n:'shop_photo',k:'ph-shop_photo'},{n:'nid_copy',k:'ph-nid'},{n:'trade_license',k:'ph-trade'}].forEach(function(item){
+      var inp=document.querySelector('[name="'+item.n+'"]');
+      if(!inp)return;
+      var box=inp.closest('.tdr-file');
+      if(!box)return;
+      box.childNodes.forEach(function(node){if(node.nodeType===3&&node.textContent.trim())node.textContent=' '+t(item.k)+' ';});
+    });
+    /* file labels above box */
+    [{n:'shop_photo',k:'lbl-shop_photo'},{n:'nid_copy',k:'lbl-nid'},{n:'trade_license',k:'lbl-trade'}].forEach(function(item){
+      var inp=document.querySelector('[name="'+item.n+'"]');
+      if(!inp)return;
+      var field=inp.closest('.tdr-field');
+      if(!field)return;
+      var lbl=field.querySelector('label:not(.tdr-file)');
+      if(!lbl)return;
+      var req=lbl.querySelector('.req');
+      var opt=lbl.querySelector('span[style]');
+      lbl.textContent=t(item.k)+' ';
+      if(req)lbl.appendChild(req);
+      if(opt){opt.textContent=t('optional');lbl.appendChild(opt);}
+    });
+    /* optional span */
+    document.querySelectorAll('label span[style]').forEach(function(el){el.textContent=t('optional');});
+    /* note */
+    document.querySelectorAll('.tdr-note').forEach(function(el){el.textContent=t('file-note');});
+    /* placeholders */
+    var phMap={'full_name':'ph-full_name','mobile':'ph-mobile','shop_name':'ph-shop_name','district':'ph-district','upazila':'ph-upazila','full_address':'ph-address','current_brands':'ph-brands','shop_size':'ph-shop_size','employees':'ph-employees','comments':'ph-comments'};
+    Object.keys(phMap).forEach(function(name){var el=document.querySelector('[name="'+name+'"]');if(el)el.placeholder=t(phMap[name]);});
+    /* option labels */
+    var optMap=[
+      {val:'খুচরা দোকান (Retail)',k:'opt-retail'},{val:'পাইকারি দোকান (Wholesale)',k:'opt-wholesale'},
+      {val:'ডিস্ট্রিবিউটর',k:'opt-dist'},{val:'অনলাইন বিক্রেতা',k:'opt-online'},
+      {val:'১ বছরের কম',k:'opt-y1'},{val:'১–৩ বছর',k:'opt-y13'},{val:'৩–৫ বছর',k:'opt-y35'},{val:'৫ বছরের বেশি',k:'opt-y5'},
+      {val:'হ্যাঁ',k:'opt-yes'},{val:'না',k:'opt-no'},
+      {val:'৫০,০০০–১,০০,০০০ টাকা',k:'opt-s1'},{val:'১,০০,০০০–৩,০০,০০০ টাকা',k:'opt-s2'},{val:'৩,০০,০০০–৫,০০,০০০ টাকা',k:'opt-s3'},{val:'৫,০০,০০০ টাকার বেশি',k:'opt-s4'},
+      {val:'এক্সটেনশন সকেট',k:'opt-p1'},{val:'মাল্টিপ্লাগ',k:'opt-p2'},{val:'ইলেকট্রিক্যাল এক্সেসরিজ',k:'opt-p3'},{val:'সবগুলো',k:'opt-p4'},
+      {val:'৫০,০০০–১ লক্ষ টাকা (সর্বনিম্ন)',k:'opt-i1'},{val:'১–৩ লক্ষ টাকা',k:'opt-i2'},{val:'৩–৫ লক্ষ টাকা',k:'opt-i3'},{val:'৫ লক্ষ টাকার বেশি',k:'opt-i4'},
+    ];
+    optMap.forEach(function(item){
+      var inp=document.querySelector('[value="'+item.val+'"]');
+      if(!inp)return;
+      var opt=inp.closest('.tdr-opt');
+      if(!opt)return;
+      opt.childNodes.forEach(function(node){if(node.nodeType===3&&node.textContent.trim())node.textContent=' '+t(item.k);});
+    });
+    /* submit btn */
+    var st2=document.getElementById('tdr-sub-txt');
+    if(st2)st2.textContent=t('submit-btn');
+    /* lang toggle */
+    var ll=document.getElementById('tdr-lang-label');
+    if(ll)ll.textContent=lang==='bn'?'English':'বাংলা';
+    var lf=document.querySelector('.tdr-lang-flag');
+    if(lf)lf.textContent=lang==='bn'?'🇬🇧':'🇧🇩';
+  }
+
+  window.tdrToggleLang=function(){lang=lang==='bn'?'en':'bn';applyLang();};
+
+  /* ── Radio/Checkbox visual ── */
+  document.querySelectorAll('#tdr-form .tdr-opt input').forEach(function(inp){
+    inp.addEventListener('change',function(){
+      var name=this.name;
+      if(this.type==='radio'){
+        document.querySelectorAll('[name="'+name+'"]').forEach(function(r){r.closest('.tdr-opt').classList.toggle('sel',r.checked);});
+      } else {
+        this.closest('.tdr-opt').classList.toggle('sel',this.checked);
+      }
+    });
+  });
+
+  /* ── File name display ── */
+  ['shop_photo','nid_copy','trade_license'].forEach(function(f,idx){
+    var inp=document.querySelector('[name="'+f+'"]');
+    if(!inp)return;
+    inp.addEventListener('change',function(){
+      var el=document.getElementById('tdr-fn'+(idx+1));
+      if(el)el.textContent=this.files[0]?this.files[0].name:'';
+    });
+  });
+
+  /* ── Error ── */
+  function showErr(msg){
+    var e=document.getElementById('tdr-err-main');
+    e.textContent=msg;e.style.display='block';
+    e.scrollIntoView({behavior:'smooth',block:'nearest'});
+    setTimeout(function(){e.style.display='none';},4000);
+  }
+
+  /* ── Submit ── */
+  document.getElementById('tdr-form').addEventListener('submit',function(e){
+    e.preventDefault();
+    var f=this;
+    var btn=document.getElementById('tdr-sub-btn');
+    var txt=document.getElementById('tdr-sub-txt');
+    var spin=document.getElementById('tdr-sub-spin');
+
+    if(!f.querySelector('[name="full_name"]').value.trim()||!f.querySelector('[name="mobile"]').value.trim()){showErr(t('err-name'));return;}
+    if(!f.querySelector('[name="shop_name"]').value.trim()){showErr(t('err-shop'));return;}
+    if(!f.querySelector('[name="business_type"]:checked')){showErr(t('err-btype'));return;}
+    if(!f.querySelector('[name="years_in_business"]:checked')){showErr(t('err-years'));return;}
+    if(!f.querySelector('[name="district"]').value.trim()||!f.querySelector('[name="full_address"]').value.trim()){showErr(t('err-addr'));return;}
+    if(!f.querySelector('[name="sells_electrical"]:checked')){showErr(t('err-elec'));return;}
+    if(!f.querySelector('[name="monthly_sales"]:checked')){showErr(t('err-sales'));return;}
+    if(!f.querySelector('[name="interested_products[]"]:checked')){showErr(t('err-prod'));return;}
+    if(!f.querySelector('[name="investment"]:checked')){showErr(t('err-inv'));return;}
+
+    var products=[];
+    f.querySelectorAll('[name="interested_products[]"]:checked').forEach(function(c){products.push(c.value);});
+
+    var fd=new FormData();
+    fd.append('action','tangram_dealer_submit');
+    fd.append('nonce',(typeof tangramAjax!=='undefined')?tangramAjax.nonce:'');
+    fd.append('full_name',f.querySelector('[name="full_name"]').value.trim());
+    fd.append('mobile',f.querySelector('[name="mobile"]').value.trim());
+    fd.append('shop_name',f.querySelector('[name="shop_name"]').value.trim());
+    fd.append('business_type',f.querySelector('[name="business_type"]:checked').value);
+    fd.append('years_in_business',f.querySelector('[name="years_in_business"]:checked').value);
+    fd.append('district',f.querySelector('[name="district"]').value.trim());
+    fd.append('upazila',f.querySelector('[name="upazila"]').value.trim());
+    fd.append('full_address',f.querySelector('[name="full_address"]').value.trim());
+    fd.append('sells_electrical',f.querySelector('[name="sells_electrical"]:checked').value);
+    fd.append('current_brands',f.querySelector('[name="current_brands"]').value.trim());
+    fd.append('shop_size',f.querySelector('[name="shop_size"]').value.trim());
+    fd.append('employees',f.querySelector('[name="employees"]').value.trim());
+    fd.append('monthly_sales',f.querySelector('[name="monthly_sales"]:checked').value);
+    fd.append('interested_products',products.join(', '));
+    fd.append('investment',f.querySelector('[name="investment"]:checked').value);
+    fd.append('comments',f.querySelector('[name="comments"]').value.trim());
+
+    ['shop_photo','nid_copy','trade_license'].forEach(function(fl){
+      var fi=f.querySelector('[name="'+fl+'"]');
+      if(fi&&fi.files[0])fd.append(fl,fi.files[0]);
+    });
+
+    btn.disabled=true;txt.style.display='none';spin.style.display='block';
+
+    var url=(typeof tangramAjax!=='undefined')?tangramAjax.url:'/wp-admin/admin-ajax.php';
+
+    fetch(url,{method:'POST',body:fd})
+      .then(function(r){return r.json();})
+      .then(function(res){
+        if(res.success){
+          document.getElementById('tdr-form').style.display='none';
+          document.getElementById('tdr-success').style.display='block';
+          window.scrollTo({top:0,behavior:'smooth'});
+        } else {
+          showErr(res.data||t('err-gen'));
+          btn.disabled=false;txt.style.display='inline';spin.style.display='none';
+        }
+      })
+      .catch(function(){
+        showErr(t('err-net'));
+        btn.disabled=false;txt.style.display='inline';spin.style.display='none';
+      });
+  });
+
+})();
+</script>
