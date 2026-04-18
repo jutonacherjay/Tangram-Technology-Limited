@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leading Companies Showcase</title>
+    <style>
+        /* Isolate all styles to prevent WordPress conflicts */
+        .companies-showcase-wrapper {
+            all: revert;
+        }
+
+        .companies-showcase-wrapper * {
+            all: revert;
+        }
+
+        .companies-showcase-wrapper {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #ffffff;
+            padding: 20px;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .showcase-container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+
+        .showcase-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .showcase-title h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            letter-spacing: -0.02em;
+            animation: showcase-fadeInDown 0.8s ease-out;
+            margin-top: 0;
+        }
+
+        .showcase-title p {
+            font-size: 1.1rem;
+            color: #64748b;
+            animation: showcase-fadeInUp 0.8s ease-out 0.2s both;
+            margin: 0;
+        }
+
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            perspective: 1000px;
+        }
+
+        .showcase-card {
+            position: relative;
+            aspect-ratio: 1;
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            animation: showcase-slideInUp 0.6s ease-out backwards;
+        }
+
+        .showcase-card:nth-child(1) { animation-delay: 0.1s; }
+        .showcase-card:nth-child(2) { animation-delay: 0.2s; }
+        .showcase-card:nth-child(3) { animation-delay: 0.3s; }
+        .showcase-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .showcase-card-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #4ade80 0%, #10b981 100%);
+            z-index: -1;
+            opacity: 0.8;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .showcase-card:nth-child(2) .showcase-card-background {
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+        }
+
+        .showcase-card:nth-child(3) .showcase-card-background {
+            background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+        }
+
+        .showcase-card:nth-child(4) .showcase-card-background {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+        }
+
+        .showcase-card-inner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3px;
+            transform: scale(0.95);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .showcase-card:hover .showcase-card-inner {
+            transform: scale(1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .showcase-card:hover .showcase-card-background {
+            transform: scale(1.1) rotate(5deg);
+            opacity: 1;
+        }
+
+        .showcase-logo-wrapper {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .showcase-logo {
+            width: 90%;
+            height: 90%;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
+            transition: all 0.4s ease-out;
+            opacity: 1;
+        }
+
+        .showcase-card:hover .showcase-logo {
+            transform: scale(1.15) rotateZ(-2deg);
+            filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.2));
+        }
+
+        .showcase-card-glow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 16px;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.3) 0%, transparent 80%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .showcase-card:hover .showcase-card-glow {
+            opacity: 1;
+        }
+
+        @keyframes showcase-float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .showcase-card:hover .showcase-card-inner {
+            animation: showcase-float 1.5s ease-in-out infinite;
+        }
+
+        @keyframes showcase-fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes showcase-fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes showcase-slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Tablet responsive */
+        @media (max-width: 768px) {
+            .companies-showcase-wrapper {
+                padding: 15px;
+            }
+
+            .showcase-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+
+            .showcase-title {
+                margin-bottom: 25px;
+            }
+
+            .showcase-title h2 {
+                font-size: 1.8rem;
+            }
+
+            .showcase-card-inner {
+                padding: 2px;
+            }
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 480px) {
+            .companies-showcase-wrapper {
+                padding: 10px;
+            }
+
+            .showcase-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .showcase-title {
+                margin-bottom: 20px;
+            }
+
+            .showcase-title h2 {
+                font-size: 1.5rem;
+                margin-bottom: 5px;
+            }
+
+            .showcase-title p {
+                font-size: 0.9rem;
+            }
+
+            .showcase-card-inner {
+                padding: 2px;
+            }
+
+            .showcase-logo {
+                width: 90%;
+                height: 90%;
+            }
+        }
+    </style>
+</head>
+<body class="companies-showcase-wrapper">
+    <div class="showcase-container">
+        <div class="showcase-title">
+            <h2>We are Serving Leading Companies</h2>
+            <p>Trusted by industry leaders worldwide</p>
+        </div>
+
+        <div class="showcase-grid">
+            <!-- Company 1 -->
+            <div class="showcase-card">
+                <div class="showcase-card-background"></div>
+                <div class="showcase-card-inner">
+                    <div class="showcase-logo-wrapper">
+                        <img src="https://tangramelectronics.com/wp-content/uploads/2025/01/1.png" alt="Company Logo" class="showcase-logo">
+                    </div>
+                </div>
+                <div class="showcase-card-glow"></div>
+            </div>
+
+            <!-- Company 2 -->
+            <div class="showcase-card">
+                <div class="showcase-card-background"></div>
+                <div class="showcase-card-inner">
+                    <div class="showcase-logo-wrapper">
+                        <img src="https://tangramelectronics.com/wp-content/uploads/2025/01/2.png" alt="Company Logo" class="showcase-logo">
+                    </div>
+                </div>
+                <div class="showcase-card-glow"></div>
+            </div>
+
+            <!-- Company 3 -->
+            <div class="showcase-card">
+                <div class="showcase-card-background"></div>
+                <div class="showcase-card-inner">
+                    <div class="showcase-logo-wrapper">
+                        <img src="https://tangramelectronics.com/wp-content/uploads/2025/01/3.png" alt="Company Logo" class="showcase-logo">
+                    </div>
+                </div>
+                <div class="showcase-card-glow"></div>
+            </div>
+
+            <!-- Company 4 -->
+            <div class="showcase-card">
+                <div class="showcase-card-background"></div>
+                <div class="showcase-card-inner">
+                    <div class="showcase-logo-wrapper">
+                        <img src="https://tangramelectronics.com/wp-content/uploads/2025/01/4.png" alt="Company Logo" class="showcase-logo">
+                    </div>
+                </div>
+                <div class="showcase-card-glow"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mouse tracking for glow effect
+        document.addEventListener('mousemove', (e) => {
+            const cards = document.querySelectorAll('.showcase-card');
+            
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                
+                const glow = card.querySelector('.showcase-card-glow');
+                glow.style.setProperty('--mouse-x', `${x}%`);
+                glow.style.setProperty('--mouse-y', `${y}%`);
+            });
+        });
+
+        // Intersection Observer for lazy animation trigger
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'showcase-slideInUp 0.6s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.showcase-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Ripple effect on click
+        document.querySelectorAll('.showcase-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                const ripple = document.createElement('div');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+
+                ripple.style.position = 'absolute';
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.style.borderRadius = '50%';
+                ripple.style.background = 'rgba(255, 255, 255, 0.5)';
+                ripple.style.pointerEvents = 'none';
+                ripple.style.animation = 'ripple 0.6s ease-out';
+                ripple.style.zIndex = '10';
+
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(2);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
