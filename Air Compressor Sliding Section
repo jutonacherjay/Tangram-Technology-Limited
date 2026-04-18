@@ -1,0 +1,149 @@
+<style>
+.tng-section { padding: 60px 20px; text-align: center; background: #fff; }
+.tng-title { font-size: 2.4rem; font-weight: 400; color: #077d68; margin-bottom: 10px; letter-spacing: 1px; }
+.tng-divider { width: 3px; height: 40px; background: #077d68; margin: 0 auto 50px; }
+.tng-outer { position: relative; max-width: 1100px; margin: 0 auto; padding: 0 48px; box-sizing: border-box; }
+.tng-viewport { overflow: hidden; width: 100%; }
+.tng-track { display: flex; transition: transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94); will-change: transform; }
+.tng-slide { flex: 0 0 33.333%; max-width: 33.333%; padding: 0 12px; display: flex; flex-direction: column; align-items: center; opacity: 0.25; transition: opacity 0.5s ease; box-sizing: border-box; }
+.tng-slide.active { opacity: 1; }
+.tng-img-wrap { width: 100%; height: 260px; display: flex; align-items: center; justify-content: center; }
+.tng-slide img { width: 100%; height: 260px; object-fit: contain; transform: scale(0.6); opacity: 0; transition: transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease; display: block; }
+.tng-slide.active img { transform: scale(1); opacity: 1; }
+.tng-pname { font-size: 15px; font-weight: 600; color: #077d68; margin-top: 14px; text-align: center; opacity: 0; transform: translateY(8px); transition: opacity 0.4s ease 0.2s, transform 0.4s ease 0.2s; }
+.tng-slide.active .tng-pname { opacity: 1; transform: translateY(0); }
+.tng-btn { display: inline-flex; align-items: center; gap: 10px; margin-top: 12px; color: #077d68; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-decoration: none; opacity: 0; transform: translateY(10px); transition: opacity 0.4s ease 0.35s, transform 0.4s ease 0.35s; }
+.tng-slide.active .tng-btn { opacity: 1; transform: translateY(0); }
+.tng-btn .tng-circle { width: 30px; height: 30px; border-radius: 50%; border: 1.5px solid #077d68; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+.tng-btn .tng-arrow { font-size: 13px; color: #077d68; transition: color 0.2s; line-height: 1; }
+.tng-btn:hover .tng-circle { background: #077d68; }
+.tng-btn:hover .tng-arrow { color: #fff; }
+.tng-nav { position: absolute; top: 38%; transform: translateY(-50%); background: none; border: none; font-size: 2.8rem; color: #077d68; cursor: pointer; padding: 8px 10px; z-index: 10; font-weight: 300; line-height: 1; transition: color 0.2s; }
+.tng-nav:hover { color: #055a4a; }
+.tng-prev { left: -4px; }
+.tng-next { right: -4px; }
+.tng-dots { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-top: 36px; }
+.tng-dot { width: 9px; height: 9px; border-radius: 50%; background: #ccc; border: none; cursor: pointer; padding: 0; transition: background 0.3s, transform 0.2s; }
+.tng-dot.active { background: #077d68; transform: scale(1.4); }
+
+@media (max-width: 640px) {
+  .tng-section { padding: 36px 10px; }
+  .tng-title { font-size: 1.7rem; }
+  .tng-divider { height: 30px; margin-bottom: 28px; }
+  .tng-outer { padding: 0 34px; }
+  .tng-slide { flex: 0 0 50%; max-width: 50%; padding: 0 8px; }
+  .tng-img-wrap { height: 155px; }
+  .tng-slide img { height: 150px; }
+  .tng-pname { display: none !important; }
+  .tng-btn { margin-top: 10px; font-size: 10px; gap: 6px; }
+  .tng-btn .tng-circle { width: 24px; height: 24px; }
+  .tng-btn .tng-arrow { font-size: 11px; }
+  .tng-nav { font-size: 2rem; padding: 4px 6px; }
+  .tng-dots { margin-top: 18px; gap: 6px; }
+  .tng-dot { width: 7px; height: 7px; }
+}
+</style>
+
+<div class="tng-section">
+  <h2 class="tng-title">Screw Air Compressor</h2>
+  <div class="tng-divider"></div>
+  <div class="tng-outer">
+    <button class="tng-nav tng-prev" id="tngPrev">&#8249;</button>
+    <div class="tng-viewport">
+      <div class="tng-track" id="tngTrack">
+
+        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/01/7.5-Screw-Air-Compressor-Tangram-Electronics.jpg" alt="7.5 Air Compressor"/></div><div class="tng-pname">7.5kw Air Compressor</div><a class="tng-btn" href="https://tangramelectronics.com/product/screw-air-compressor-7-5kw/" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
+        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/01/15kw.jpg" alt="Big Octagonal Holder"/></div><div class="tng-pname">15kw Air Compressor</div><a class="tng-btn" href="https://tangramelectronics.com/products/screw-air-compressor-bangladesh/" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
+        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/01/22kw-screw-air-compressor-Tangram-Electronics.jpg" alt="Batten Holder B/C"/></div><div class="tng-pname">22kw Air Compressor</div><a class="tng-btn" href="https://tangramelectronics.com/product/screw-air-compressor-22kw-ip-55/" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
+        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/01/37-KW-screw-Air-Compressor-Tangram-Electronics.jpg" alt="Square Holder"/></div><div class="tng-pname">37kw Air Compressor</div><a class="tng-btn" href="https://tangramelectronics.com/product/37kw-screw-air-compressor/" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
+        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/05/55kw-Screw-Air-Compressor-Tangram-Electronics.jpg" alt="Pendant Holder C"/></div><div class="tng-pname">55kw Air Compressor</div><a class="tng-btn" href="https://tangramelectronics.com/product/55kw-screw-air-compressor-price/" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
+        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/05/45kw-Screw-Air-compressor-Tangram-Electronics.jpg" alt="Pendant Holder A/B"/></div><div class="tng-pname">45kw Air Compressor</div><a class="tng-btn" href="https://tangramelectronics.com/product/air-compressor-price-in-bangladesh/" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
+        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/01/75kw-Screw-Air-compressor-bangladesh-Tangram-Electronics.jpg" alt="Heat Resistant Holder"/></div><div class="tng-pname">75kw Air Compressor</div><a class="tng-btn" href="https://tangramelectronics.com/product/75kw-screw-air-compressor-bangladesh/" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
+        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/06/90kw-screw-air-compressor-Bangladesh-Tangram-Electronics.jpg" alt="Small Ceiling Rose"/></div><div class="tng-pname">90kw Air Compressor</div><a class="tng-btn" href="https://tangramelectronics.com/product/spirit-small-ceiling-rose/" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
+        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/01/1000-Ltr-Air-Tank-10-Bar-Tangram-Electronics.jpg" alt="Big Ceiling Rose"/></div><div class="tng-pname">1000Liter Air Tank</div><a class="tng-btn" href="https://tangramelectronics.com/product/air-tank-10-bar-price-in-bd/" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
+        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/01/Freeze-Air-Dryer-20AC-Tangram-Electronics.jpg" alt="Square Ceiling Rose"/></div><div class="tng-pname">20AC Air Dryer</div><a class="tng-btn" href="https://tangramelectronics.com/product/air-dryer-20hp/" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
+        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/01/Freeze-Air-Dryer-30Ac-Tangram-Electronics.jpg" alt="Fuse"/></div><div class="tng-pname">30AC Air Dryer</div><a class="tng-btn" href="https://tangramelectronics.com/product/piano-fuse/" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
+        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/01/50HP-Air-dryer-for-compressor-Tangram-Electronics.jpg" alt="Indicator"/></div><div class="tng-pname">50HP Air Dryer</div><a class="tng-btn" href="https://tangramelectronics.com/product/50-hp-air-dryer-for-compressor/" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
+
+      </div>
+    </div>
+    <button class="tng-nav tng-next" id="tngNext">&#8250;</button>
+  </div>
+  <div class="tng-dots" id="tngDots"></div>
+</div>
+
+<script>
+(function(){
+  var isMobile = function(){ return window.innerWidth <= 640; };
+  var track = document.getElementById('tngTrack');
+  var slides = Array.from(track.querySelectorAll('.tng-slide'));
+  var total = slides.length;
+  var current = 0;
+  var autoTimer;
+  var visible, pages;
+
+  var dotsEl = document.getElementById('tngDots');
+
+  function getVisible(){ return isMobile() ? 2 : 3; }
+
+  function buildDots(){
+    dotsEl.innerHTML = '';
+    pages = Math.ceil(total / visible);
+    for(var i = 0; i < pages; i++){
+      var d = document.createElement('button');
+      d.className = 'tng-dot' + (i === 0 ? ' active' : '');
+      (function(idx){ d.addEventListener('click', function(){ goTo(idx); }); })(i);
+      dotsEl.appendChild(d);
+    }
+  }
+
+  function updateActive(){
+    var start = current * visible;
+    slides.forEach(function(s, i){
+      s.classList.toggle('active', i >= start && i < start + visible);
+    });
+  }
+
+  function getSlideWidth(){
+    return slides[0].getBoundingClientRect().width;
+  }
+
+  function goTo(page){
+    pages = Math.ceil(total / visible);
+    current = (page + pages) % pages;
+    track.style.transform = 'translateX(-' + (current * visible * getSlideWidth()) + 'px)';
+    var dots = dotsEl.querySelectorAll('.tng-dot');
+    dots.forEach(function(d, i){ d.classList.toggle('active', i === current); });
+    slides.forEach(function(s){ s.classList.remove('active'); });
+    setTimeout(updateActive, 80);
+    clearInterval(autoTimer);
+    autoTimer = setInterval(function(){ goTo(current + 1); }, 6000);
+  }
+
+  function init(){
+    visible = getVisible();
+    pages = Math.ceil(total / visible);
+    if(current >= pages) current = 0;
+    buildDots();
+    track.style.transition = 'none';
+    track.style.transform = 'translateX(-' + (current * visible * getSlideWidth()) + 'px)';
+    setTimeout(function(){ track.style.transition = 'transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94)'; }, 50);
+    updateActive();
+  }
+
+  document.getElementById('tngPrev').addEventListener('click', function(){ goTo(current - 1); });
+  document.getElementById('tngNext').addEventListener('click', function(){ goTo(current + 1); });
+
+  var resizeTimer;
+  window.addEventListener('resize', function(){
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function(){
+      visible = getVisible();
+      init();
+    }, 150);
+  });
+
+  init();
+  autoTimer = setInterval(function(){ goTo(current + 1); }, 3000);
+})();
+</script>
