@@ -1,0 +1,258 @@
+
+// ================================================================
+// SNIPPET 1 — TANGRAM DEALER: BACKEND
+// Code Snippets এ এই কোডটা আলাদা একটা Snippet হিসেবে রাখুন
+// Title: Tangram Dealer — Backend
+// ================================================================
+
+
+// ১. CUSTOM POST TYPE
+add_action( 'init', 'tangram_register_dealer_cpt' );
+function tangram_register_dealer_cpt() {
+    register_post_type( 'dealer_request', array(
+        'labels' => array(
+            'name'          => 'Dealer Requests',
+            'singular_name' => 'Dealer Request',
+            'menu_name'     => 'Dealer Requests',
+            'not_found'     => 'কোনো আবেদন পাওয়া যায়নি',
+        ),
+        'public'       => false,
+        'show_ui'      => true,
+        'show_in_menu' => true,
+        'menu_icon'    => 'dashicons-store',
+        'supports'     => array( 'title' ),
+        'has_archive'  => false,
+    ));
+}
+
+
+// ২. ADMIN LIST কলাম
+add_filter( 'manage_dealer_request_posts_columns', 'tangram_dealer_columns' );
+function tangram_dealer_columns( $columns ) {
+    return array(
+        'cb'            => $columns['cb'],
+        'title'         => 'আবেদনকারীর নাম',
+        'mobile'        => 'মোবাইল',
+        'shop_name'     => 'দোকানের নাম',
+        'district'      => 'জেলা',
+        'business_type' => 'ব্যবসার ধরণ',
+        'monthly_sales' => 'মাসিক বিক্রয়',
+        'date'          => 'তারিখ',
+    );
+}
+
+add_action( 'manage_dealer_request_posts_custom_column', 'tangram_dealer_column_data', 10, 2 );
+function tangram_dealer_column_data( $column, $post_id ) {
+    $map = array(
+        'mobile'        => '_mobile',
+        'shop_name'     => '_shop_name',
+        'district'      => '_district',
+        'business_type' => '_business_type',
+        'monthly_sales' => '_monthly_sales',
+    );
+    if ( isset( $map[ $column ] ) ) {
+        echo esc_html( get_post_meta( $post_id, $map[ $column ], true ) );
+    }
+}
+
+
+// ৩. META BOX — আবেদনের ভেতরে সব তথ্য
+add_action( 'add_meta_boxes', 'tangram_dealer_meta_box' );
+function tangram_dealer_meta_box() {
+    add_meta_box(
+        'dealer_details',
+        'আবেদনের বিস্তারিত তথ্য',
+        'tangram_dealer_meta_box_cb',
+        'dealer_request',
+        'normal',
+        'high'
+    );
+}
+function tangram_dealer_meta_box_cb( $post ) {
+    $fields = array(
+        '_full_name'           => 'পূর্ণ নাম',
+        '_mobile'              => 'মোবাইল নম্বর',
+        '_shop_name'           => 'দোকানের নাম',
+        '_business_type'       => 'ব্যবসার ধরণ',
+        '_years_in_business'   => 'কত বছর ব্যবসা',
+        '_district'            => 'জেলা',
+        '_upazila'             => 'উপজেলা / এলাকা',
+        '_full_address'        => 'সম্পূর্ণ ঠিকানা',
+        '_sells_electrical'    => 'ইলেকট্রিক্যাল পণ্য বিক্রি করেন?',
+        '_current_brands'      => 'বর্তমান ব্র্যান্ড',
+        '_shop_size'           => 'দোকানের আকার (sq ft)',
+        '_employees'           => 'কর্মচারীর সংখ্যা',
+        '_monthly_sales'       => 'সম্ভাব্য মাসিক বিক্রয়',
+        '_interested_products' => 'আগ্রহী পণ্য',
+        '_investment'          => 'প্রাথমিক বিনিয়োগ',
+        '_comments'            => 'অতিরিক্ত মন্তব্য',
+        '_submitted_at'        => 'সাবমিট তারিখ ও সময়',
+    );
+    echo '<table style="width:100%;border-collapse:collapse;">';
+    foreach ( $fields as $key => $label ) {
+        $value = get_post_meta( $post->ID, $key, true );
+        echo '<tr style="border-bottom:1px solid #eee;">';
+        echo '<th style="text-align:left;padding:8px 12px;width:220px;background:#f9f9f9;font-weight:600;">' . esc_html( $label ) . '</th>';
+        echo '<td style="padding:8px 12px;">' . nl2br( esc_html( $value ) ) . '</td>';
+        echo '</tr>';
+    }
+
+    // ফাইলগুলো আলাদাভাবে দেখানো
+    $file_fields = array(
+        '_file_shop_photo'    => 'দোকানের ছবি',
+        '_file_nid_copy'      => 'এনআইডি কপি',
+        '_file_trade_license' => 'ট্রেড লাইসেন্স',
+    );
+    foreach ( $file_fields as $meta_key => $label ) {
+        $att_id  = get_post_meta( $post->ID, $meta_key, true );
+        $file_url = get_post_meta( $post->ID, str_replace( '_file_', '_file_url_', $meta_key ), true );
+        if ( $att_id || $file_url ) {
+            $url = $file_url ? $file_url : wp_get_attachment_url( $att_id );
+            echo '<tr style="border-bottom:1px solid #eee;">';
+            echo '<th style="text-align:left;padding:8px 12px;width:220px;background:#f9f9f9;font-weight:600;">' . esc_html( $label ) . '</th>';
+            echo '<td style="padding:8px 12px;"><a href="' . esc_url( $url ) . '" target="_blank" style="color:#0a9e84;font-weight:600;">ফাইল দেখুন / ডাউনলোড করুন →</a></td>';
+            echo '</tr>';
+        }
+    }
+
+    echo '</table>';
+}
+
+
+// ৪. AJAX nonce — front-end এ পাঠানো
+add_action( 'wp_enqueue_scripts', 'tangram_dealer_enqueue' );
+function tangram_dealer_enqueue() {
+    wp_register_script( 'tangram-dealer', '', array(), '1.0', true );
+    wp_enqueue_script( 'tangram-dealer' );
+    wp_localize_script( 'tangram-dealer', 'tangramAjax', array(
+        'url'   => admin_url( 'admin-ajax.php' ),
+        'nonce' => wp_create_nonce( 'tangram_dealer_nonce' ),
+    ));
+}
+
+
+// ৫. AJAX HANDLER — form submit হলে ডেটা সেভ
+add_action( 'wp_ajax_tangram_dealer_submit',        'tangram_handle_dealer_submit' );
+add_action( 'wp_ajax_nopriv_tangram_dealer_submit', 'tangram_handle_dealer_submit' );
+
+function tangram_handle_dealer_submit() {
+
+    if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'tangram_dealer_nonce' ) ) {
+        wp_send_json_error( 'নিরাপত্তা যাচাই ব্যর্থ হয়েছে।' );
+    }
+
+    $full_name           = sanitize_text_field( wp_unslash( $_POST['full_name']           ?? '' ) );
+    $mobile              = sanitize_text_field( wp_unslash( $_POST['mobile']              ?? '' ) );
+    $shop_name           = sanitize_text_field( wp_unslash( $_POST['shop_name']           ?? '' ) );
+    $business_type       = sanitize_text_field( wp_unslash( $_POST['business_type']       ?? '' ) );
+    $years_in_business   = sanitize_text_field( wp_unslash( $_POST['years_in_business']   ?? '' ) );
+    $district            = sanitize_text_field( wp_unslash( $_POST['district']            ?? '' ) );
+    $upazila             = sanitize_text_field( wp_unslash( $_POST['upazila']             ?? '' ) );
+    $full_address        = sanitize_textarea_field( wp_unslash( $_POST['full_address']    ?? '' ) );
+    $sells_electrical    = sanitize_text_field( wp_unslash( $_POST['sells_electrical']    ?? '' ) );
+    $current_brands      = sanitize_text_field( wp_unslash( $_POST['current_brands']      ?? '' ) );
+    $shop_size           = sanitize_text_field( wp_unslash( $_POST['shop_size']           ?? '' ) );
+    $employees           = sanitize_text_field( wp_unslash( $_POST['employees']           ?? '' ) );
+    $monthly_sales       = sanitize_text_field( wp_unslash( $_POST['monthly_sales']       ?? '' ) );
+    $interested_products = sanitize_text_field( wp_unslash( $_POST['interested_products'] ?? '' ) );
+    $investment          = sanitize_text_field( wp_unslash( $_POST['investment']          ?? '' ) );
+    $comments            = sanitize_textarea_field( wp_unslash( $_POST['comments']        ?? '' ) );
+
+    if ( ! $full_name || ! $mobile || ! $shop_name || ! $district || ! $full_address ) {
+        wp_send_json_error( 'প্রয়োজনীয় তথ্য পূরণ করা হয়নি।' );
+    }
+
+    $post_id = wp_insert_post( array(
+        'post_title'  => $full_name . ' — ' . $shop_name . ' (' . $district . ')',
+        'post_type'   => 'dealer_request',
+        'post_status' => 'publish',
+    ));
+
+    if ( is_wp_error( $post_id ) ) {
+        wp_send_json_error( 'আবেদন সংরক্ষণে সমস্যা হয়েছে।' );
+    }
+
+    $meta = array(
+        '_full_name'           => $full_name,
+        '_mobile'              => $mobile,
+        '_shop_name'           => $shop_name,
+        '_business_type'       => $business_type,
+        '_years_in_business'   => $years_in_business,
+        '_district'            => $district,
+        '_upazila'             => $upazila,
+        '_full_address'        => $full_address,
+        '_sells_electrical'    => $sells_electrical,
+        '_current_brands'      => $current_brands,
+        '_shop_size'           => $shop_size,
+        '_employees'           => $employees,
+        '_monthly_sales'       => $monthly_sales,
+        '_interested_products' => $interested_products,
+        '_investment'          => $investment,
+        '_comments'            => $comments,
+        '_submitted_at'        => current_time( 'Y-m-d H:i:s' ),
+    );
+
+    foreach ( $meta as $key => $value ) {
+        update_post_meta( $post_id, $key, $value );
+    }
+
+    // সবসময় include করতে হবে — condition ছাড়া
+    require_once ABSPATH . 'wp-admin/includes/file.php';
+    require_once ABSPATH . 'wp-admin/includes/image.php';
+    require_once ABSPATH . 'wp-admin/includes/media.php';
+
+    // $_FILES global কে ঠিকমতো set করা
+    if ( ! function_exists( 'wp_handle_upload' ) ) {
+        require_once ABSPATH . 'wp-admin/includes/file.php';
+    }
+
+    $file_fields = array(
+        'shop_photo'    => 'দোকানের ছবি',
+        'nid_copy'      => 'এনআইডি কপি',
+        'trade_license' => 'ট্রেড লাইসেন্স',
+    );
+
+    foreach ( $file_fields as $field => $label ) {
+        // ফাইল আছে কিনা এবং error নেই কিনা চেক করা
+        if (
+            ! empty( $_FILES[ $field ]['name'] ) &&
+            isset( $_FILES[ $field ]['error'] ) &&
+            $_FILES[ $field ]['error'] === UPLOAD_ERR_OK
+        ) {
+            // $_FILES এ সঠিকভাবে assign করা
+            $file_data = $_FILES[ $field ];
+
+            $upload_overrides = array(
+                'test_form' => false,
+                'test_size' => true,
+            );
+
+            $uploaded = wp_handle_upload( $file_data, $upload_overrides );
+
+            if ( $uploaded && ! isset( $uploaded['error'] ) ) {
+                // Media library তে attachment তৈরি করা
+                $attachment = array(
+                    'post_mime_type' => $uploaded['type'],
+                    'post_title'     => sanitize_file_name( $file_data['name'] ),
+                    'post_content'   => '',
+                    'post_status'    => 'inherit',
+                    'post_parent'    => $post_id,
+                );
+
+                $att_id = wp_insert_attachment( $attachment, $uploaded['file'], $post_id );
+
+                if ( ! is_wp_error( $att_id ) ) {
+                    // Attachment metadata generate করা (thumbnail ইত্যাদি)
+                    $attach_data = wp_generate_attachment_metadata( $att_id, $uploaded['file'] );
+                    wp_update_attachment_metadata( $att_id, $attach_data );
+
+                    // Post meta তে save করা
+                    update_post_meta( $post_id, '_file_' . $field, $att_id );
+                    update_post_meta( $post_id, '_file_url_' . $field, $uploaded['url'] );
+                }
+            }
+        }
+    }
+
+    wp_send_json_success( array( 'post_id' => $post_id ) );
+}
