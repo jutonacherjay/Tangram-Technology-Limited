@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Announcement Section</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        .announcement-container {
+            position: relative;
+            width: 100%;
+            min-height: 240px;
+            height: auto;
+            background: linear-gradient(135deg, #1a5f56 0%, #2a7a6e 50%, #1a5f56 100%);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .background-gradient {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(255, 215, 0, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(42, 122, 110, 0.3) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .particles-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            bottom: -10px;
+            width: 4px;
+            height: 4px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.8), rgba(255, 215, 0, 0));
+            border-radius: 50%;
+            opacity: 0.6;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-110vh) translateX(20px);
+                opacity: 0;
+            }
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .announcement-header {
+            margin-bottom: 20px;
+            animation: slideInDown 0.8s ease-out;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 215, 0, 0.15);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 25px;
+            color: #ffd700;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .main-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 12px 0;
+            letter-spacing: -1px;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            font-family: 'Georgia', 'Times New Roman', serif;
+            animation: slideInUp 0.8s ease-out 0.1s both;
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 8px;
+            line-height: 1.4;
+            animation: slideInUp 0.8s ease-out 0.2s both;
+        }
+
+        .logo-container {
+            margin: 15px 0;
+            perspective: 1200px;
+            animation: zoomIn 0.8s ease-out 0.3s both;
+        }
+
+        .logo-3d {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+            transform-style: preserve-3d;
+            position: relative;
+        }
+
+        .logo-3d:hover {
+            transform: scale(1.05);
+        }
+
+        .bell-icon {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4));
+        }
+
+        .notification-dot {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .pulse-ring {
+            animation: expandPulse 2s ease-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                r: 8;
+                opacity: 1;
+            }
+            50% {
+                r: 9;
+                opacity: 0.7;
+            }
+        }
+
+        @keyframes expandPulse {
+            0% {
+                r: 8;
+                opacity: 1;
+            }
+            100% {
+                r: 16;
+                opacity: 0;
+            }
+        }
+
+        .glow-effect {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 160px;
+            height: 160px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.3), transparent);
+            border-radius: 50%;
+            animation: glow 3s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(255, 215, 0, 0.5);
+            }
+        }
+
+        .button-container {
+            margin-top: 15px;
+            animation: slideInUp 0.8s ease-out 0.4s both;
+        }
+
+        .cta-button {
+            position: relative;
+            padding: 12px 28px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #1a5f56;
+            background: linear-gradient(135deg, #ffd700 0%, #ffa500 100%);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.4),
+                        0 0 20px rgba(255, 215, 0, 0.2);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            letter-spacing: 0.5px;
+            transform: translateY(0);
+        }
+
+        .cta-button:hover,
+        .cta-button:active {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 15px 50px rgba(255, 215, 0, 0.6),
+                        0 0 30px rgba(255, 215, 0, 0.4);
+        }
+
+        .button-text {
+            position: relative;
+            z-index: 2;
+        }
+
+        .button-arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .cta-button:hover .button-arrow {
+            transform: translateX(5px);
+        }
+
+        .button-shine {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            border-radius: 50px;
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+
+        .city-skyline {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 120px;
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            opacity: 0.15;
+            pointer-events: none;
+            padding: 0 20px;
+        }
+
+        .building {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px 4px 0 0;
+        }
+
+        .building-1 {
+            width: 30px;
+            height: 80px;
+        }
+
+        .building-2 {
+            width: 40px;
+            height: 100px;
+        }
+
+        .building-3 {
+            width: 35px;
+            height: 90px;
+        }
+
+        .building-4 {
+            width: 45px;
+            height: 110px;
+        }
+
+        .building-5 {
+            width: 32px;
+            height: 85px;
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .announcement-container {
+                min-height: 280px;
+                padding: 40px 20px;
+            }
+
+            .main-title {
+                font-size: 2.2rem;
+            }
+
+            .subtitle {
+                font-size: 0.95rem;
+            }
+
+            .logo-3d {
+                width: 150px;
+                height: 150px;
+            }
+
+            .cta-button {
+                padding: 14px 30px;
+                font-size: 0.95rem;
+            }
+
+            .announcement-header {
+                margin-bottom: 40px;
+            }
+
+            .logo-container {
+                margin: 40px 0;
+            }
+
+            .city-skyline {
+                height: 80px;
+            }
+
+            .building-1 {
+                width: 20px;
+                height: 50px;
+            }
+
+            .building-2 {
+                width: 25px;
+                height: 70px;
+            }
+
+            .building-3 {
+                width: 22px;
+                height: 60px;
+            }
+
+            .building-4 {
+                width: 30px;
+                height: 80px;
+            }
+
+            .building-5 {
+                width: 20px;
+                height: 55px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 1.8rem;
+            }
+
+            .subtitle {
+                font-size: 0.9rem;
+            }
+
+            .cta-button {
+                padding: 12px 24px;
+                font-size: 0.85rem;
+            }
+
+            .logo-3d {
+                width: 130px;
+                height: 130px;
+            }
+
+            .announcement-header {
+                margin-bottom: 30px;
+            }
+
+            .logo-container {
+                margin: 20px 0;
+            }
+
+            .button-container {
+                margin-top: 25px;
+            }
+
+            .announcement-container {
+                min-height: 320px;
+                padding: 30px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="announcement-container">
+    <!-- Animated background -->
+    <div class="background-gradient"></div>
+    
+    <!-- Floating particles -->
+    <div class="particles-container" id="particlesContainer"></div>
+
+    <!-- Main content -->
+    <div class="content-wrapper">
+        <div class="announcement-header">
+            <span class="badge">ANNOUNCEMENTS</span>
+            <h2 class="main-title">Latest News & Events</h2>
+            <p class="subtitle">Stay updated with our newest product launches, company updates, and industry events</p>
+        </div>
+
+        <!-- 3D Logo Animation -->
+        <div class="logo-container">
+            <div class="logo-3d" id="logo3d">
+                <!-- Bell icon with 3D effect -->
+                <svg
+                    viewBox="0 0 200 200"
+                    class="bell-icon"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <!-- Shadow layer -->
+                    <defs>
+                        <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+                            <feDropShadow dx="0" dy="4" stdDeviation="4" floodOpacity="0.3" />
+                            <feGaussianBlur in="SourceGraphic" stdDeviation="2" />
+                        </filter>
+                        <linearGradient id="bellGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color: #FFD700; stop-opacity: 1" />
+                            <stop offset="100%" style="stop-color: #FFA500; stop-opacity: 1" />
+                        </linearGradient>
+                    </defs>
+
+                    <g opacity="0.2" filter="url(#shadow)">
+                        <path
+                            d="M100 40C85 40 75 50 75 65V85C75 105 65 115 65 135V145H135V135C135 115 125 105 125 85V65C125 50 115 40 100 40Z"
+                            fill="#000"
+                        />
+                    </g>
+
+                    <!-- Main bell body -->
+                    <path
+                        d="M100 40C85 40 75 50 75 65V85C75 105 65 115 65 135V145H135V135C135 115 125 105 125 85V65C125 50 115 40 100 40Z"
+                        fill="url(#bellGradient)"
+                        stroke="#FF8C00"
+                        stroke-width="2"
+                        filter="url(#shadow)"
+                    />
+
+                    <!-- Highlight for 3D effect -->
+                    <ellipse cx="90" cy="60" rx="12" ry="15" fill="#FFEB3B" opacity="0.6" />
+
+                    <!-- Bell clapper -->
+                    <circle cx="100" cy="155" r="6" fill="#FF8C00" />
+                    <path
+                        d="M100 160L95 175C95 177 97 180 100 180C103 180 105 177 105 175Z"
+                        fill="#FF6B00"
+                    />
+
+                    <!-- Notification dot -->
+                    <circle
+                        cx="120"
+                        cy="50"
+                        r="8"
+                        fill="#FF3333"
+                        class="notification-dot"
+                    />
+                    <circle cx="120" cy="50" r="8" fill="none" stroke="#FF3333" stroke-width="2" class="pulse-ring" />
+                </svg>
+
+                <!-- Glow effect -->
+                <div class="glow-effect"></div>
+            </div>
+        </div>
+
+        <!-- CTA Button -->
+        <div class="button-container">
+            <button class="cta-button" onclick="window.open('https://tangramelectronics.com/news-events/', '_self')">
+                <span class="button-text">View All News & Events</span>
+                <span class="button-arrow">→</span>
+                <div class="button-shine"></div>
+            </button>
+        </div>
+
+        <!-- Decorative elements -->
+        <div class="city-skyline">
+            <div class="building building-1"></div>
+            <div class="building building-2"></div>
+            <div class="building building-3"></div>
+            <div class="building building-4"></div>
+            <div class="building building-5"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Generate floating particles
+    function initParticles() {
+        const container = document.getElementById('particlesContainer');
+        const particleCount = 20;
+
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            const left = Math.random() * 100;
+            const delay = Math.random() * 2;
+            const duration = 3 + Math.random() * 2;
+            const size = 2 + Math.random() * 4;
+
+            particle.style.left = left + '%';
+            particle.style.setProperty('--delay', delay + 's');
+            particle.style.setProperty('--duration', duration + 's');
+            particle.style.setProperty('--size', size + 'px');
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.animation = `float ${duration}s ease-in-out ${delay}s infinite`;
+
+            container.appendChild(particle);
+        }
+    }
+
+    // 3D hover effect on logo
+    function init3DLogo() {
+        const logo = document.getElementById('logo3d');
+        const container = document.querySelector('.announcement-container');
+
+        container.addEventListener('mousemove', (e) => {
+            const rect = container.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const rotateX = ((y - rect.height / 2) / rect.height) * 15;
+            const rotateY = ((x - rect.width / 2) / rect.width) * -15;
+
+            logo.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+        });
+
+        container.addEventListener('mouseleave', () => {
+            logo.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+        });
+    }
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        initParticles();
+        init3DLogo();
+    });
+</script>
+
+</body>
+</html>
