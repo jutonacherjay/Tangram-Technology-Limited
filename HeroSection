@@ -458,7 +458,7 @@
       <div class="inner-slide" data-bg="https://tangramelectronics.com/wp-content/uploads/2026/02/10ft-x-4ft-MD-sir-room-scaled.jpg"></div>
       <div class="inner-slide" data-bg="https://tangramelectronics.com/wp-content/uploads/2026/03/565202250_797376173158971_5331781058357869663_n-2.jpg"></div>
       <div class="inner-slide" data-bg="https://tangramelectronics.com/wp-content/uploads/2026/02/05-3x2ft-LED-Light-scaled.jpg"></div>
-      <div class="inner-slide" data-bg="https://tangramelectronics.com/wp-content/uploads/2026/02/629664381_884224754474112_2005643736107419374_n.jpg"></div>
+      <div class="inner-slide" data-bg="https://tangramelectronics.com/wp-content/uploads/2026/02/IMG20260205134619-scaled.jpg"></div>
 
       <button class="inner-arrow prev-btn" onclick="innerNav(-1)">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0a9e84" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
