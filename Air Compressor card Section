@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tangram Screw Air Compressor - Products</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --mint-primary: #e8f8f5;
+            --mint-light: #c8f2ec;
+            --mint-soft: #b2ece3;
+            --gradient-start: #0d5c52;
+            --gradient-mid: #0e7a68;
+            --gradient-end: #1a9e85;
+            --accent-bright: #2ecfb0;
+            --accent-active: #0a9e84;
+            --accent-hover: #077d68;
+            --text-dark: #1a1a1a;
+            --text-light: #666;
+        }
+
+        /* CSS Isolation wrapper */
+        .accordion-section {
+            all: revert;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .accordion-section * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #ffffff;
+            padding: 0;
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        .accordion-section {
+            width: 100%;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0;
+            padding: 60px 40px;
+            width: 100%;
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            margin-bottom: 70px;
+            animation: fadeInDown 0.7s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header h1 {
+            font-size: 3.2em;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            color: var(--accent-active);
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        /* Accordion Container */
+        .accordion-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Accordion Item */
+        .accordion-item {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(46, 207, 176, 0.2);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            animation: slideUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .accordion-item:nth-child(1) { animation-delay: 0.1s; }
+        .accordion-item:nth-child(2) { animation-delay: 0.15s; }
+        .accordion-item:nth-child(3) { animation-delay: 0.2s; }
+        .accordion-item:nth-child(4) { animation-delay: 0.25s; }
+        .accordion-item:nth-child(5) { animation-delay: 0.3s; }
+        .accordion-item:nth-child(6) { animation-delay: 0.35s; }
+        .accordion-item:nth-child(7) { animation-delay: 0.4s; }
+
+        .accordion-item:hover {
+            background: rgba(255, 255, 255, 0.85);
+            border-color: var(--accent-bright);
+            box-shadow: 0 8px 32px rgba(13, 92, 82, 0.12), 
+                        0 0 30px rgba(46, 207, 176, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .accordion-item.active {
+            background: rgba(255, 255, 255, 0.95);
+            border-color: var(--accent-bright);
+            box-shadow: 0 12px 48px rgba(13, 92, 82, 0.15),
+                        0 0 40px rgba(10, 158, 132, 0.2);
+        }
+
+        /* Accordion Header */
+        .accordion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 28px;
+            background: linear-gradient(135deg, rgba(13, 92, 82, 0.05) 0%, rgba(14, 122, 104, 0.05) 100%);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .accordion-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(46, 207, 176, 0.15), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .accordion-item:hover .accordion-header::before {
+            left: 100%;
+        }
+
+        .accordion-item.active .accordion-header {
+            background: linear-gradient(135deg, rgba(10, 158, 132, 0.08) 0%, rgba(26, 158, 133, 0.08) 100%);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .category-icon {
+            font-size: 1.8em;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--accent-bright), var(--accent-active));
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+        }
+
+        .header-title {
+            font-size: 1.15em;
+            font-weight: 700;
+            color: var(--gradient-start);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            line-height: 1.3;
+            text-align: left;
+            flex: 1;
+            word-break: break-word;
+        }
+
+        .toggle-icon {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(46, 207, 176, 0.15);
+            border-radius: 6px;
+            font-size: 1.3em;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            color: var(--accent-active);
+            font-weight: 700;
+        }
+
+        .accordion-item.active .toggle-icon {
+            background: linear-gradient(135deg, var(--accent-bright), var(--accent-active));
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        /* Accordion Content */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                        opacity 0.4s ease 0.1s,
+                        padding 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .accordion-item.active .accordion-content {
+            max-height: 600px;
+            opacity: 1;
+        }
+
+        .content-wrapper {
+            padding: 32px 28px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            animation: slideUpContent 0.5s ease-out;
+        }
+
+        @keyframes slideUpContent {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Image Section */
+        .image-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .product-image-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 280px;
+            aspect-ratio: 1;
+            border-radius: 12px;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(46, 207, 176, 0.1), rgba(184, 236, 227, 0.1));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 40px rgba(13, 92, 82, 0.1);
+        }
+
+        .product-image {
+            width: 90%;
+            height: 90%;
+            object-fit: contain;
+            animation: zoomIn 0.6s ease-out;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.95);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Reflection Effect */
+        .reflection {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(180deg, transparent 0%, rgba(46, 207, 176, 0.05) 50%, transparent 100%);
+            filter: blur(8px);
+            pointer-events: none;
+        }
+
+        /* Content Section */
+        .info-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            animation: fadeInUp 0.6s ease-out 0.1s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .info-title {
+            font-size: 1.35em;
+            font-weight: 800;
+            color: var(--gradient-start);
+            margin-bottom: 12px;
+            letter-spacing: -0.3px;
+        }
+
+        .info-description {
+            font-size: 0.95em;
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 24px;
+            font-weight: 400;
+        }
+
+        /* Specs Table */
+        .specs-table {
+            border-collapse: collapse;
+            width: 100%;
+            background: rgba(184, 236, 227, 0.08);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(46, 207, 176, 0.15);
+        }
+
+        .specs-table thead {
+            background: linear-gradient(135deg, rgba(10, 158, 132, 0.1), rgba(26, 158, 133, 0.1));
+        }
+
+        .specs-table th {
+            padding: 12px 14px;
+            text-align: left;
+            font-size: 0.85em;
+            font-weight: 700;
+            color: var(--accent-active);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid rgba(46, 207, 176, 0.2);
+        }
+
+        .specs-table td {
+            padding: 12px 14px;
+            font-size: 0.9em;
+            color: var(--text-dark);
+            border-bottom: 1px solid rgba(46, 207, 176, 0.1);
+            font-weight: 500;
+        }
+
+        .specs-table tbody tr:hover {
+            background: rgba(46, 207, 176, 0.08);
+        }
+
+        .specs-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2em;
+            }
+
+            .header p {
+                font-size: 1em;
+            }
+
+            .accordion-header {
+                padding: 18px 20px;
+            }
+
+            .header-title {
+                font-size: 1em;
+                letter-spacing: 0.5px;
+            }
+
+            .accordion-item.active .accordion-content {
+                max-height: 1200px;
+            }
+
+            .content-wrapper {
+                grid-template-columns: 1fr;
+                gap: 24px;
+                padding: 24px 20px;
+            }
+
+            .image-section {
+                order: -1;
+                width: 100%;
+                margin: 0 auto;
+            }
+
+            .product-image-wrapper {
+                max-width: 100%;
+                width: 100%;
+                max-width: 280px;
+                margin: 0 auto;
+            }
+
+            .info-title {
+                font-size: 1.2em;
+            }
+
+            .info-description {
+                font-size: 0.9em;
+                margin-bottom: 18px;
+            }
+
+            .specs-table {
+                font-size: 0.85em;
+                width: 100%;
+                overflow-x: auto;
+            }
+
+            .specs-table th,
+            .specs-table td {
+                padding: 10px 10px;
+                white-space: nowrap;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 0;
+            }
+
+            .container {
+                padding: 40px 20px;
+            }
+
+            .header {
+                margin-bottom: 40px;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .accordion-container {
+                gap: 12px;
+            }
+
+            .accordion-header {
+                padding: 16px 14px;
+            }
+
+            .header-content {
+                gap: 10px;
+                flex-wrap: wrap;
+            }
+
+            .category-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 1.4em;
+                flex-shrink: 0;
+            }
+
+            .header-title {
+                font-size: 0.9em;
+                flex: 1;
+                min-width: 200px;
+            }
+
+            .accordion-item.active .accordion-content {
+                max-height: 1200px;
+            }
+
+            .content-wrapper {
+                padding: 18px 14px;
+                gap: 20px;
+                grid-template-columns: 1fr;
+            }
+
+            .image-section {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                margin-bottom: 10px;
+            }
+
+            .product-image-wrapper {
+                max-width: 100%;
+                width: 100%;
+                max-width: 240px;
+                height: 240px;
+                aspect-ratio: 1;
+            }
+
+            .info-section {
+                width: 100%;
+            }
+
+            .info-title {
+                font-size: 1.1em;
+                margin-bottom: 12px;
+            }
+
+            .info-description {
+                font-size: 0.85em;
+                line-height: 1.5;
+                margin-bottom: 16px;
+                color: #666;
+            }
+
+            .specs-table {
+                font-size: 0.8em;
+                width: 100%;
+                display: block;
+                border: 1px solid var(--accent-bright);
+                border-radius: 6px;
+                overflow: hidden;
+            }
+
+            .specs-table th,
+            .specs-table td {
+                padding: 0;
+                white-space: normal;
+                border: none;
+            }
+
+            .specs-table thead {
+                display: none;
+            }
+
+            .specs-table tbody tr {
+                display: grid;
+                grid-template-columns: 1fr;
+                margin-bottom: 0;
+                padding: 0;
+                background: transparent;
+                border-radius: 0;
+                border-left: none;
+                box-shadow: none;
+            }
+
+            .specs-table tbody tr:not(:last-child) {
+                border-bottom: 1px solid rgba(46, 207, 176, 0.2);
+            }
+
+            .specs-table td {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 12px;
+                text-align: left;
+                border: none !important;
+                color: #333;
+            }
+
+            .specs-table td::before {
+                content: attr(data-label);
+                font-weight: 700;
+                color: var(--accent-active);
+                font-size: 0.7em;
+                text-transform: uppercase;
+                letter-spacing: 0.8px;
+                display: inline;
+                margin-right: 12px;
+                min-width: 80px;
+            }
+        }
+
+        /* Smooth scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(46, 207, 176, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-bright);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-active);
+        }
+    </style>
+</head>
+<body>
+    <div class="accordion-section">
+        <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>OUR PRODUCTS</h1>
+            <p>Tangram Screw Air Compressor Bangladesh</p>
+        </div>
+
+        <!-- Accordion Container -->
+        <div class="accordion-container" id="accordionContainer">
+            <!-- Items will be generated by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        // Product data
+        const products = [
+            {
+                id: 1,
+                category: "7.5 KW Screw Air Compressor",
+                icon: "⚙",
+                models: [
+                    { model: "TGR-C10A", power: "7.5KW", capacity: "1.1m³/min", pressure: "0.8MPA", size: "750×630×800", weight: "110KG" }
+                ],
+                image: "https://tangramelectronics.com/wp-content/uploads/2025/01/15kw.jpg",
+                description: "High-quality direct-type screw air compressors engineered for reliable, continuous operation. Robust design ensures stable performance even in harsh industrial environments with temperatures up to 55°C. Perfect for demanding applications."
+            },
+            {
+                id: 2,
+                category: "22 KW Screw Air Compressor",
+                icon: "🎚",
+                models: [
+                    { model: "TGR-C30A", power: "22KW", capacity: "3.6m³/min", pressure: "0.8MPA", size: "1200×850×1150", weight: "390KG" }
+                ],
+                image: "https://tangramelectronics.com/wp-content/uploads/2025/01/22kw-screw-air-compressor-Tangram-Electronics.jpg",
+                description: "Advanced variable speed drive technology optimizes power consumption based on demand. Delivers superior energy efficiency without compromising performance. Ideal for facilities with variable air requirements."
+            },
+            {
+                id: 3,
+                category: "37 KW Screw Air Compressor",
+                icon: "⚙",
+                models: [
+                    { model: "TGR-C50A", power: "37KW", capacity: "6.2m³/min", pressure: "0.8MPA", size: "1400×950×1300", weight: "480KG" }
+                ],
+                image: "https://tangramelectronics.com/wp-content/uploads/2025/01/37-KW-screw-Air-Compressor-Tangram-Electronics.jpg",
+                description: "Professional-grade screw air compressors for industrial applications. Engineered with precision to deliver consistent, high-pressure air output. Minimal on-site installation required with simple operation and maintenance."
+            },
+            {
+                id: 4,
+                category: "45 KW Screw Air Compressor",
+                icon: "💨",
+                models: [
+                    { model: "TGR-C60A", power: "45KW", capacity: "7.0m³/min", pressure: "0.8MPA", size: "1850×1280×1700", weight: "550KG" }
+                ],
+                image: "https://tangramelectronics.com/wp-content/uploads/2025/05/45kw-Screw-Air-compressor-Tangram-Electronics.jpg",
+                description: "Heavy-duty air compressors designed for large industrial operations. Delivers maximum air capacity for multiple simultaneous applications. Built for continuous operation in the most demanding environments."
+            },
+            {
+                id: 5,
+                category: "55 KW Screw Air Compressor",
+                icon: "⚙",
+                models: [
+                    { model: "TGR-C75A", power: "55KW", capacity: "9.6m³/min", pressure: "0.8MPA", size: "1780×1250×1560", weight: "900KG" }
+                ],
+                image: "https://tangramelectronics.com/wp-content/uploads/2025/05/55kw-Screw-Air-Compressor-Tangram-Electronics.jpg",
+                description: "Professional-grade screw air compressors for industrial applications. Engineered with precision to deliver consistent, high-pressure air output. Minimal on-site installation required with simple operation and maintenance."
+            },
+            {
+                id: 6,
+                category: "75 KW Screw Air Compressor",
+                icon: "⚙",
+                models: [
+                    { model: "TGR-C100A", power: "75KW", capacity: "12.6m³/min", pressure: "0.8MPA", size: "1850×1280×1700", weight: "965KG" }
+                ],
+                image: "https://tangramelectronics.com/wp-content/uploads/2025/01/75kw-Screw-Air-compressor-bangladesh-Tangram-Electronics.jpg",
+                description: "Heavy-duty air compressors designed for large industrial operations. Delivers maximum air capacity for multiple simultaneous applications. Built for continuous operation in the most demanding environments."
+            },
+            {
+                id: 7,
+                category: "90 KW Screw Air Compressor",
+                icon: "💨",
+                models: [
+                    { model: "TGR-C120A", power: "90KW", capacity: "15.0m³/min", pressure: "0.8MPA", size: "1780×1250×1560", weight: "1100KG" }
+                ],
+                image: "https://tangramelectronics.com/wp-content/uploads/2025/06/90kw-screw-air-compressor-Bangladesh-Tangram-Electronics.jpg",
+                description: "Heavy-duty air compressors designed for large industrial operations. Delivers maximum air capacity for multiple simultaneous applications. Built for continuous operation in the most demanding environments."
+            }
+        ];
+
+        function initializeAccordion() {
+            const container = document.getElementById('accordionContainer');
+            
+            products.forEach((product, index) => {
+                const item = document.createElement('div');
+                item.className = 'accordion-item';
+                item.dataset.productId = product.id;
+
+                // Build table rows
+                const tableRows = product.models.map(model => `
+                    <tr>
+                        <td data-label="Model">${model.model}</td>
+                        <td data-label="Power">${model.power}</td>
+                        <td data-label="Capacity">${model.capacity}</td>
+                        <td data-label="Pressure">${model.pressure}</td>
+                        <td data-label="Size">${model.size}</td>
+                        <td data-label="Weight">${model.weight}</td>
+                    </tr>
+                `).join('');
+
+                item.innerHTML = `
+                    <div class="accordion-header">
+                        <div class="header-content">
+                            <div class="category-icon">${product.icon}</div>
+                            <div class="header-title">${product.category}</div>
+                        </div>
+                        <div class="toggle-icon">+</div>
+                    </div>
+
+                    <div class="accordion-content">
+                        <div class="content-wrapper">
+                            <!-- Image Section -->
+                            <div class="image-section">
+                                <div class="product-image-wrapper">
+                                    <img src="${product.image}" alt="${product.category}" class="product-image" 
+                                         onerror="this.src='https://via.placeholder.com/300x300?text=${product.category}'">
+                                    <div class="reflection"></div>
+                                </div>
+                            </div>
+
+                            <!-- Info Section -->
+                            <div class="info-section">
+                                <div class="info-title">Tangram Screw Air Compressor Bangladesh</div>
+                                <p class="info-description">${product.description}</p>
+                                
+                                <table class="specs-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Model</th>
+                                            <th>Power</th>
+                                            <th>Capacity</th>
+                                            <th>Pressure</th>
+                                            <th>Size (mm)</th>
+                                            <th>Weight</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${tableRows}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                // Add click handler
+                const header = item.querySelector('.accordion-header');
+                header.addEventListener('click', () => {
+                    toggleAccordion(item);
+                });
+
+                container.appendChild(item);
+            });
+        }
+
+        function toggleAccordion(clickedItem) {
+            const allItems = document.querySelectorAll('.accordion-item');
+            
+            allItems.forEach(item => {
+                if (item !== clickedItem && item.classList.contains('active')) {
+                    item.classList.remove('active');
+                }
+            });
+
+            clickedItem.classList.toggle('active');
+        }
+
+        // Close accordion when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.accordion-item')) {
+                // Optional: uncomment to close all on outside click
+                // document.querySelectorAll('.accordion-item.active').forEach(item => {
+                //     item.classList.remove('active');
+                // });
+            }
+        });
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', initializeAccordion);
+    </script>
+</body>
+</html>
