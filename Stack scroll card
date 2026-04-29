@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tangram Air Compressor - Interactive Showcase</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800;900&family=Barlow+Condensed:wght@700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy-deep: #060d1f;
+            --navy-mid: #0b1530;
+            --navy-card: #0e1c3a;
+            --navy-card2: #112040;
+            --navy-border: rgba(0, 210, 210, 0.18);
+            --cyan: #00d9d9;
+            --cyan-light: #4ef0f0;
+            --cyan-dim: rgba(0, 217, 217, 0.12);
+            --teal: #00b8b8;
+            --text-primary: #e8f4f8;
+            --text-secondary: #7bafc4;
+            --text-muted: #4a7a96;
+            --badge-bg: rgba(0, 217, 217, 0.12);
+            --badge-border: rgba(0, 217, 217, 0.4);
+            --feature-bg: rgba(0, 180, 180, 0.08);
+            --feature-border: rgba(0, 217, 217, 0.25);
+            --spec-label: #4a9db5;
+            --divider: rgba(0, 200, 200, 0.12);
+            --btn-grad1: #00c8c8;
+            --btn-grad2: #007a8a;
+            --shadow-glow: rgba(0, 217, 217, 0.12);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Barlow', sans-serif;
+            background: #ffffff;
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        /* ──────────────────── STACKED SECTION ──────────────────── */
+        .stacked-cards-section {
+            position: relative;
+            width: 100%;
+            min-height: 700vh;
+            background: #ffffff;
+        }
+
+        .stacked-cards-container {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            overflow: hidden;
+            z-index: 10;
+        }
+
+        /* subtle radial bg glow */
+        .stacked-cards-container::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 900px; height: 600px;
+            background: radial-gradient(ellipse at center,
+                rgba(0,200,200,0.04) 0%,
+                transparent 70%);
+            pointer-events: none;
+        }
+
+        /* ──────────────────── CARD ──────────────────── */
+        .product-card {
+            position: fixed;
+            width: 90%;
+            max-width: 1160px;
+            background: linear-gradient(135deg, #0c1b38 0%, #0a172e 60%, #081424 100%);
+            border: none;
+            border-radius: 20px;
+            padding: 44px 48px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+            box-shadow: none;
+            top: 50%; left: 50%;
+            transform: translateX(-50%) translateY(calc(-50% + 100px));
+            opacity: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* top-right subtle glow blob */
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: -80px; right: -80px;
+            width: 380px; height: 380px;
+            background: radial-gradient(circle, rgba(0,200,200,0.07) 0%, transparent 65%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .product-card:nth-child(1) { z-index: 1; }
+        .product-card:nth-child(2) { z-index: 2; }
+        .product-card:nth-child(3) { z-index: 3; }
+        .product-card:nth-child(4) { z-index: 4; }
+        .product-card:nth-child(5) { z-index: 5; }
+        .product-card:nth-child(6) { z-index: 6; }
+        .product-card:nth-child(7) { z-index: 7; }
+
+        .product-card.active { pointer-events: auto; }
+
+        /* ──────────────────── CARD CONTENT ──────────────────── */
+        .card-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        /* Badge */
+        .card-badge {
+            display: inline-block;
+            width: fit-content;
+            padding: 5px 14px;
+            background: var(--badge-bg);
+            border: 1px solid var(--badge-border);
+            border-radius: 50px;
+            font-size: 0.7em;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: var(--cyan);
+            text-transform: uppercase;
+        }
+
+        /* Title */
+        .card-title {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 3em;
+            font-weight: 900;
+            line-height: 1.1;
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
+        }
+
+        .card-title .accent {
+            color: var(--cyan);
+        }
+
+        /* Description */
+        .card-description {
+            font-size: 0.9em;
+            line-height: 1.65;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        /* Features grid */
+        .card-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 2px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 14px;
+            background: var(--feature-bg);
+            border: 1px solid var(--feature-border);
+            border-radius: 8px;
+        }
+
+        .feature-icon {
+            font-size: 1.15em;
+            width: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .feature-text {
+            font-size: 0.83em;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: 0.2px;
+        }
+
+        /* Specs */
+        .card-specs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            padding-top: 16px;
+            border-top: 1px solid var(--divider);
+        }
+
+        .spec-item { display: flex; flex-direction: column; gap: 4px; }
+
+        .spec-label {
+            font-size: 0.68em;
+            color: var(--spec-label);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .spec-value {
+            font-size: 1em;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        /* CTA Button */
+        .card-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            width: fit-content;
+            padding: 12px 28px;
+            background: linear-gradient(135deg, var(--btn-grad1) 0%, var(--btn-grad2) 100%);
+            border: none;
+            border-radius: 8px;
+            color: #ffffff;
+            font-family: 'Barlow', sans-serif;
+            font-size: 0.85em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 8px 24px rgba(0, 200, 200, 0.25);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .card-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(0, 200, 200, 0.35);
+        }
+
+        .card-cta svg {
+            width: 16px; height: 16px;
+        }
+
+        /* ──────────────────── IMAGE SIDE ──────────────────── */
+        .card-image {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .image-container {
+            position: relative;
+            width: 100%;
+            height: 380px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle, rgba(0,180,180,0.07) 0%, transparent 65%);
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 16px 40px rgba(0,160,180,0.2));
+        }
+
+        /* ──────────────────── RESPONSIVE ──────────────────── */
+        @media (max-width: 900px) {
+            .product-card {
+                grid-template-columns: 1fr;
+                padding: 32px 24px;
+                gap: 28px;
+            }
+            .card-title { font-size: 2.4em; }
+            .image-container { height: 300px; }
+        }
+
+        @media (max-width: 600px) {
+            .product-card {
+                width: 96%;
+                padding: 22px 16px;
+                gap: 20px;
+                border-radius: 14px;
+            }
+            .card-title { font-size: 1.9em; }
+            .card-features { grid-template-columns: 1fr; gap: 8px; }
+            .card-specs { grid-template-columns: 1fr 1fr; }
+            .image-container { height: 240px; }
+            .card-cta { width: 100%; justify-content: center; }
+        }
+
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body>
+
+    <section class="stacked-cards-section">
+        <div class="stacked-cards-container">
+            <div class="cards-wrapper" id="cardsWrapper"></div>
+        </div>
+    </section>
+
+    <div class="progress-indicator" id="progressIndicator"></div>
+
+    <script>
+        const products = [
+            {
+                id: 1,
+                badge: "ENTRY LEVEL",
+                title: "7.5 KW <span class='accent'>Direct Type</span>",
+                description: "High-quality direct-type screw air compressors engineered for reliable, continuous operation. Robust design ensures stable performance even in harsh industrial environments with temperatures up to 55°C.",
+                features: [
+                    { icon: "⚡", text: "7.5 KW Power" },
+                    { icon: "💨", text: "1.1 m³/min" },
+                    { icon: "🔧", text: "0.8 MPA Pressure" },
+                    { icon: "📦", text: "110 KG Weight" }
+                ],
+                specs: [
+                    { label: "Model", value: "TGR-C10A" },
+                    { label: "Displacement", value: "1.1 m³/min" },
+                    { label: "Pressure", value: "0.8 MPA" },
+                    { label: "Size", value: "750×630×800" }
+                ],
+                image: "https://tangramelectronics.com/wp-content/uploads/2025/01/15kw.jpg",
+                cta: "Explore Model"
+            },
+            {
+                id: 2,
+                badge: "VARIABLE SPEED",
+                title: "22 KW <span class='accent'>Variable Drive</span>",
+                description: "Advanced variable speed drive technology optimizes power consumption based on demand. Delivers superior energy efficiency without compromising performance. Ideal for facilities with variable air requirements.",
+                features: [
+                    { icon: "🎚", text: "Variable Speed Drive" },
+                    { icon: "💨", text: "3.6 m³/min" },
+                    { icon: "⚙", text: "Smart Control" },
+                    { icon: "💰", text: "Energy Efficient" }
+                ],
+                specs: [
+                    { label: "Model", value: "TGR-C30A" },
+                    { label: "Displacement", value: "3.6 m³/min" },
+                    { label: "Pressure", value: "1.0 MPA" },
+                    { label: "Size", value: "1200×850×1150" }
+                ],
+                image: "https://tangramelectronics.com/wp-content/uploads/2025/01/22kw-screw-air-compressor-Tangram-Electronics.jpg",
+                cta: "View Details"
+            },
+            {
+                id: 3,
+                badge: "INDUSTRIAL GRADE",
+                title: "37 KW <span class='accent'>Professional Series</span>",
+                description: "Professional-grade screw air compressors for industrial applications. Engineered with precision to deliver consistent, high-pressure air output. Minimal on-site installation required.",
+                features: [
+                    { icon: "⚡", text: "37 KW Power" },
+                    { icon: "💨", text: "6.2 m³/min" },
+                    { icon: "🏭", text: "Industrial Grade" },
+                    { icon: "🔒", text: "Robust Design" }
+                ],
+                specs: [
+                    { label: "Model", value: "TGR-C50A" },
+                    { label: "Displacement", value: "6.2 m³/min" },
+                    { label: "Pressure", value: "1.0 MPA" },
+                    { label: "Size", value: "1400×950×1300" }
+                ],
+                image: "https://tangramelectronics.com/wp-content/uploads/2025/01/37-KW-screw-Air-Compressor-Tangram-Electronics.jpg",
+                cta: "Request Quote"
+            },
+            {
+                id: 4,
+                badge: "POWER PACKED",
+                title: "45 KW <span class='accent'>Premium Edition</span>",
+                description: "Heavy-duty air compressors designed for large industrial operations. Delivers maximum air capacity for multiple simultaneous applications. Built for continuous operation in the most demanding environments.",
+                features: [
+                    { icon: "⚡", text: "45 KW Power" },
+                    { icon: "💨", text: "7.0 m³/min" },
+                    { icon: "🏭", text: "Heavy Duty" },
+                    { icon: "⏱", text: "24/7 Operation" }
+                ],
+                specs: [
+                    { label: "Model", value: "TGR-C60A" },
+                    { label: "Displacement", value: "7.0 m³/min" },
+                    { label: "Pressure", value: "1.0 MPA" },
+                    { label: "Size", value: "1850×1280×1700" }
+                ],
+                image: "https://tangramelectronics.com/wp-content/uploads/2025/05/45kw-Screw-Air-compressor-Tangram-Electronics.jpg",
+                cta: "Learn More"
+            },
+            {
+                id: 5,
+                badge: "HIGH CAPACITY",
+                title: "55 KW <span class='accent'>Advanced Series</span>",
+                description: "Advanced industrial air compressors for complex manufacturing operations. Superior reliability with minimal maintenance downtime. Engineered for maximum efficiency and output consistency.",
+                features: [
+                    { icon: "⚡", text: "55 KW Power" },
+                    { icon: "💨", text: "9.6 m³/min" },
+                    { icon: "🔧", text: "Low Maintenance" },
+                    { icon: "🌍", text: "Global Standard" }
+                ],
+                specs: [
+                    { label: "Model", value: "TGR-C75A" },
+                    { label: "Displacement", value: "9.6 m³/min" },
+                    { label: "Pressure", value: "1.0 MPA" },
+                    { label: "Size", value: "1780×1250×1560" }
+                ],
+                image: "https://tangramelectronics.com/wp-content/uploads/2025/05/55kw-Screw-Air-Compressor-Tangram-Electronics.jpg",
+                cta: "Get Quote"
+            },
+            {
+                id: 6,
+                badge: "ENTERPRISE",
+                title: "75 KW <span class='accent'>Industrial Power</span>",
+                description: "Heavy-duty industrial compressor for large-scale manufacturing and processing facilities. Maximum reliability with proven track record in demanding applications worldwide.",
+                features: [
+                    { icon: "⚡", text: "75 KW Power" },
+                    { icon: "💨", text: "12.6 m³/min" },
+                    { icon: "🏢", text: "Enterprise Grade" },
+                    { icon: "🛡", text: "Premium Support" }
+                ],
+                specs: [
+                    { label: "Model", value: "TGR-C100A" },
+                    { label: "Displacement", value: "12.6 m³/min" },
+                    { label: "Pressure", value: "1.0 MPA" },
+                    { label: "Size", value: "1850×1280×1700" }
+                ],
+                image: "https://tangramelectronics.com/wp-content/uploads/2025/01/75kw-Screw-Air-compressor-bangladesh-Tangram-Electronics.jpg",
+                cta: "Contact Sales"
+            },
+            {
+                id: 7,
+                badge: "PREMIUM CLASS",
+                title: "90 KW <span class='accent'>Enterprise Solution</span>",
+                description: "Ultimate air compression solution for enterprise-level operations. Built for continuous, demanding industrial environments with minimal maintenance requirements and maximum uptime.",
+                features: [
+                    { icon: "⚡", text: "90 KW Power" },
+                    { icon: "💨", text: "15.0 m³/min" },
+                    { icon: "🏢", text: "Enterprise Grade" },
+                    { icon: "🛡", text: "Premium Support" }
+                ],
+                specs: [
+                    { label: "Model", value: "TGR-C120A" },
+                    { label: "Displacement", value: "15.0 m³/min" },
+                    { label: "Pressure", value: "1.0 MPA" },
+                    { label: "Size", value: "1780×1250×1560" }
+                ],
+                image: "https://tangramelectronics.com/wp-content/uploads/2025/06/90kw-screw-air-compressor-Bangladesh-Tangram-Electronics.jpg",
+                cta: "Premium Support"
+            }
+        ];
+
+        function initializeCards() {
+            const wrapper = document.getElementById('cardsWrapper');
+
+            products.forEach((product, index) => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.dataset.index = index;
+
+                const specsHTML = product.specs.map(spec => `
+                    <div class="spec-item">
+                        <div class="spec-label">${spec.label}</div>
+                        <div class="spec-value">${spec.value}</div>
+                    </div>
+                `).join('');
+
+                const featuresHTML = product.features.map(feature => `
+                    <div class="feature-item">
+                        <div class="feature-icon">${feature.icon}</div>
+                        <div class="feature-text">${feature.text}</div>
+                    </div>
+                `).join('');
+
+                card.innerHTML = `
+                    <div class="card-content">
+                        <div class="card-badge">${product.badge}</div>
+                        <h2 class="card-title">${product.title}</h2>
+                        <p class="card-description">${product.description}</p>
+                        <div class="card-features">${featuresHTML}</div>
+                        <div class="card-specs">${specsHTML}</div>
+                        <button class="card-cta" onclick="alert('${product.cta} clicked for ${product.specs[0].value}')">
+                            ${product.cta}
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="card-image">
+                        <div class="image-container">
+                            <img src="${product.image}" alt="${product.specs[0].value}" class="product-img"
+                                 onerror="this.src='https://via.placeholder.com/400x400/0b1530/00d9d9?text=${product.specs[0].value}'">
+                        </div>
+                    </div>
+                `;
+
+                wrapper.appendChild(card);
+            });
+
+            setupScrollAnimation();
+        }
+
+        function setupScrollAnimation() {
+            const cards = document.querySelectorAll('.product-card');
+            const section = document.querySelector('.stacked-cards-section');
+
+            // Set section height = card height * number of cards (so scroll matches exactly)
+            function updateSectionHeight() {
+                const cardHeight = cards[0] ? cards[0].offsetHeight : window.innerHeight;
+                section.style.minHeight = (cardHeight * cards.length + window.innerHeight) + 'px';
+            }
+            updateSectionHeight();
+            window.addEventListener('resize', updateSectionHeight);
+
+            window.addEventListener('scroll', () => {
+                const sectionRect = section.getBoundingClientRect();
+                const sectionTop = sectionRect.top;
+                const sectionHeight = sectionRect.height;
+                const viewportHeight = window.innerHeight;
+
+                const progress = (viewportHeight - sectionTop) / (sectionHeight + viewportHeight);
+                const normalizedProgress = Math.max(0, Math.min(1, progress));
+
+                const cardCount = cards.length;
+                const progressPerCard = 1 / cardCount;
+
+                cards.forEach((card, index) => {
+                    const cardStartProgress = index * progressPerCard;
+                    const cardEndProgress = (index + 1) * progressPerCard;
+                    let cardProgress = 0;
+
+                    if (normalizedProgress >= cardStartProgress) {
+                        cardProgress = Math.min(1, (normalizedProgress - cardStartProgress) / progressPerCard);
+                    }
+
+                    if (cardProgress > 0) {
+                        const easeProgress = easeInOutCubic(cardProgress);
+                        const startY = 100;
+                        const endY = -50;
+                        const currentY = startY + (endY - startY) * easeProgress;
+                        card.style.transform = `translateX(-50%) translateY(calc(-50% + ${currentY}px))`;
+                        card.style.opacity = easeProgress;
+                    }
+
+                    if (normalizedProgress >= cardEndProgress) {
+                        card.classList.add('active');
+                    } else {
+                        card.classList.remove('active');
+                    }
+                });
+            });
+
+            window.dispatchEvent(new Event('scroll'));
+        }
+
+        function easeInOutCubic(t) {
+            return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        }
+
+        document.addEventListener('DOMContentLoaded', initializeCards);
+    </script>
+</body>
+</html>
