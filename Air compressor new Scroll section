@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tangram Air Compressor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .tgr-section {
+            position: relative;
+            width: 100%;
+            height: 100vh; /* always 1 viewport tall — JS handles card stepping */
+        }
+
+        .tgr-inner {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #FFFFFF;
+            clip-path: inset(0 0 0 0);
+            overflow: hidden;
+        }
+
+        .tgr-inner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(0,210,210,0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,210,210,0.035) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+        }
+
+        .tgr-inner::after {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px; height: 500px;
+            background: radial-gradient(ellipse, rgba(0,180,200,0.07) 0%, transparent 65%);
+            pointer-events: none;
+        }
+
+        .tgr-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* ── CARD ── */
+        .tgr-card {
+            position: absolute;
+            width: 90%;
+            max-width: 1180px;
+            background: linear-gradient(135deg, #0b1a35 0%, #091428 60%, #070f1e 100%);
+            border: 1px solid rgba(0,210,210,0.2);
+            border-radius: 20px;
+            padding: 40px 48px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+            top: 50%; left: 50%;
+            /* default: waiting below — far down + slightly scaled down */
+            transform: translateX(-50%) translateY(calc(-50% + 120px)) scale(0.96);
+            opacity: 0;
+            pointer-events: none;
+            will-change: transform, opacity, filter;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.55);
+            /* spring-like easing: quick rise, gentle settle */
+            transition:
+                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                opacity   0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                filter    0.5s ease;
+            filter: blur(6px);
+        }
+
+        .tgr-card::before {
+            content: '';
+            position: absolute;
+            top: -80px; right: -80px;
+            width: 350px; height: 350px;
+            background: radial-gradient(circle, rgba(0,200,200,0.06) 0%, transparent 60%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .tgr-card:nth-child(1){z-index:1} .tgr-card:nth-child(2){z-index:2}
+        .tgr-card:nth-child(3){z-index:3} .tgr-card:nth-child(4){z-index:4}
+        .tgr-card:nth-child(5){z-index:5} .tgr-card:nth-child(6){z-index:6}
+        .tgr-card:nth-child(7){z-index:7}
+
+        /* rises from below → center, full size, sharp */
+        .tgr-card.tgr-visible {
+            transform: translateX(-50%) translateY(-50%) scale(1);
+            opacity: 1;
+            pointer-events: auto;
+            filter: blur(0px);
+        }
+
+        /* exits upward → shrinks + blurs out */
+        .tgr-card.tgr-gone {
+            transform: translateX(-50%) translateY(calc(-50% - 80px)) scale(0.97);
+            opacity: 0;
+            pointer-events: none;
+            filter: blur(4px);
+            transition:
+                transform 0.5s cubic-bezier(0.4, 0, 1, 1),
+                opacity   0.4s ease,
+                filter    0.4s ease;
+        }
+
+        /* progress dots */
+        .tgr-dots {
+            position: absolute;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .tgr-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: rgba(0,210,210,0.25);
+            border: 1px solid rgba(0,210,210,0.4);
+            transition: all 0.3s ease;
+        }
+
+        .tgr-dot.tgr-dot-active {
+            background: #00d4d4;
+            transform: scale(1.3);
+        }
+
+        .tgr-content {
+            position: relative; z-index: 2;
+            display: flex; flex-direction: column; gap: 16px;
+        }
+
+        .tgr-badge {
+            display: inline-block; width: fit-content;
+            padding: 5px 16px;
+            background: rgba(0,210,210,0.08);
+            border: 1px solid rgba(0,210,210,0.4);
+            border-radius: 50px;
+            font-size: 0.72em; font-weight: 700; letter-spacing: 1.5px;
+            color: #00d4d4; text-transform: uppercase;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .tgr-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.6em; font-weight: 800;
+            line-height: 1.15; color: #e8f4ff;
+            letter-spacing: -0.5px; margin: 0;
+        }
+        .tgr-title .tgr-accent { color: #00cfff; }
+
+        .tgr-desc {
+            font-size: 0.9em; line-height: 1.7;
+            color: #7a9dbf; font-family: 'Poppins', sans-serif; margin: 0;
+        }
+
+        .tgr-features { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+        .tgr-feature {
+            display: flex; align-items: center; gap: 12px;
+            padding: 12px 14px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(0,210,210,0.15);
+            border-left: 3px solid rgba(0,210,210,0.45);
+            border-radius: 8px;
+        }
+        .tgr-ficon { font-size: 1.1em; width: 22px; flex-shrink: 0; text-align: center; }
+        .tgr-ftext { font-size: 0.83em; font-weight: 600; color: #cce8f0; font-family: 'Poppins', sans-serif; }
+
+        .tgr-specs {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+            padding-top: 14px;
+            border-top: 1px solid rgba(0,200,200,0.12);
+        }
+        .tgr-spec { display: flex; flex-direction: column; gap: 3px; }
+        .tgr-slabel { font-size: 0.67em; color: #2a8fa8; text-transform: uppercase; letter-spacing: 1.2px; font-weight: 700; font-family: 'Poppins', sans-serif; }
+        .tgr-sval { font-size: 0.95em; font-weight: 700; color: #e0f0ff; font-family: 'Poppins', sans-serif; }
+
+        .tgr-btn {
+            display: inline-flex; align-items: center; gap: 10px; width: fit-content;
+            padding: 11px 26px;
+            background: linear-gradient(135deg, #00c8c8 0%, #007a8a 100%);
+            border: none; border-radius: 8px; color: #fff;
+            font-family: 'Poppins', sans-serif; font-size: 0.83em; font-weight: 700;
+            cursor: pointer; box-shadow: 0 8px 24px rgba(0,200,200,0.22);
+            text-transform: uppercase; letter-spacing: 0.8px; margin-top: 4px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .tgr-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,200,200,0.32); }
+        .tgr-btn svg { width: 15px; height: 15px; }
+
+        .tgr-imgwrap { position: relative; z-index: 2; width: 100%; }
+        .tgr-imgbox {
+            width: 100%; height: 360px;
+            display: flex; align-items: center; justify-content: center;
+            background: radial-gradient(circle, rgba(0,160,180,0.07) 0%, transparent 65%);
+            border-radius: 14px; overflow: hidden;
+        }
+        .tgr-img {
+            width: 100%; height: 100%; object-fit: contain;
+            filter: drop-shadow(0 14px 36px rgba(0,160,200,0.22));
+        }
+
+        @media (max-width: 900px) {
+            .tgr-section { height: 90vh; }
+            .tgr-inner   { height: 90vh; }
+            .tgr-card { grid-template-columns: 1fr; padding: 24px 20px; gap: 16px; }
+            .tgr-title { font-size: 1.9em; }
+            .tgr-imgbox { height: 220px; }
+            .tgr-desc { font-size: 0.85em; line-height: 1.55; }
+        }
+
+        @media (max-width: 600px) {
+            .tgr-section { height: 85vh; }
+            .tgr-inner   { height: 85vh; }
+            .tgr-card {
+                width: 94%;
+                padding: 18px 14px;
+                border-radius: 14px;
+                gap: 12px;
+                /* stack: image first on mobile for visual impact */
+                grid-template-areas: "img" "content";
+            }
+            .tgr-content { grid-area: content; gap: 10px; }
+            .tgr-imgwrap { grid-area: img; }
+            .tgr-title { font-size: 1.5em; }
+            /* hide description on small screens to save space */
+            .tgr-desc { display: none; }
+            .tgr-features { grid-template-columns: 1fr 1fr; gap: 7px; }
+            .tgr-feature { padding: 9px 10px; }
+            .tgr-ftext { font-size: 0.78em; }
+            .tgr-imgbox { height: 180px; }
+            .tgr-specs { gap: 10px; padding-top: 10px; }
+            .tgr-btn { width: 100%; justify-content: center; padding: 10px 16px; }
+        }
+
+        @media (max-width: 400px) {
+            .tgr-section { height: 80vh; }
+            .tgr-inner   { height: 80vh; }
+            .tgr-title { font-size: 1.3em; }
+            .tgr-imgbox { height: 150px; }
+            .tgr-features { grid-template-columns: 1fr; gap: 6px; }
+        }
+    </style>
+</head>
+<body>
+
+<section class="tgr-section" id="tgrSection">
+    <div class="tgr-inner">
+        <div class="tgr-wrapper" id="tgrWrapper"></div>
+        <div class="tgr-dots" id="tgrDots"></div>
+    </div>
+</section>
+
+<script>
+(function () {
+
+    var products = [
+        { badge:"ENTRY LEVEL", title:"7.5 KW <span class='tgr-accent'>Air Compressor</span>", desc:"High-quality direct-type screw air compressors engineered for reliable, continuous operation. Robust design ensures stable performance even in harsh industrial environments up to 55°C.", features:[{icon:"⚡",text:"7.5 KW Power"},{icon:"💨",text:"1.1 m³/min"},{icon:"🔧",text:"0.8 MPA Pressure"},{icon:"📦",text:"110 KG Weight"}], specs:[{label:"Model",value:"TGR-C10A"},{label:"Displacement",value:"1.1 m³/min"},{label:"Pressure",value:"0.8 MPA"},{label:"Size",value:"750×630×800"}], image:"https://tangramelectronics.com/wp-content/uploads/2025/01/15kw.jpg", cta:"Explore Model" },
+        { badge:"VARIABLE SPEED", title:"22 KW <span class='tgr-accent'>Air Compressor</span>", desc:"Advanced variable speed drive technology optimizes power consumption based on demand. Delivers superior energy efficiency without compromising performance.", features:[{icon:"🎚",text:"Variable Speed"},{icon:"💨",text:"3.6 m³/min"},{icon:"⚙",text:"Smart Control"},{icon:"💰",text:"Energy Efficient"}], specs:[{label:"Model",value:"TGR-C30A"},{label:"Displacement",value:"3.6 m³/min"},{label:"Pressure",value:"1.0 MPA"},{label:"Size",value:"1200×850×1150"}], image:"https://tangramelectronics.com/wp-content/uploads/2025/01/22kw-screw-air-compressor-Tangram-Electronics.jpg", cta:"View Details" },
+        { badge:"INDUSTRIAL GRADE", title:"37 KW <span class='tgr-accent'>Air Compressor</span>", desc:"Professional-grade screw air compressors for industrial applications. Engineered with precision to deliver consistent, high-pressure air output.", features:[{icon:"⚡",text:"37 KW Power"},{icon:"💨",text:"6.2 m³/min"},{icon:"🏭",text:"Industrial Grade"},{icon:"🔒",text:"Robust Design"}], specs:[{label:"Model",value:"TGR-C50A"},{label:"Displacement",value:"6.2 m³/min"},{label:"Pressure",value:"1.0 MPA"},{label:"Size",value:"1400×950×1300"}], image:"https://tangramelectronics.com/wp-content/uploads/2025/01/37-KW-screw-Air-Compressor-Tangram-Electronics.jpg", cta:"Request Quote" },
+        { badge:"POWER PACKED", title:"45 KW <span class='tgr-accent'>Air Compressor </span>", desc:"Heavy-duty air compressors designed for large industrial operations. Delivers maximum air capacity for multiple simultaneous applications.", features:[{icon:"⚡",text:"45 KW Power"},{icon:"💨",text:"7.0 m³/min"},{icon:"🏭",text:"Heavy Duty"},{icon:"⏱",text:"24/7 Operation"}], specs:[{label:"Model",value:"TGR-C60A"},{label:"Displacement",value:"7.0 m³/min"},{label:"Pressure",value:"1.0 MPA"},{label:"Size",value:"1850×1280×1700"}], image:"https://tangramelectronics.com/wp-content/uploads/2025/05/45kw-Screw-Air-compressor-Tangram-Electronics.jpg", cta:"Learn More" },
+        { badge:"HIGH CAPACITY", title:"55 KW <span class='tgr-accent'>Air Compressor</span>", desc:"Advanced industrial air compressors for complex manufacturing operations. Superior reliability with minimal maintenance downtime.", features:[{icon:"⚡",text:"55 KW Power"},{icon:"💨",text:"9.6 m³/min"},{icon:"🔧",text:"Low Maintenance"},{icon:"🌍",text:"Global Standard"}], specs:[{label:"Model",value:"TGR-C75A"},{label:"Displacement",value:"9.6 m³/min"},{label:"Pressure",value:"1.0 MPA"},{label:"Size",value:"1780×1250×1560"}], image:"https://tangramelectronics.com/wp-content/uploads/2025/05/55kw-Screw-Air-Compressor-Tangram-Electronics.jpg", cta:"Get Quote" },
+        { badge:"ENTERPRISE", title:"75 KW <span class='tgr-accent'>Air Compressor </span>", desc:"Heavy-duty industrial compressor for large-scale manufacturing and processing facilities. Maximum reliability with proven track record worldwide.", features:[{icon:"⚡",text:"75 KW Power"},{icon:"💨",text:"12.6 m³/min"},{icon:"🏢",text:"Enterprise Grade"},{icon:"🛡",text:"Premium Support"}], specs:[{label:"Model",value:"TGR-C100A"},{label:"Displacement",value:"12.6 m³/min"},{label:"Pressure",value:"1.0 MPA"},{label:"Size",value:"1850×1280×1700"}], image:"https://tangramelectronics.com/wp-content/uploads/2025/01/75kw-Screw-Air-compressor-bangladesh-Tangram-Electronics.jpg", cta:"Contact Sales" },
+        { badge:"PREMIUM CLASS", title:"90 KW <span class='tgr-accent'>Air Compressor </span>", desc:"Ultimate air compression solution for enterprise-level operations. Built for continuous, demanding industrial environments with minimal maintenance requirements.", features:[{icon:"⚡",text:"90 KW Power"},{icon:"💨",text:"15.0 m³/min"},{icon:"🏢",text:"Enterprise Grade"},{icon:"🛡",text:"Premium Support"}], specs:[{label:"Model",value:"TGR-C120A"},{label:"Displacement",value:"15.0 m³/min"},{label:"Pressure",value:"1.0 MPA"},{label:"Size",value:"1780×1250×1560"}], image:"https://tangramelectronics.com/wp-content/uploads/2025/06/90kw-screw-air-compressor-Bangladesh-Tangram-Electronics.jpg", cta:"Premium Support" }
+    ];
+
+    var currentCard = 0;
+    var total = products.length;
+    var isActive = false;   // true when section is in viewport
+    var isDone = false;     // true when all cards shown
+    var isLocked = false;   // prevent rapid firing
+    var touchStartY = 0;
+
+    function init() {
+        var wrapper = document.getElementById('tgrWrapper');
+        var dotsEl  = document.getElementById('tgrDots');
+        if (!wrapper) return;
+
+        products.forEach(function(p, i) {
+            var card = document.createElement('div');
+            card.className = 'tgr-card';
+            card.id = 'tgrCard' + i;
+            card.innerHTML =
+                '<div class="tgr-content">' +
+                    '<div class="tgr-badge">' + p.badge + '</div>' +
+                    '<h2 class="tgr-title">' + p.title + '</h2>' +
+                    '<p class="tgr-desc">' + p.desc + '</p>' +
+                    '<div class="tgr-features">' +
+                        p.features.map(function(f){ return '<div class="tgr-feature"><span class="tgr-ficon">'+f.icon+'</span><span class="tgr-ftext">'+f.text+'</span></div>'; }).join('') +
+                    '</div>' +
+                    '<div class="tgr-specs">' +
+                        p.specs.map(function(s){ return '<div class="tgr-spec"><span class="tgr-slabel">'+s.label+'</span><span class="tgr-sval">'+s.value+'</span></div>'; }).join('') +
+                    '</div>' +
+                    '<button class="tgr-btn">' + p.cta +
+                        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>' +
+                    '</button>' +
+                '</div>' +
+                '<div class="tgr-imgwrap"><div class="tgr-imgbox"><img src="'+p.image+'" alt="'+p.specs[0].value+'" class="tgr-img"></div></div>';
+            wrapper.appendChild(card);
+
+            // dot
+            var dot = document.createElement('div');
+            dot.className = 'tgr-dot';
+            dot.id = 'tgrDot' + i;
+            dotsEl.appendChild(dot);
+        });
+
+        showCard(0);
+        setupEvents();
+    }
+
+    /* ── show a specific card ── */
+    function showCard(index) {
+        var cards = document.querySelectorAll('.tgr-card');
+        var dots  = document.querySelectorAll('.tgr-dot');
+
+        cards.forEach(function(c, i) {
+            c.classList.remove('tgr-visible', 'tgr-gone');
+            if (i < index)  c.classList.add('tgr-gone');
+            if (i === index) c.classList.add('tgr-visible');
+        });
+
+        dots.forEach(function(d, i) {
+            d.classList.toggle('tgr-dot-active', i === index);
+        });
+
+        currentCard = index;
+    }
+
+    /* ── next / prev ── */
+    function next() {
+        if (isLocked) return;
+        if (currentCard < total - 1) {
+            isLocked = true;
+            showCard(currentCard + 1);
+            setTimeout(function(){ isLocked = false; }, 550);
+        } else {
+            // last card done — release scroll
+            isDone = true;
+            enableScroll();
+        }
+    }
+
+    function prev() {
+        if (isLocked) return;
+        if (currentCard > 0) {
+            isLocked = true;
+            showCard(currentCard - 1);
+            setTimeout(function(){ isLocked = false; }, 550);
+        } else {
+            // first card — release upward scroll
+            enableScroll();
+            isDone = false;
+        }
+    }
+
+    /* ── scroll lock/unlock ── */
+    function disableScroll() {
+        document.body.style.overflow = 'hidden';
+    }
+
+    function enableScroll() {
+        document.body.style.overflow = '';
+    }
+
+    /* ── IntersectionObserver: lock when section enters, unlock when leaves ── */
+    function setupEvents() {
+        var section = document.getElementById('tgrSection');
+
+        // Observe section visibility
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting && entry.intersectionRatio >= 0.6) {
+                    // Section is prominently in view
+                    isActive = true;
+                    if (!isDone) {
+                        disableScroll();
+                        // Scroll section into full view
+                        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                } else {
+                    isActive = false;
+                    if (!isDone) enableScroll();
+                }
+            });
+        }, { threshold: 0.6 });
+
+        observer.observe(section);
+
+        // WHEEL
+        window.addEventListener('wheel', function(e) {
+            if (!isActive) return;
+            if (isDone && e.deltaY > 0) return; // let scroll continue after done
+            if (!isDone || e.deltaY < 0) {
+                e.preventDefault();
+                if (e.deltaY > 0) next();
+                else              prev();
+            }
+        }, { passive: false });
+
+        // KEYBOARD
+        window.addEventListener('keydown', function(e) {
+            if (!isActive) return;
+            if (e.key === 'ArrowDown' || e.key === 'ArrowRight') { e.preventDefault(); next(); }
+            if (e.key === 'ArrowUp'   || e.key === 'ArrowLeft')  { e.preventDefault(); prev(); }
+        });
+
+        // TOUCH
+        window.addEventListener('touchstart', function(e) {
+            touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+
+        window.addEventListener('touchend', function(e) {
+            if (!isActive) return;
+            var diff = touchStartY - e.changedTouches[0].clientY;
+            if (Math.abs(diff) < 30) return;
+            e.preventDefault();
+            if (diff > 0) next();
+            else          prev();
+        }, { passive: false });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+
+})();
+</script>
+
+</body>
+</html>
