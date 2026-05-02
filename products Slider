@@ -4,11 +4,11 @@
 .tng-divider { width: 3px; height: 40px; background: #077d68; margin: 0 auto 50px; }
 .tng-outer { position: relative; max-width: 1100px; margin: 0 auto; padding: 0 48px; box-sizing: border-box; }
 .tng-viewport { overflow: hidden; width: 100%; }
-.tng-track { display: flex; transition: transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94); will-change: transform; }
-.tng-slide { flex: 0 0 33.333%; max-width: 33.333%; padding: 0 12px; display: flex; flex-direction: column; align-items: center; opacity: 0.25; transition: opacity 0.5s ease; box-sizing: border-box; }
+.tng-track { display: flex; will-change: transform; }
+.tng-slide { flex: 0 0 25%; max-width: 25%; padding: 0 12px; display: flex; flex-direction: column; align-items: center; opacity: 0.25; box-sizing: border-box; transition: opacity 0.5s ease; }
 .tng-slide.active { opacity: 1; }
 .tng-img-wrap { width: 100%; height: 260px; display: flex; align-items: center; justify-content: center; }
-.tng-slide img { width: 100%; height: 260px; object-fit: contain; transform: scale(0.6); opacity: 0; transition: transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease; display: block; }
+.tng-slide img { width: 100%; height: 260px; object-fit: contain; display: block; transform: scale(0.65); opacity: 0; transition: transform 0.65s cubic-bezier(0.34,1.56,0.64,1), opacity 0.5s ease; }
 .tng-slide.active img { transform: scale(1); opacity: 1; }
 .tng-pname { font-size: 15px; font-weight: 600; color: #077d68; margin-top: 14px; text-align: center; opacity: 0; transform: translateY(8px); transition: opacity 0.4s ease 0.2s, transform 0.4s ease 0.2s; }
 .tng-slide.active .tng-pname { opacity: 1; transform: translateY(0); }
@@ -52,32 +52,32 @@
     <div class="tng-viewport">
       <div class="tng-track" id="tngTrack">
 
-        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/06/Tangram-Round-Batten-Holder.jpg" alt="Round Batten Holder"/></div><div class="tng-pname">Round Batten Holder</div><a class="tng-btn" href="https://tangramelectronics.com/product/round-batten-holder-b22-e27/" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
-        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/01/Image_20260106110218.jpg" alt="Big Octagonal Holder"/></div><div class="tng-pname">Big Octagonal Holder</div><a class="tng-btn" href="https://tangramelectronics.com/product/spirit-octagonal-big-holder/" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
-        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/06/Tangram-Batten-Holder-b-c.jpg" alt="Batten Holder B/C"/></div><div class="tng-pname">Batten Holder B/C</div><a class="tng-btn" href="https://tangramelectronics.com/product/pendant-holder-a-b/" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
-        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/06/Tangram-Spirit-Square-Holder.jpg" alt="Square Holder"/></div><div class="tng-pname">Square Holder</div><a class="tng-btn" href="https://tangramelectronics.com/product/spirit-square-holder-b22-e27/" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
-        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/12/Pendant-Holder-C.jpg" alt="Pendant Holder C"/></div><div class="tng-pname">Pendant Holder C</div><a class="tng-btn" href="https://tangramelectronics.com/product/pendant-holder-c/" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
-        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/12/Pendant-Holder-AB.jpg" alt="Pendant Holder A/B"/></div><div class="tng-pname">Pendant Holder A/B</div><a class="tng-btn" href="https://tangramelectronics.com/product/pendant-holder-a-b/" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
+        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/06/Tangram-Round-Batten-Holder.jpg" alt="Round Batten Holder"/></div><div class="tng-pname">Round Batten Holder</div><a class="tng-btn" href="https://tangramelectronics.com" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
+        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/01/Image_20260106110218.jpg" alt="Big Octagonal Holder"/></div><div class="tng-pname">Big Octagonal Holder</div><a class="tng-btn" href="https://tangramelectronics.com" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
+        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/06/Tangram-Batten-Holder-b-c.jpg" alt="Batten Holder B/C"/></div><div class="tng-pname">Batten Holder B/C</div><a class="tng-btn" href="https://tangramelectronics.com" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
+        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/06/Tangram-Spirit-Square-Holder.jpg" alt="Square Holder"/></div><div class="tng-pname">Square Holder</div><a class="tng-btn" href="https://tangramelectronics.com" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
+        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/12/Pendant-Holder-C.jpg" alt="Pendant Holder C"/></div><div class="tng-pname">Pendant Holder C</div><a class="tng-btn" href="https://tangramelectronics.com" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
+        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/12/Pendant-Holder-AB.jpg" alt="Pendant Holder A/B"/></div><div class="tng-pname">Pendant Holder A/B</div><a class="tng-btn" href="https://tangramelectronics.com" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
         <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2026/02/Image_20260224144453.jpg" alt="Heat Resistant Holder"/></div><div class="tng-pname">Heat Resistant Holder</div><a class="tng-btn" href="https://tangramelectronics.com" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
-        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/01/Tangram-Small-Ceiling-Rose.jpg" alt="Small Ceiling Rose"/></div><div class="tng-pname">Small Ceiling Rose</div><a class="tng-btn" href="https://tangramelectronics.com/product/spirit-small-ceiling-rose/" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
-        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/01/Tangram-Big-ceiling-rose.jpg" alt="Big Ceiling Rose"/></div><div class="tng-pname">Big Ceiling Rose</div><a class="tng-btn" href="https://tangramelectronics.com/product/big-ceiling-rose/" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
-        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/12/Image_20251230114103.jpg" alt="Square Ceiling Rose"/></div><div class="tng-pname">Square Ceiling Rose</div><a class="tng-btn" href="https://tangramelectronics.com/product/square-ceiling-rose/" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
-        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/12/Image_20251228104005.jpg" alt="Fuse"/></div><div class="tng-pname">Fuse</div><a class="tng-btn" href="https://tangramelectronics.com/product/piano-fuse/" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
-        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/04/Tangram-Spirit-Piano-Indicator-Switch.jpg" alt="Indicator"/></div><div class="tng-pname">Indicator</div><a class="tng-btn" href="https://tangramelectronics.com/product/spirit-piano-indicator-switch/" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
-        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/06/Tangram-Piano-2-Pin-socket.jpg" alt="2pin Socket"/></div><div class="tng-pname">2pin Socket</div><a class="tng-btn" href="https://tangramelectronics.com/product/2-pin-socket/" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
-        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/04/Spirit-Smart-Fan-Regulator.jpg" alt="Regulator"/></div><div class="tng-pname">Regulator</div><a class="tng-btn" href="https://tangramelectronics.com/product/tangram-spirit-fan-regulator/" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
+        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/01/Tangram-Small-Ceiling-Rose.jpg" alt="Small Ceiling Rose"/></div><div class="tng-pname">Small Ceiling Rose</div><a class="tng-btn" href="https://tangramelectronics.com" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
+        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/01/Tangram-Big-ceiling-rose.jpg" alt="Big Ceiling Rose"/></div><div class="tng-pname">Big Ceiling Rose</div><a class="tng-btn" href="https://tangramelectronics.com" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
+        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/12/Image_20251230114103.jpg" alt="Square Ceiling Rose"/></div><div class="tng-pname">Square Ceiling Rose</div><a class="tng-btn" href="https://tangramelectronics.com" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
+        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/12/Image_20251228104005.jpg" alt="Fuse"/></div><div class="tng-pname">Fuse</div><a class="tng-btn" href="https://tangramelectronics.com" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
+        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/04/Tangram-Spirit-Piano-Indicator-Switch.jpg" alt="Indicator"/></div><div class="tng-pname">Indicator</div><a class="tng-btn" href="https://tangramelectronics.com" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
+        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/06/Tangram-Piano-2-Pin-socket.jpg" alt="2pin Socket"/></div><div class="tng-pname">2pin Socket</div><a class="tng-btn" href="https://tangramelectronics.com" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
+        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/04/Spirit-Smart-Fan-Regulator.jpg" alt="Regulator"/></div><div class="tng-pname">Regulator</div><a class="tng-btn" href="https://tangramelectronics.com" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
         <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/12/2way-Switch.jpg" alt="2 Way Switch"/></div><div class="tng-pname">2 Way Switch</div><a class="tng-btn" href="https://tangramelectronics.com" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
-        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/04/Tangram-Spirit-Bell-Push-switch.jpg" alt="Bell Push"/></div><div class="tng-pname">Bell Push</div><a class="tng-btn" href="https://tangramelectronics.com/product/tangram-spirit-piano-switch/" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
-        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/12/Concealed-TYpe-Mounting-Red.jpg" alt="Mounting Box Concealed"/></div><div class="tng-pname">Mounting Box Concealed</div><a class="tng-btn" href="https://tangramelectronics.com/product/concealed-mounting-box/" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
-        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/12/1-Gang-Surface-Mounting-Box.jpg" alt="Mounting Box Surface"/></div><div class="tng-pname">Mounting Box Surface</div><a class="tng-btn" href="https://tangramelectronics.com/product/surface-mounting-box/" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
-        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/06/5-Pin-Combination-Socket.jpg" alt="Combination Socket 5pin"/></div><div class="tng-pname">Combination Socket 5pin</div><a class="tng-btn" href="https://tangramelectronics.com/product/5-pin-socket/" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
-        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/06/Tangram-8-Pin-Combination-Socket.jpg" alt="Combination Socket 8pin"/></div><div class="tng-pname">Combination Socket 8pin</div><a class="tng-btn" href="https://tangramelectronics.com/product/8-pin-socket-2/" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
+        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/04/Tangram-Spirit-Bell-Push-switch.jpg" alt="Bell Push"/></div><div class="tng-pname">Bell Push</div><a class="tng-btn" href="https://tangramelectronics.com" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
+        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/12/Concealed-TYpe-Mounting-Red.jpg" alt="Mounting Box Concealed"/></div><div class="tng-pname">Mounting Box Concealed</div><a class="tng-btn" href="https://tangramelectronics.com" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
+        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/12/1-Gang-Surface-Mounting-Box.jpg" alt="Mounting Box Surface"/></div><div class="tng-pname">Mounting Box Surface</div><a class="tng-btn" href="https://tangramelectronics.com" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
+        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/06/5-Pin-Combination-Socket.jpg" alt="Combination Socket 5pin"/></div><div class="tng-pname">Combination Socket 5pin</div><a class="tng-btn" href="https://tangramelectronics.com" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
+        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/06/Tangram-8-Pin-Combination-Socket.jpg" alt="Combination Socket 8pin"/></div><div class="tng-pname">Combination Socket 8pin</div><a class="tng-btn" href="https://tangramelectronics.com" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
         <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/12/Image_20251230114249.jpg" alt="Plug 2pin Round"/></div><div class="tng-pname">Plug 2pin Round</div><a class="tng-btn" href="https://tangramelectronics.com" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
-        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/06/Image_20251230123616.jpg" alt="Plug 3pin Flat"/></div><div class="tng-pname">Plug 3pin Flat</div><a class="tng-btn" href="https://tangramelectronics.com/product/3-pin-plug/" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
-        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2026/01/Image_20260106111812.jpg" alt="Extension 4bit 2pin"/></div><div class="tng-pname">Extension 4bit 2pin</div><a class="tng-btn" href="https://tangramelectronics.com/product/4-gang-extension-socket/" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
-        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2026/01/Image_20260106111858.jpg" alt="Extension 4bit 3pin"/></div><div class="tng-pname">Extension 4bit 3pin</div><a class="tng-btn" href="https://tangramelectronics.com/product/4-gang-extension-socket/" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
-        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2026/01/Image_20260106111822.jpg" alt="Extension 5bit 2pin"/></div><div class="tng-pname">Extension 5bit 2pin</div><a class="tng-btn" href="https://tangramelectronics.com/product/5-gang-extension-socket/" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
-        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2026/01/Image_20260112113920.jpg" alt="Extension 5bit 3pin"/></div><div class="tng-pname">Extension 5bit 3pin</div><a class="tng-btn" href="https://tangramelectronics.com/product/5-gang-extension-socket/" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
+        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2025/06/Image_20251230123616.jpg" alt="Plug 3pin Flat"/></div><div class="tng-pname">Plug 3pin Flat</div><a class="tng-btn" href="https://tangramelectronics.com" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
+        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2026/01/Image_20260106111812.jpg" alt="Extension 4bit 2pin"/></div><div class="tng-pname">Extension 4bit 2pin</div><a class="tng-btn" href="https://tangramelectronics.com" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
+        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2026/01/Image_20260106111858.jpg" alt="Extension 4bit 3pin"/></div><div class="tng-pname">Extension 4bit 3pin</div><a class="tng-btn" href="https://tangramelectronics.com" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
+        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2026/01/Image_20260106111822.jpg" alt="Extension 5bit 2pin"/></div><div class="tng-pname">Extension 5bit 2pin</div><a class="tng-btn" href="https://tangramelectronics.com" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
+        <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2026/01/Image_20260112113920.jpg" alt="Extension 5bit 3pin"/></div><div class="tng-pname">Extension 5bit 3pin</div><a class="tng-btn" href="https://tangramelectronics.com" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
         <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2026/01/8.jpg" alt="Socket 8pin Combination"/></div><div class="tng-pname">Socket 8pin Combination</div><a class="tng-btn" href="https://tangramelectronics.com" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
         <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2026/01/4.jpg" alt="4 Gang Switch"/></div><div class="tng-pname">4 Gang Switch</div><a class="tng-btn" href="https://tangramelectronics.com" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
         <div class="tng-slide"><div class="tng-img-wrap"><img src="https://tangramelectronics.com/wp-content/uploads/2026/01/3.jpg" alt="3 Gang Switch"/></div><div class="tng-pname">3 Gang Switch</div><a class="tng-btn" href="https://tangramelectronics.com" target="_blank"><span class="tng-circle"><span class="tng-arrow">&#8599;</span></span>VISIT SITE</a></div>
@@ -99,77 +99,92 @@
 </div>
 
 <script>
-(function(){
-  var isMobile = function(){ return window.innerWidth <= 640; };
-  var track = document.getElementById('tngTrack');
-  var slides = Array.from(track.querySelectorAll('.tng-slide'));
-  var total = slides.length;
-  var current = 0;
-  var autoTimer;
-  var visible, pages;
+window.addEventListener('load', function(){
+  setTimeout(function(){
+    var track = document.getElementById('tngTrack');
+    if(!track) return;
 
-  var dotsEl = document.getElementById('tngDots');
+    var slides = Array.from(track.querySelectorAll('.tng-slide'));
+    var total = slides.length;
+    var current = 0;
+    var autoTimer;
+    var visible, pages;
+    var dotsEl = document.getElementById('tngDots');
 
-  function getVisible(){ return isMobile() ? 2 : 3; }
+    function isMobile(){ return window.innerWidth <= 640; }
+    function getVisible(){ return window.innerWidth <= 640 ? 2 : 4; }
 
-  function buildDots(){
-    dotsEl.innerHTML = '';
-    pages = Math.ceil(total / visible);
-    for(var i = 0; i < pages; i++){
-      var d = document.createElement('button');
-      d.className = 'tng-dot' + (i === 0 ? ' active' : '');
-      (function(idx){ d.addEventListener('click', function(){ goTo(idx); }); })(i);
-      dotsEl.appendChild(d);
+    function getSlideWidth(){
+      return slides[0].getBoundingClientRect().width;
     }
-  }
 
-  function updateActive(){
-    var start = current * visible;
-    slides.forEach(function(s, i){
-      s.classList.toggle('active', i >= start && i < start + visible);
-    });
-  }
+    function buildDots(){
+      dotsEl.innerHTML = '';
+      pages = Math.ceil(total / visible);
+      for(var i = 0; i < pages; i++){
+        var d = document.createElement('button');
+        d.className = 'tng-dot' + (i === 0 ? ' active' : '');
+        (function(idx){ d.addEventListener('click', function(){ goTo(idx); }); })(i);
+        dotsEl.appendChild(d);
+      }
+    }
 
-  function getSlideWidth(){
-    return slides[0].getBoundingClientRect().width;
-  }
+    function updateActive(){
+      var start = current * visible;
+      slides.forEach(function(s, i){
+        s.classList.toggle('active', i >= start && i < start + visible);
+      });
+    }
 
-  function goTo(page){
-    pages = Math.ceil(total / visible);
-    current = (page + pages) % pages;
-    track.style.transform = 'translateX(-' + (current * visible * getSlideWidth()) + 'px)';
-    var dots = dotsEl.querySelectorAll('.tng-dot');
-    dots.forEach(function(d, i){ d.classList.toggle('active', i === current); });
-    slides.forEach(function(s){ s.classList.remove('active'); });
-    setTimeout(updateActive, 80);
-    clearInterval(autoTimer);
-    autoTimer = setInterval(function(){ goTo(current + 1); }, 6000);
-  }
+    function setTransform(px, animated){
+      if(!animated){
+        track.style.transition = 'none';
+        track.style.transform = 'translateX(-' + px + 'px)';
+        track.offsetHeight;
+        track.style.transition = 'transform 0.65s cubic-bezier(0.25,0.46,0.45,0.94)';
+      } else {
+        track.style.transition = 'transform 0.65s cubic-bezier(0.25,0.46,0.45,0.94)';
+        track.style.transform = 'translateX(-' + px + 'px)';
+      }
+    }
 
-  function init(){
-    visible = getVisible();
-    pages = Math.ceil(total / visible);
-    if(current >= pages) current = 0;
-    buildDots();
-    track.style.transition = 'none';
-    track.style.transform = 'translateX(-' + (current * visible * getSlideWidth()) + 'px)';
-    setTimeout(function(){ track.style.transition = 'transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94)'; }, 50);
-    updateActive();
-  }
+    function goTo(page){
+      pages = Math.ceil(total / visible);
+      current = (page + pages) % pages;
+      setTransform(current * visible * getSlideWidth(), true);
+      dotsEl.querySelectorAll('.tng-dot').forEach(function(d,i){
+        d.classList.toggle('active', i === current);
+      });
+      slides.forEach(function(s){ s.classList.remove('active'); });
+      setTimeout(updateActive, 80);
+      clearInterval(autoTimer);
+      autoTimer = setInterval(function(){ goTo(current + 1); }, 3000);
+    }
 
-  document.getElementById('tngPrev').addEventListener('click', function(){ goTo(current - 1); });
-  document.getElementById('tngNext').addEventListener('click', function(){ goTo(current + 1); });
-
-  var resizeTimer;
-  window.addEventListener('resize', function(){
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(function(){
+    function init(){
       visible = getVisible();
-      init();
-    }, 150);
-  });
+      pages = Math.ceil(total / visible);
+      if(current >= pages) current = 0;
+      buildDots();
+      setTransform(current * visible * getSlideWidth(), false);
+      updateActive();
+    }
 
-  init();
-  autoTimer = setInterval(function(){ goTo(current + 1); }, 3000);
-})();
+    document.getElementById('tngPrev').addEventListener('click', function(){ goTo(current - 1); });
+    document.getElementById('tngNext').addEventListener('click', function(){ goTo(current + 1); });
+
+    var resizeTimer;
+    window.addEventListener('resize', function(){
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function(){
+        visible = getVisible();
+        init();
+      }, 200);
+    });
+
+    init();
+    autoTimer = setInterval(function(){ goTo(current + 1); }, 3000);
+
+  }, 300);
+});
 </script>
