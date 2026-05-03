@@ -1,0 +1,365 @@
+<style>
+.tgm-wrap {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  background: #111827;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  min-height: 520px;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  overflow: hidden;
+}
+
+/* ── LEFT ── */
+.tgm-left {
+  flex: 0 0 42%;
+  padding: 80px 48px 80px 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+  z-index: 2;
+  box-sizing: border-box;
+}
+
+.tgm-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(46,207,176,0.13);
+  border: 1px solid rgba(46,207,176,0.35);
+  color: #2ecfb0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  padding: 5px 15px;
+  border-radius: 50px;
+  margin-bottom: 20px;
+  width: fit-content;
+}
+
+.tgm-badge-dot {
+  width: 7px;
+  height: 7px;
+  background: #2ecfb0;
+  border-radius: 50%;
+  animation: tgm-pulse 1.6s infinite;
+}
+
+@keyframes tgm-pulse {
+  0%,100% { opacity:1; transform:scale(1); }
+  50%      { opacity:0.4; transform:scale(0.7); }
+}
+
+.tgm-h1 {
+  color: #ffffff !important;
+  font-size: 2.9rem !important;
+  font-weight: 800 !important;
+  line-height: 1.13 !important;
+  margin: 0 0 18px 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  letter-spacing: -0.5px;
+}
+
+.tgm-h1 span { color: #2ecfb0; }
+
+.tgm-sub {
+  color: #9ca3af !important;
+  font-size: 0.97rem !important;
+  line-height: 1.75 !important;
+  margin: 0 0 32px 0 !important;
+  padding: 0 !important;
+}
+
+.tgm-btn-primary {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  background: #2ecfb0 !important;
+  color: #062e26 !important;
+  font-size: 0.88rem !important;
+  font-weight: 800 !important;
+  padding: 14px 32px !important;
+  border-radius: 50px !important;
+  text-decoration: none !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: background 0.18s, transform 0.15s !important;
+  width: fit-content;
+  box-shadow: none !important;
+}
+
+.tgm-btn-primary:hover {
+  background: #1fb89c !important;
+  transform: translateY(-2px) !important;
+  color: #062e26 !important;
+  text-decoration: none !important;
+}
+
+/* ── RIGHT ── */
+.tgm-right {
+  flex: 0 0 58%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 60px 100px 60px 48px;
+  box-sizing: border-box;
+}
+
+.tgm-right-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 52% 48%, #0a9e84 0%, #065e50 42%, #111827 80%);
+}
+
+.tgm-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.06;
+  pointer-events: none;
+}
+
+/* cards grid */
+.tgm-cards-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  width: 100%;
+}
+
+.tgm-job-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  padding: 22px 18px;
+  box-sizing: border-box;
+  transition: background 0.2s, transform 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tgm-job-card:hover {
+  background: rgba(46,207,176,0.09);
+  border-color: rgba(46,207,176,0.35);
+  transform: translateY(-3px);
+}
+
+.tgm-card-type {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #2ecfb0;
+  margin: 0 0 4px 0;
+}
+
+.tgm-card-title {
+  color: #f3f4f6 !important;
+  font-size: 0.84rem !important;
+  font-weight: 700 !important;
+  line-height: 1.3 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.tgm-card-dept {
+  color: #9ca3af !important;
+  font-size: 0.72rem !important;
+  margin: 3px 0 0 0 !important;
+  padding: 0 !important;
+}
+
+.tgm-card-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 10px;
+}
+
+.tgm-card-meta span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #9ca3af;
+  font-size: 0.70rem;
+}
+
+.tgm-card-meta span b {
+  color: #d1d5db;
+  font-weight: 600;
+}
+
+.tgm-pill {
+  display: inline-block;
+  font-size: 0.62rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.3px;
+  margin-top: 9px;
+  width: fit-content;
+}
+
+.tgm-pill.onsite { background: rgba(251,146,60,0.15); color: #fb923c; }
+.tgm-pill.remote { background: rgba(46,207,176,0.15); color: #2ecfb0; }
+.tgm-pill.hybrid { background: rgba(139,92,246,0.15); color: #a78bfa; }
+
+.tgm-apply-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  margin-top: 12px !important;
+  background: rgba(46,207,176,0.15) !important;
+  color: #2ecfb0 !important;
+  font-size: 0.70rem !important;
+  font-weight: 700 !important;
+  padding: 7px 14px !important;
+  border-radius: 50px !important;
+  text-decoration: none !important;
+  border: 1px solid rgba(46,207,176,0.3) !important;
+  cursor: pointer !important;
+  transition: background 0.18s !important;
+  width: fit-content;
+  box-shadow: none !important;
+}
+
+.tgm-apply-btn:hover {
+  background: rgba(46,207,176,0.28) !important;
+  text-decoration: none !important;
+  color: #2ecfb0 !important;
+}
+
+/* feedback tab */
+.tgm-feedback-tab {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #0a9e84;
+  color: #fff !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  letter-spacing: 1.5px;
+  writing-mode: vertical-rl;
+  padding: 14px 7px;
+  border-radius: 7px 0 0 7px;
+  z-index: 20;
+  cursor: pointer;
+  text-transform: uppercase;
+  text-decoration: none !important;
+}
+
+/* responsive */
+@media (max-width: 900px) {
+  .tgm-wrap { flex-direction: column; min-height: unset; justify-content: unset; }
+  .tgm-left { flex: none; padding: 40px 28px 24px 36px; }
+  .tgm-right { flex: none; padding: 24px 28px 40px; justify-content: center; }
+  .tgm-h1 { font-size: 1.9rem !important; }
+  .tgm-cards-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 520px) {
+  .tgm-cards-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+<section class="tgm-wrap">
+
+  <!-- LEFT -->
+  <div class="tgm-left">
+    <div class="tgm-badge">
+      <div class="tgm-badge-dot"></div>
+      We're hiring
+    </div>
+    <h2 class="tgm-h1">Tangram is<br><span>Hiring Now</span></h2>
+    <p class="tgm-sub">Join our team and be part of something great. We're looking for talented people across multiple roles.</p>
+    <a href="#" class="tgm-btn-primary">
+      View all jobs
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+
+  <!-- RIGHT — JOB CARDS -->
+  <div class="tgm-right">
+    <div class="tgm-right-bg"></div>
+
+    <svg class="tgm-pattern" viewBox="0 0 600 520" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="tgm-dots" x="0" y="0" width="22" height="22" patternUnits="userSpaceOnUse">
+          <circle cx="2" cy="2" r="1.4" fill="white"/>
+        </pattern>
+      </defs>
+      <rect width="600" height="520" fill="url(#tgm-dots)"/>
+    </svg>
+
+    <div class="tgm-cards-grid">
+
+      <!-- CARD 1 -->
+      <div class="tgm-job-card">
+        <p class="tgm-card-type">Executive</p>
+        <p class="tgm-card-title">Air Compressor Executive</p>
+        <p class="tgm-card-dept">Electrical Accessories</p>
+        <div class="tgm-card-meta">
+          <span>📍 <b>Dhaka City</b></span>
+          <span>👤 Vacancy: <b>01</b></span>
+        </div>
+        <span class="tgm-pill onsite">On-site</span>
+        <a href="#" class="tgm-apply-btn" target="_blank" rel="noopener">
+          Apply Now
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </a>
+      </div>
+
+      <!-- CARD 2 -->
+      <div class="tgm-job-card">
+        <p class="tgm-card-type">Executive</p>
+        <p class="tgm-card-title">Corporate Sales Executive</p>
+        <p class="tgm-card-dept">Sales & Business Dev.</p>
+        <div class="tgm-card-meta">
+          <span>📍 <b>Dhaka City</b></span>
+          <span>👤 Vacancy: <b>01</b></span>
+        </div>
+        <span class="tgm-pill onsite">On-site</span>
+        <a href="#" class="tgm-apply-btn" target="_blank" rel="noopener">
+          Apply Now
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </a>
+      </div>
+
+      <!-- CARD 3 -->
+      <div class="tgm-job-card">
+        <p class="tgm-card-type">Executive</p>
+        <p class="tgm-card-title">VAT & Tax Executive</p>
+        <p class="tgm-card-dept">Accounts</p>
+        <div class="tgm-card-meta">
+          <span>📍 <b>Dhaka City</b></span>
+          <span>👤 Vacancy: <b>01</b></span>
+        </div>
+        <span class="tgm-pill onsite">On-site</span>
+        <a href="#" class="tgm-apply-btn" target="_blank" rel="noopener">
+          Apply Now
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </a>
+      </div>
+
+      <!-- নতুন card যোগ করতে এখানে copy-paste করো ⬆ -->
+
+    </div>
+  </div>
+
+  <a href="#" class="tgm-feedback-tab">Feedback</a>
+</section>
