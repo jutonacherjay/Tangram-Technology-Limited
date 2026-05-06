@@ -1,0 +1,220 @@
+<!-- ✅ WordPress Custom HTML Block এ paste করুন -->
+<!-- Theme এর সাথে কোনো conflict হবে না — সব style inline -->
+
+<div style="all:initial; display:block; width:100%; font-family:'DM Sans',sans-serif;">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  @keyframes distPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.6; transform: scale(1.4); }
+  }
+  @keyframes distFloat {
+    0%, 100% { transform: translateY(-50%) translateX(0); }
+    50%       { transform: translateY(-56%) translateX(6px); }
+  }
+  @keyframes distFloat2 {
+    0%, 100% { transform: translateY(-50%) translateX(0); }
+    50%       { transform: translateY(-56%) translateX(6px); }
+  }
+  #dist-section-wrap .dist-orb-el {
+    animation: distFloat 5s ease-in-out infinite !important;
+  }
+  #dist-section-wrap .dist-orb-el2 {
+    animation: distFloat2 5s ease-in-out 2.5s infinite !important;
+  }
+  #dist-section-wrap .dist-dot {
+    animation: distPulse 2s ease-in-out infinite !important;
+  }
+  #dist-section-wrap .dist-cta-btn:hover {
+    transform: translateY(-3px) scale(1.03) !important;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.2) !important;
+  }
+  @media (max-width: 600px) {
+    #dist-section-wrap { padding: 60px 24px !important; }
+    #dist-section-wrap .dist-orb-el,
+    #dist-section-wrap .dist-orb-el2 { display: none !important; }
+    #dist-section-wrap .dist-heading-el { font-size: 1.8rem !important; }
+  }
+</style>
+
+<div id="dist-section-wrap" style="
+  all: initial;
+  display: block;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #077d68 0%, #0a9e84 45%, #2ecfb0 100%);
+  padding: 80px 60px;
+  text-align: center;
+  font-family: 'DM Sans', sans-serif;
+">
+
+  <!-- Texture overlay -->
+  <div style="
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: repeating-linear-gradient(135deg, transparent, transparent 28px, rgba(255,255,255,0.03) 28px, rgba(255,255,255,0.03) 30px);
+    pointer-events: none;
+    z-index: 0;
+  "></div>
+
+  <!-- Top right circle -->
+  <div style="
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: rgba(46,207,176,0.18);
+    pointer-events: none;
+    z-index: 0;
+  "></div>
+
+  <!-- Bottom left circle -->
+  <div style="
+    position: absolute;
+    bottom: -60px; left: -60px;
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    background: rgba(7,125,104,0.25);
+    pointer-events: none;
+    z-index: 0;
+  "></div>
+
+  <!-- Orb left -->
+  <div class="dist-orb-el" style="
+    position: absolute;
+    top: 50%; left: 8%;
+    transform: translateY(-50%);
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(46,207,176,0.5), rgba(10,158,132,0.1));
+    border: 1.5px solid rgba(255,255,255,0.15);
+    pointer-events: none;
+    z-index: 0;
+  "></div>
+
+  <!-- Orb right -->
+  <div class="dist-orb-el2" style="
+    position: absolute;
+    top: 50%; right: 8%;
+    transform: translateY(-50%);
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(46,207,176,0.5), rgba(10,158,132,0.1));
+    border: 1.5px solid rgba(255,255,255,0.15);
+    pointer-events: none;
+    z-index: 0;
+  "></div>
+
+  <!-- Content -->
+  <div style="
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  ">
+
+    <!-- Eyebrow badge -->
+    <div style="
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 100px;
+      padding: 6px 18px;
+      color: rgba(255,255,255,0.85);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      font-family: 'DM Sans', sans-serif;
+      line-height: 1.4;
+    ">
+      <span class="dist-dot" style="
+        display: inline-block;
+        width: 6px; height: 6px;
+        min-width: 6px;
+        border-radius: 50%;
+        background: #2ecfb0;
+        box-shadow: 0 0 8px #2ecfb0;
+      "></span>
+      Authorized Network
+    </div>
+
+    <!-- Heading -->
+    <h2 class="dist-heading-el" style="
+      all: unset;
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 3.2rem;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.15;
+      margin-bottom: 12px;
+      text-shadow: 0 2px 24px rgba(0,0,0,0.18);
+      letter-spacing: -0.01em;
+      text-align: center;
+    ">
+      Our Distributors in
+      <span style="
+        color: #2ecfb0;
+        position: relative;
+        display: inline-block;
+        padding-bottom: 4px;
+        border-bottom: 3px solid rgba(46,207,176,0.6);
+      ">Bangladesh</span>
+    </h2>
+
+    <!-- Subtitle -->
+    <p style="
+      all: unset;
+      display: block;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      color: rgba(255,255,255,0.75);
+      font-weight: 400;
+      margin-top: 12px;
+      margin-bottom: 32px;
+      letter-spacing: 0.01em;
+      line-height: 1.5;
+      text-align: center;
+    ">Our Authorized Distributor Network Nationwide</p>
+
+    <!-- Button -->
+    <a href="#" class="dist-cta-btn" style="
+      all: unset;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: #ffffff;
+      color: #077d68;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      padding: 14px 30px;
+      border-radius: 100px;
+      cursor: pointer;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.15), 0 2px 8px rgba(0,0,0,0.1);
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      line-height: 1;
+    ">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#077d68" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+        <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+      </svg>
+      Serving Across 64 Districts
+    </a>
+
+  </div>
+</div>
+
+</div>
