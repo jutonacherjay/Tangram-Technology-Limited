@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LED Light Series</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --light-mint: #e8f8f5;
+            --soft-mint: #c8f2ec;
+            --mint: #b2ece3;
+            --primary: #2ecfb0;
+            --primary-dark: #0a9e84;
+            --primary-darker: #077d68;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Work Sans', sans-serif; background: white; color: #1a1a1a; }
+
+        /* Page Header */
+        .page-header { text-align: center; padding: 4rem 5% 3rem; background: linear-gradient(135deg, var(--light-mint) 0%, white 100%); }
+        .page-title { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900; color: var(--primary-darker); margin: 0 0 0.5rem 0; }
+        .page-subtitle { color: var(--primary-dark); font-size: 1.1rem; }
+
+        /* LED badge accent */
+        .led-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 0.3rem 0.9rem;
+            border-radius: 99px;
+            margin-bottom: 1rem;
+        }
+
+        /* Glow effect behind header title */
+        .page-header-inner {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Container */
+        .container { max-width: 1400px; margin: 0 auto; padding: 4rem 5%; }
+        .category-section { margin-bottom: 5rem; }
+        .category-title { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--primary-dark); margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 3px solid var(--mint); display: inline-block; }
+
+        /* Products Grid */
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; }
+
+        /* Product Card */
+        .product-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(50px);
+            border: 2px solid transparent;
+        }
+        .product-card.animate { animation: slideUp 0.6s ease forwards; }
+        @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(46, 207, 176, 0.25);
+            border-color: var(--primary);
+        }
+
+        /* Image wrapper with glow on hover */
+        .product-image-wrap {
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .product-image-wrap::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(46,207,176,0.12) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .product-card:hover .product-image-wrap::after { opacity: 1; }
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+        .product-card:hover .product-image { transform: scale(1.04); }
+
+        /* Wattage Badge on card */
+        .watt-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: var(--primary-darker);
+            color: white;
+            font-size: 0.72rem;
+            font-weight: 600;
+            padding: 0.25rem 0.65rem;
+            border-radius: 99px;
+            letter-spacing: 0.05em;
+            z-index: 2;
+        }
+        .watt-badge.ac-dc {
+            background: linear-gradient(135deg, #e67e22, #c0392b);
+        }
+
+        .product-info { padding: 1.5rem; }
+        .product-name { font-weight: 600; font-size: 1.1rem; color: var(--primary-darker); margin-bottom: 0.5rem; }
+        .product-description { color: #666; font-size: 0.9rem; line-height: 1.4; }
+        .view-details { display: inline-block; margin-top: 1rem; color: var(--primary); font-weight: 500; font-size: 0.9rem; transition: all 0.3s ease; }
+        .product-card:hover .view-details { transform: translateX(5px); }
+
+        /* Quick specs strip */
+        .quick-specs {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+            flex-wrap: wrap;
+        }
+        .qs-chip {
+            font-size: 0.75rem;
+            background: var(--light-mint);
+            color: var(--primary-dark);
+            border-radius: 6px;
+            padding: 0.2rem 0.55rem;
+            font-weight: 500;
+        }
+
+        /* Modal */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; overflow-y: auto; padding: 2rem; }
+        .modal.active { display: flex; align-items: center; justify-content: center; }
+        .modal-content { background: white; border-radius: 24px; max-width: 960px; width: 100%; max-height: 92vh; overflow-y: auto; position: relative; animation: slideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        @keyframes slideIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .modal-close { position: absolute; top: 1.5rem; right: 1.5rem; width: 40px; height: 40px; background: var(--primary); border: none; border-radius: 50%; color: white; font-size: 1.5rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; z-index: 10; }
+        .modal-close:hover { background: var(--primary-dark); transform: rotate(90deg); }
+
+        .modal-layout { display: grid; grid-template-columns: 1fr 1fr; }
+        .modal-image-col { background: #ffffff; display: flex; align-items: center; justify-content: center; min-height: 380px; border-radius: 24px 0 0 24px; overflow: hidden; position: relative; }
+        .modal-image { width: 100%; height: 100%; object-fit: contain; }
+        .modal-info { padding: 2.5rem; overflow-y: auto; }
+
+        .modal-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--primary-darker); margin-bottom: 0.5rem; }
+        .modal-description { color: #666; line-height: 1.6; margin-bottom: 1.5rem; font-size: 0.95rem; }
+
+        /* Lumen highlight bar */
+        .lumen-highlight {
+            background: linear-gradient(135deg, var(--primary-darker), var(--primary-dark));
+            color: white;
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .lumen-stat { text-align: center; flex: 1; min-width: 80px; }
+        .lumen-stat .ls-val { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; }
+        .lumen-stat .ls-label { font-size: 0.7rem; opacity: 0.85; letter-spacing: 0.05em; text-transform: uppercase; margin-top: 0.2rem; }
+
+        .specifications { background: var(--light-mint); border-radius: 12px; padding: 1.5rem; }
+        .spec-title { font-weight: 600; color: var(--primary-darker); margin-bottom: 1rem; font-size: 1.1rem; }
+        .spec-item { display: flex; justify-content: space-between; padding: 0.65rem 0; border-bottom: 1px solid var(--mint); font-size: 0.9rem; }
+        .spec-item:last-child { border-bottom: none; }
+        .spec-label { font-weight: 500; color: var(--primary-dark); }
+        .spec-value { color: #555; text-align: right; max-width: 55%; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-title { font-size: 2rem; }
+            .container { padding: 2rem 5%; }
+            .products-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+            .modal { padding: 0.75rem; align-items: flex-end; }
+            .modal-content { border-radius: 20px 20px 16px 16px; max-height: 88vh; overflow-y: auto; }
+            .modal-layout { grid-template-columns: 1fr; }
+            .modal-image-col { min-height: 160px; max-height: 190px; border-radius: 20px 20px 0 0; }
+            .modal-image { object-fit: contain; padding: 10px; }
+            .modal-info { padding: 1rem 1.25rem 1.25rem; }
+            .modal-title { font-size: 1.2rem; margin-bottom: 0.3rem; }
+            .modal-description { font-size: 0.85rem; margin-bottom: 0.9rem; line-height: 1.5; }
+            .lumen-highlight { gap: 0.5rem; padding: 0.75rem 1rem; margin-bottom: 1rem; }
+            .lumen-stat .ls-val { font-size: 1.1rem; }
+            .lumen-stat .ls-label { font-size: 0.65rem; }
+            .specifications { padding: 1rem; border-radius: 10px; }
+            .spec-title { font-size: 0.95rem; margin-bottom: 0.6rem; }
+            .spec-item { padding: 0.5rem 0; font-size: 0.82rem; }
+            .modal-close { top: 0.9rem; right: 0.9rem; width: 34px; height: 34px; font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-header">
+    <div class="led-badge">✦ LED Series</div>
+    <h1 class="page-title">LED Light Series</h1>
+    <p class="page-subtitle">Energy-efficient illumination with superior performance</p>
+</div>
+
+<div class="container" id="productsContainer"></div>
+
+<!-- Modal -->
+<div class="modal" id="productModal">
+    <div class="modal-content">
+        <button class="modal-close" onclick="closeModal()">×</button>
+        <div class="modal-layout">
+            <div class="modal-image-col">
+                <img class="modal-image" id="modalImage" alt="">
+            </div>
+            <div class="modal-info">
+                <h2 class="modal-title" id="modalTitle"></h2>
+                <p class="modal-description" id="modalDescription"></p>
+                <div id="modalLumenBar"></div>
+                <div class="specifications">
+                    <h3 class="spec-title">Technical Specifications</h3>
+                    <div id="modalSpecs"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+const productsData = {
+    categories: [{
+        id: 4,
+        name: 'LED Light Series',
+        subcategories: [{
+            id: 401,
+            name: 'LED Lights',
+            products: [
+                {
+                    id: 4001,
+                    name: '5W LED Bulb',
+                    description: 'Compact 5W LED bulb for everyday lighting needs',
+                    image: 'https://tangramelectronics.com/wp-content/uploads/2026/05/5watt.jpg',
+                    wattBadge: '5W',
+                    quickSpecs: ['5W', '220V', '50Hz'],
+                    lumenHighlight: null,
+                    specifications: {
+                        'Rated Wattage': '5W',
+                        'Rated Voltage': '220V',
+                        'Rated Frequency': '50Hz',
+                        'Warranty': '1 Year'
+                    }
+                },
+                {
+                    id: 4002,
+                    name: '12W LED Bulb',
+                    description: 'Bright 12W LED bulb for medium to large rooms',
+                    image: 'https://tangramelectronics.com/wp-content/uploads/2026/05/12watt.jpg',
+                    wattBadge: '12W',
+                    quickSpecs: ['12W', '220V', '50Hz'],
+                    lumenHighlight: null,
+                    specifications: {
+                        'Rated Wattage': '12W',
+                        'Rated Voltage': '220V',
+                        'Rated Frequency': '50Hz',
+                        'Warranty': '1 Year'
+                    }
+                },
+                {
+                    id: 4003,
+                    name: '15W LED Bulb',
+                    description: 'High-brightness 15W LED bulb for large spaces',
+                    image: 'https://tangramelectronics.com/wp-content/uploads/2026/05/15watt.jpg',
+                    wattBadge: '15W',
+                    quickSpecs: ['15W', '220V', '50Hz'],
+                    lumenHighlight: null,
+                    specifications: {
+                        'Rated Wattage': '15W',
+                        'Rated Voltage': '220V',
+                        'Rated Frequency': '50Hz',
+                        'Warranty': '1 Year'
+                    }
+                },
+                {
+                    id: 4004,
+                    name: '20W LED Bulb',
+                    description: 'Powerful 20W LED bulb for industrial and commercial use',
+                    image: 'https://tangramelectronics.com/wp-content/uploads/2026/05/20watt.jpg',
+                    wattBadge: '20W',
+                    quickSpecs: ['20W', '220V', '50Hz'],
+                    lumenHighlight: null,
+                    specifications: {
+                        'Rated Wattage': '20W',
+                        'Rated Voltage': '220V',
+                        'Rated Frequency': '50Hz',
+                        'Warranty': '1 Year'
+                    }
+                },
+                {
+                    id: 4005,
+                    name: '12W AC/DC Emergency LED',
+                    description: 'Dual-mode 12W LED with emergency backup — keeps shining even during power cuts',
+                    image: 'https://tangramelectronics.com/wp-content/uploads/2026/05/AC-DC12watt.jpg',
+                    wattBadge: '12W AC/DC',
+                    wattBadgeType: 'ac-dc',
+                    quickSpecs: ['12W', '100–277V', '2.5Hrs Backup'],
+                    lumenHighlight: {
+                        stats: [
+                            { val: '1200lm', label: 'Rated Lumen' },
+                            { val: '450lm', label: 'Emergency Lumen' },
+                            { val: '≥90%', label: 'Lumen Maintenance' }
+                        ]
+                    },
+                    specifications: {
+                        'Rated Wattage': '12W',
+                        'Rated Voltage': '220V',
+                        'Wide Voltage Range': '100V ~ 277V',
+                        'Rated Frequency': '50Hz',
+                        
+                    }
+                }
+            ]
+        }]
+    }]
+};
+
+function renderProducts() {
+    const container = document.getElementById('productsContainer');
+    const series = productsData.categories[0];
+
+    series.subcategories.forEach(subcategory => {
+        const section = document.createElement('div');
+        section.className = 'category-section';
+        section.innerHTML = `<h2 class="category-title">${subcategory.name}</h2><div class="products-grid"></div>`;
+        const grid = section.querySelector('.products-grid');
+
+        subcategory.products.forEach((product, index) => {
+            const card = document.createElement('div');
+            card.className = 'product-card';
+            card.style.animationDelay = `${index * 0.1}s`;
+
+            const badgeClass = product.wattBadgeType === 'ac-dc' ? 'watt-badge ac-dc' : 'watt-badge';
+            const quickChips = (product.quickSpecs || []).map(s => `<span class="qs-chip">${s}</span>`).join('');
+
+            card.innerHTML = `
+                <div class="product-image-wrap">
+                    <span class="${badgeClass}">${product.wattBadge}</span>
+                    <img src="${product.image}" alt="${product.name}" class="product-image">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">${product.name}</h3>
+                    <p class="product-description">${product.description}</p>
+                    <div class="quick-specs">${quickChips}</div>
+                    <span class="view-details">View Details →</span>
+                </div>
+            `;
+            card.onclick = () => openModal(product);
+            grid.appendChild(card);
+        });
+
+        container.appendChild(section);
+    });
+
+    observeCards();
+}
+
+function observeCards() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add('animate');
+        });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.product-card').forEach(card => observer.observe(card));
+}
+
+function openModal(product) {
+    const modal = document.getElementById('productModal');
+    document.getElementById('modalImage').src = product.image;
+    document.getElementById('modalImage').alt = product.name;
+    document.getElementById('modalTitle').textContent = product.name;
+    document.getElementById('modalDescription').textContent = product.description;
+
+    // Lumen highlight bar
+    const lumenBar = document.getElementById('modalLumenBar');
+    if (product.lumenHighlight) {
+        lumenBar.innerHTML = `
+            <div class="lumen-highlight">
+                ${product.lumenHighlight.stats.map(s => `
+                    <div class="lumen-stat">
+                        <div class="ls-val">${s.val}</div>
+                        <div class="ls-label">${s.label}</div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    } else {
+        lumenBar.innerHTML = '';
+    }
+
+    // Specs
+    const specsContainer = document.getElementById('modalSpecs');
+    specsContainer.innerHTML = '';
+    Object.entries(product.specifications).forEach(([key, value]) => {
+        specsContainer.innerHTML += `
+            <div class="spec-item">
+                <span class="spec-label">${key}</span>
+                <span class="spec-value">${value}</span>
+            </div>
+        `;
+    });
+
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+    document.getElementById('productModal').classList.remove('active');
+    document.body.style.overflow = 'auto';
+}
+
+document.getElementById('productModal').addEventListener('click', (e) => {
+    if (e.target.id === 'productModal') closeModal();
+});
+
+renderProducts();
+</script>
+</body>
+</html>
