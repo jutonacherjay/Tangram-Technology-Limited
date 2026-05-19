@@ -63,7 +63,7 @@
 </head>
 <body>
     <div class="page-header">
-        <h1 class="page-title">Harmony Series </h1>
+        <h1 class="page-title">Harmony Series</h1>
         <p class="page-subtitle">Elegant design meets superior functionality</p>
     </div>
     <div class="container" id="productsContainer"></div>
@@ -82,7 +82,166 @@
         </div>
     </div>
     <script>
-        const productsData={categories:[{id:3,name:'Harmony Series',subcategories:[{id:301,name:'Combination Socket',products:[{id:3001,name:'Socket 8pin Combination',description:'8-pin combination socket',image:'https://tangramelectronics.com/wp-content/uploads/2026/01/8.jpg',specifications:{'Pins':'8','Warranty':'1 Year','Material':'Polycarbonate Virgin Resin'}}]},{id:302,name:'Switch',products:[{id:3002,name:'4 Gang Switch',description:'Four gang switch',image:'https://tangramelectronics.com/wp-content/uploads/2026/01/4.jpg',specifications:{'Gangs':'4','Rating':'6A','Voltage':'250V AC'}},{id:3003,name:'3 Gang Switch',description:'Three gang switch',image:'https://tangramelectronics.com/wp-content/uploads/2026/01/3.jpg',specifications:{'Gangs':'3','Rating':'6A','Voltage':'250V AC'}},{id:3004,name:'DP Switch',description:'Double pole switch',image:'https://tangramelectronics.com/wp-content/uploads/2026/01/6.jpg',specifications:{'Poles':'Double','Rating':'10A','Voltage':'250V AC'}},{id:3005,name:'2 Way Switch',description:'Two way switch',image:'https://tangramelectronics.com/wp-content/uploads/2026/01/2.jpg',specifications:{'Type':'2 Way','Rating':'6A','Voltage':'250V AC'}},{id:3006,name:'One Gang Switch',description:'Single gang switch',image:'https://tangramelectronics.com/wp-content/uploads/2026/01/1.jpg',specifications:{'Gangs':'1','Rating':'6A','Voltage':'250V AC'}},{id:3007,name:'Fan Regulator',description:'Speed control unit',image:'https://tangramelectronics.com/wp-content/uploads/2026/01/5.jpg',specifications:{'Type':'Fan Speed Control','Rating':'5A','Voltage':'230V AC'}}]},{id:303,name:'Socket',products:[{id:3008,name:'Television Socket',description:'TV connection socket',image:'https://tangramelectronics.com/wp-content/uploads/2026/01/12.jpg',specifications:{'Type':'Television','Rating':'10A','Impedance':'75 Ohm'}},{id:3009,name:'Internet Socket',description:'Internet/Ethernet socket',image:'https://tangramelectronics.com/wp-content/uploads/2026/01/11.jpg',specifications:{'Type':'RJ45','Category':'CAT6','Rating':'10A'}},{id:3010,name:'Telephone Socket',description:'Phone connection socket',image:'https://tangramelectronics.com/wp-content/uploads/2026/01/10.jpg',specifications:{'Type':'Telephone','Pins':'2','Rating':'5A'}},{id:3011,name:'3 Pin Flat Socket',description:'3-pin flat socket',image:'https://tangramelectronics.com/wp-content/uploads/2026/01/9.jpg',specifications:{'Type':'flat Pin','Pins':'3','Rating':'10A'}},{id:3012,name:'3 Pin Round Socket',description:'3-pin round socket',image:'https://tangramelectronics.com/wp-content/uploads/2026/01/7.jpg',specifications:{'Type':'Round Pin','Pins':'3','Rating':'10A'}}]}]}]};function renderProducts(){const container=document.getElementById('productsContainer');const harmonySeries=productsData.categories[0];harmonySeries.subcategories.forEach(subcategory=>{const section=document.createElement('div');section.className='category-section';section.innerHTML=`<h2 class="category-title">${subcategory.name}</h2><div class="products-grid"></div>`;const grid=section.querySelector('.products-grid');subcategory.products.forEach((product,index)=>{const card=document.createElement('div');card.className='product-card';card.style.animationDelay=`${index*0.1}s`;card.innerHTML=`<img src="${product.image}" alt="${product.name}" class="product-image"><div class="product-info"><h3 class="product-name">${product.name}</h3><p class="product-description">${product.description}</p><span class="view-details">View Details →</span></div>`;card.onclick=()=>openModal(product);grid.appendChild(card);});container.appendChild(section);});observeCards();}function observeCards(){const observer=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('animate');}});},{threshold:0.1});document.querySelectorAll('.product-card').forEach(card=>{observer.observe(card);});}function openModal(product){const modal=document.getElementById('productModal');document.getElementById('modalImage').src=product.image;document.getElementById('modalTitle').textContent=product.name;document.getElementById('modalDescription').textContent=product.description;const specsContainer=document.getElementById('modalSpecs');specsContainer.innerHTML='';Object.entries(product.specifications).forEach(([key,value])=>{specsContainer.innerHTML+=`<div class="spec-item"><span class="spec-label">${key}</span><span class="spec-value">${value}</span></div>`;});modal.classList.add('active');document.body.style.overflow='hidden';}function closeModal(){const modal=document.getElementById('productModal');modal.classList.remove('active');document.body.style.overflow='auto';}document.getElementById('productModal').addEventListener('click',(e)=>{if(e.target.id==='productModal'){closeModal();}});renderProducts();
+        const productsData = {
+            categories: [{
+                id: 3,
+                name: 'Harmony Series',
+                subcategories: [
+                    {
+                        id: 302,
+                        name: 'Switch',
+                        products: [
+                            {
+                                id: 3006,
+                                name: '1 Gang Switch',
+                                description: 'Single gang switch',
+                                image: 'https://tangramelectronics.com/wp-content/uploads/2026/01/1.jpg',
+                                specifications: { 'Gangs': '1', 'Rating': '6A', 'Voltage': '250V AC' }
+                            },
+                            {
+                                id: 3005,
+                                name: '2 Gang Switch',
+                                description: 'Two way switch',
+                                image: 'https://tangramelectronics.com/wp-content/uploads/2026/01/2.jpg',
+                                specifications: { 'Type': '2 Way', 'Rating': '6A', 'Voltage': '250V AC' }
+                            },
+                            {
+                                id: 3003,
+                                name: '3 Gang Switch',
+                                description: 'Three gang switch',
+                                image: 'https://tangramelectronics.com/wp-content/uploads/2026/01/3.jpg',
+                                specifications: { 'Gangs': '3', 'Rating': '6A', 'Voltage': '250V AC' }
+                            },
+                            {
+                                id: 3002,
+                                name: '4 Gang Switch',
+                                description: 'Four gang switch',
+                                image: 'https://tangramelectronics.com/wp-content/uploads/2026/01/4.jpg',
+                                specifications: { 'Gangs': '4', 'Rating': '6A', 'Voltage': '250V AC' }
+                            },
+                            {
+                                id: 3007,
+                                name: 'Fan Regulator',
+                                description: 'Speed control unit',
+                                image: 'https://tangramelectronics.com/wp-content/uploads/2026/01/5.jpg',
+                                specifications: { 'Type': 'Fan Speed Control', 'Rating': '5A', 'Voltage': '230V AC' }
+                            },
+                            {
+                                id: 3004,
+                                name: 'DP Switch',
+                                description: 'Double pole switch',
+                                image: 'https://tangramelectronics.com/wp-content/uploads/2026/01/6.jpg',
+                                specifications: { 'Poles': 'Double', 'Rating': '10A', 'Voltage': '250V AC' }
+                            }
+                        ]
+                    },
+                    {
+                        id: 303,
+                        name: 'Socket',
+                        products: [
+                            {
+                                id: 3012,
+                                name: '3 Pin Round Socket',
+                                description: '3-pin round socket',
+                                image: 'https://tangramelectronics.com/wp-content/uploads/2026/01/7.jpg',
+                                specifications: { 'Type': 'Round Pin', 'Pins': '3', 'Rating': '10A' }
+                            },
+                            {
+                                id: 3011,
+                                name: '3 Pin Flat Socket',
+                                description: '3-pin flat socket',
+                                image: 'https://tangramelectronics.com/wp-content/uploads/2026/01/9.jpg',
+                                specifications: { 'Type': 'Flat Pin', 'Pins': '3', 'Rating': '10A' }
+                            },
+                            {
+                                id: 3001,
+                                name: 'Socket 8pin Combination',
+                                description: '8-pin combination socket',
+                                image: 'https://tangramelectronics.com/wp-content/uploads/2026/01/8.jpg',
+                                specifications: { 'Pins': '8', 'Warranty': '1 Year', 'Material': 'Polycarbonate Virgin Resin' }
+                            },
+                            {
+                                id: 3010,
+                                name: 'Telephone Socket',
+                                description: 'Phone connection socket',
+                                image: 'https://tangramelectronics.com/wp-content/uploads/2026/01/10.jpg',
+                                specifications: { 'Type': 'Telephone', 'Pins': '2', 'Rating': '5A' }
+                            },
+                            {
+                                id: 3009,
+                                name: 'Internet Socket',
+                                description: 'Internet/Ethernet socket',
+                                image: 'https://tangramelectronics.com/wp-content/uploads/2026/01/11.jpg',
+                                specifications: { 'Type': 'RJ45', 'Category': 'CAT6', 'Rating': '10A' }
+                            },
+                            {
+                                id: 3008,
+                                name: 'Television Socket',
+                                description: 'TV connection socket',
+                                image: 'https://tangramelectronics.com/wp-content/uploads/2026/01/12.jpg',
+                                specifications: { 'Type': 'Television', 'Rating': '10A', 'Impedance': '75 Ohm' }
+                            }
+                        ]
+                    }
+                ]
+            }]
+        };
+
+        function renderProducts() {
+            const container = document.getElementById('productsContainer');
+            const harmonySeries = productsData.categories[0];
+            harmonySeries.subcategories.forEach(subcategory => {
+                const section = document.createElement('div');
+                section.className = 'category-section';
+                section.innerHTML = `<h2 class="category-title">${subcategory.name}</h2><div class="products-grid"></div>`;
+                const grid = section.querySelector('.products-grid');
+                subcategory.products.forEach((product, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'product-card';
+                    card.style.animationDelay = `${index * 0.1}s`;
+                    card.innerHTML = `<img src="${product.image}" alt="${product.name}" class="product-image"><div class="product-info"><h3 class="product-name">${product.name}</h3><p class="product-description">${product.description}</p><span class="view-details">View Details →</span></div>`;
+                    card.onclick = () => openModal(product);
+                    grid.appendChild(card);
+                });
+                container.appendChild(section);
+            });
+            observeCards();
+        }
+
+        function observeCards() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) { entry.target.classList.add('animate'); }
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.product-card').forEach(card => { observer.observe(card); });
+        }
+
+        function openModal(product) {
+            const modal = document.getElementById('productModal');
+            document.getElementById('modalImage').src = product.image;
+            document.getElementById('modalTitle').textContent = product.name;
+            document.getElementById('modalDescription').textContent = product.description;
+            const specsContainer = document.getElementById('modalSpecs');
+            specsContainer.innerHTML = '';
+            Object.entries(product.specifications).forEach(([key, value]) => {
+                specsContainer.innerHTML += `<div class="spec-item"><span class="spec-label">${key}</span><span class="spec-value">${value}</span></div>`;
+            });
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('productModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.getElementById('productModal').addEventListener('click', (e) => {
+            if (e.target.id === 'productModal') { closeModal(); }
+        });
+
+        renderProducts();
     </script>
 </body>
 </html>
