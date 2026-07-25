@@ -1,0 +1,606 @@
+<section class="tg-location">
+
+<style>
+
+.tg-location{
+    padding:100px 20px;
+    background:
+    radial-gradient(circle at top left,#dceeff,transparent 40%),
+    linear-gradient(135deg,#f7fbff,#eef5ff);
+    overflow:hidden;
+}
+
+.tg-container{
+    max-width:1300px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:450px 1fr;
+    gap:50px;
+    align-items:center;
+}
+
+
+/* LEFT CARD */
+
+.tg-card{
+
+    background:rgba(255,255,255,.75);
+    backdrop-filter:blur(20px);
+
+    border-radius:35px;
+    padding:45px;
+
+    box-shadow:
+    0 30px 80px rgba(0,0,0,.12);
+
+    position:relative;
+    overflow:hidden;
+
+    animation:slideLeft 1s ease;
+
+}
+
+
+.tg-card:before{
+
+content:"";
+position:absolute;
+width:250px;
+height:250px;
+background:#006cff;
+border-radius:50%;
+right:-120px;
+top:-120px;
+opacity:.08;
+
+}
+
+
+.tg-tag{
+
+display:inline-block;
+
+padding:8px 18px;
+
+background:#e7f0ff;
+
+color:#006cff;
+
+border-radius:30px;
+
+font-size:13px;
+
+font-weight:600;
+
+letter-spacing:1px;
+
+margin-bottom:20px;
+
+}
+
+
+.tg-title{
+
+font-size:42px;
+
+line-height:1.15;
+
+font-weight:700;
+
+color:#071426;
+
+margin-bottom:20px;
+
+}
+
+
+.tg-text{
+
+color:#667085;
+
+line-height:30px;
+
+font-size:15px;
+
+margin-bottom:35px;
+
+}
+
+
+/* INFO */
+
+.tg-info{
+
+display:flex;
+
+gap:18px;
+
+margin-bottom:25px;
+
+}
+
+
+.tg-icon{
+
+min-width:55px;
+
+height:55px;
+
+background:
+
+linear-gradient(135deg,#006cff,#00b7ff);
+
+border-radius:18px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:24px;
+
+color:white;
+
+box-shadow:0 15px 30px rgba(0,108,255,.3);
+
+}
+
+
+
+.tg-info h4{
+
+font-size:17px;
+
+margin-bottom:5px;
+
+color:#101828;
+
+}
+
+
+.tg-info p{
+
+font-size:14px;
+
+line-height:25px;
+
+color:#667085;
+
+}
+
+
+
+/* BUTTON */
+
+.tg-buttons{
+
+display:flex;
+
+gap:15px;
+
+margin-top:35px;
+
+}
+
+
+.tg-btn{
+
+padding:15px 28px;
+
+border-radius:50px;
+
+text-decoration:none;
+
+font-weight:600;
+
+font-size:14px;
+
+transition:.4s;
+
+}
+
+
+.primary{
+
+background:#006cff;
+
+color:white;
+
+box-shadow:0 15px 35px rgba(0,108,255,.35);
+
+}
+
+
+.primary:hover{
+
+transform:translateY(-5px);
+
+}
+
+
+.secondary{
+
+border:2px solid #006cff;
+
+color:#006cff;
+
+}
+
+
+.secondary:hover{
+
+background:#006cff;
+
+color:white;
+
+}
+
+
+
+/* MAP */
+
+.tg-map{
+
+height:650px;
+
+border-radius:35px;
+
+overflow:hidden;
+
+position:relative;
+
+box-shadow:
+
+0 35px 90px rgba(0,0,0,.18);
+
+animation:slideRight 1s ease;
+
+}
+
+
+.tg-map iframe{
+
+width:100%;
+height:100%;
+border:0;
+
+}
+
+
+
+/* MAP LABEL */
+
+.tg-label{
+
+position:absolute;
+
+top:25px;
+
+left:25px;
+
+background:white;
+
+padding:20px 25px;
+
+border-radius:20px;
+
+box-shadow:0 15px 40px rgba(0,0,0,.15);
+
+z-index:5;
+
+}
+
+
+.tg-label h3{
+
+font-size:18px;
+
+margin-bottom:5px;
+
+}
+
+
+.tg-label span{
+
+font-size:13px;
+
+color:#667085;
+
+}
+
+
+
+/* FLOATING PIN */
+
+
+.tg-pin{
+
+position:absolute;
+
+bottom:30px;
+
+right:30px;
+
+width:75px;
+
+height:75px;
+
+background:#006cff;
+
+border-radius:50%;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:35px;
+
+color:white;
+
+box-shadow:
+0 20px 40px rgba(0,108,255,.5);
+
+animation:bounce 2s infinite;
+
+}
+
+
+
+/* ANIMATION */
+
+@keyframes bounce{
+
+0%,100%{
+transform:translateY(0);
+}
+
+50%{
+transform:translateY(-15px);
+}
+
+}
+
+
+
+@keyframes slideLeft{
+
+from{
+opacity:0;
+transform:translateX(-80px);
+}
+
+to{
+opacity:1;
+transform:translateX(0);
+}
+
+}
+
+
+
+@keyframes slideRight{
+
+from{
+opacity:0;
+transform:translateX(80px);
+}
+
+to{
+opacity:1;
+transform:translateX(0);
+}
+
+}
+
+
+
+/* RESPONSIVE */
+
+
+@media(max-width:950px){
+
+.tg-container{
+
+grid-template-columns:1fr;
+
+}
+
+
+.tg-title{
+
+font-size:32px;
+
+}
+
+
+.tg-map{
+
+height:450px;
+
+}
+
+}
+
+
+@media(max-width:500px){
+
+.tg-card{
+
+padding:30px;
+
+}
+
+
+.tg-buttons{
+
+flex-direction:column;
+
+}
+
+}
+
+</style>
+
+
+
+<div class="tg-container">
+
+
+<!-- LEFT -->
+
+<div class="tg-card">
+
+
+<div class="tg-tag">
+
+📍 VISIT TANGRAM
+
+</div>
+
+
+<h2 class="tg-title">
+
+Experience Innovation<br>
+with Tangram Technology
+
+</h2>
+
+
+<p class="tg-text">
+
+Visit our head office for industrial air compressor
+solutions, electrical accessories and professional
+technical support.
+
+</p>
+
+
+
+<div class="tg-info">
+
+<div class="tg-icon">
+📍
+</div>
+
+<div>
+
+<h4>Head Office</h4>
+
+<p>
+
+Tangram Technology Ltd.<br>
+
+House: 05, Road: 06 (Love Road)<br>
+
+Block: E, Section: 02<br>
+
+Mirpur, Dhaka-1216
+
+</p>
+
+</div>
+
+</div>
+
+
+
+<div class="tg-info">
+
+<div class="tg-icon">
+☎
+</div>
+
+<div>
+
+<h4>Contact</h4>
+
+<p>
+
++8801341701136<br>
+
+info@tangramelectronics.com
+
+</p>
+
+</div>
+
+</div>
+
+
+
+<div class="tg-buttons">
+
+<a class="tg-btn primary"
+href="https://maps.app.goo.gl/Tr9nu6y9L9ugS8tc7"
+target="_blank">
+
+Get Direction
+
+</a>
+
+
+<a class="tg-btn secondary"
+href="tel:+8801XXXXXXXXX">
+
+Call Now
+
+</a>
+
+
+</div>
+
+
+</div>
+
+
+
+<!-- MAP -->
+
+
+<div class="tg-map">
+
+
+<div class="tg-label">
+
+<h3>
+
+Tangram Technology Ltd.
+
+</h3>
+
+<span>
+
+Mirpur, Dhaka Bangladesh
+
+</span>
+
+
+</div>
+
+
+<iframe
+
+src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d456.3058826542753!2d90.35753949285761!3d23.802696690860337!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c1005119ee1f%3A0x727ab6d72f01bded!2sTelegram%20Office!5e0!3m2!1sen!2sbd!4v1784952564565!5m2!1sen!2sbd"
+
+loading="lazy">
+
+</iframe>
+
+
+<div class="tg-pin">
+
+📍
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</section>
